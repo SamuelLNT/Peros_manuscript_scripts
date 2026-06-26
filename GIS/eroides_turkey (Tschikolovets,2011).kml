@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>eroides_turkey (Tschikolovets,2011).kml</name>
+	<StyleMap id="msn_ylw-pushpin">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sh_ylw-pushpin">
+		<IconStyle>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<BalloonStyle>
+		</BalloonStyle>
+		<PolyStyle>
+			<color>80ffffff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="sn_ylw-pushpin">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<BalloonStyle>
+		</BalloonStyle>
+		<PolyStyle>
+			<color>80ffffff</color>
+		</PolyStyle>
+	</Style>
+	<Placemark>
+		<name>eroides_turkey (Tschikolovets,2011)</name>
+		<LookAt>
+			<longitude>30.20347877612747</longitude>
+			<latitude>42.1191583261477</latitude>
+			<altitude>0</altitude>
+			<heading>-12.8238682380527</heading>
+			<tilt>0</tilt>
+			<range>1507917.287277718</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#msn_ylw-pushpin</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						28.21364494317842,40.37660421326591,0 28.09110469977297,40.11597368077153,0 27.98301697355515,39.93987173603103,0 27.83488501337282,39.63086918928975,0 27.96431197002256,39.56346926645841,0 28.16701626749341,39.34478524395615,0 28.71857062684278,39.175665230434,0 29.19674135160399,39.09201311777781,0 30.02152434821888,39.00237566187216,0 30.85083886259385,38.87547795769217,0 31.85609018028762,38.90363149320906,0 32.9105324824272,38.93706442360114,0 33.83626182178054,39.15401271588913,0 34.95761925957813,39.64662180455856,0 35.55987792491663,40.20342893194189,0 36.65507615913944,40.47969971295885,0 36.90685229381963,40.71179415069152,0 37.10356326919737,41.11237151111089,0 36.90923830761614,41.30460358818433,0 36.62699923048325,41.3405802030292,0 36.38814790530974,41.29348084157678,0 36.19180228763747,41.35765596816921,0 36.10202728403485,41.60598525885341,0 35.95021379534651,41.67969925772187,0 35.4779076293803,41.59624174995932,0 35.30533424296122,41.70638384315461,0 35.06347777278366,41.8181452938034,0 34.89080279068402,41.85771054416582,0 34.30492302659049,41.93470045034757,0 33.78237166849955,41.96669223093425,0 33.30529068392268,41.98296623866959,0 32.84252914540246,41.83791086848746,0 32.39524565302749,41.74323805938035,0 32.0064915252154,41.53460477110661,0 31.47043933539777,41.33125984432312,0 31.32292021771771,41.1363178943384,0 30.58923543903163,41.11844052253935,0 30.28862879561698,41.17978627096842,0 29.61198868982515,40.81913196119966,0 29.4900353066621,40.68502659356829,0 29.17335390848029,40.39334021956471,0 28.70973115914765,40.3583041962122,0 28.46722652521037,40.39437589797074,0 28.21364494317842,40.37660421326591,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+</Document>
+</kml>
