@@ -116,10 +116,13 @@ The repository has several directories, as show below:
     └── FigS10_Stairwayplot.R
 ```
 ### Summary for each directory
+
 GIS: Contains all the polygon files to plot the distribution range in Figure 1
+
 scripts: Contains all the scripts used in the manuscripts - 
  - files with prefix "ANA_AnalysesName_" are files used for analyses
  - files with prefix "FigX" are scripts used to generate corresponding figures
  - If figures are not prepared with a separated script, the figure is plotted using the same analysis script
+ 
 paramfiles: Contains paramfiles for analyses, it is sorted into different analyses
 
