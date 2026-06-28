@@ -1,0 +1,115 @@
+ipyrad PCA python implement
+
+#get ipyrad running
+export PATH='/projappl/project_2002599/ipyrad_0.9.92/bin/:$PATH'
+
+#activating python to run PCA in ipyrad 
+python
+
+#importing packages
+import ipyrad.analysis as ipa
+import pandas as pd
+import toyplot
+import os
+import sklearn
+import numpy
+import collections
+
+
+#fixing AttributeError: module 'numpy' has no attribute 'asscalar'. error:
+import numpy
+def patch_asscalar(a):
+    return a.item()
+
+setattr(numpy, "asscalar", patch_asscalar)
+
+#Fixes for collection error
+collections.Mapping = collections.abc.Mapping
+collections.Sequence = collections.abc.Sequence
+
+#checking and changing working dir
+print(os.getcwd())
+os.chdir('/scratch/project_2002599/ddRAD_demultiplexed_projects/004_eros_eroides_Jul2025/process_files/Eros_icarus_REF/PCAperse')
+print(os.getcwd())
+
+#setting data, it has to use hdf5 format
+data = "./Eros_REF_icarus_aftrkr_merg_n55_c85_m35.snps.hdf5"
+print(data)
+
+# group individuals into populations
+imap = {
+  "eros": ["Peros_R07W163_ES_U_M","Peros_R07W164_ES_U_M", "Peros_R09V828_ES_U_M", "Peros_R10B863_FR_U_M", "Peros_R10C085_FR_U_M", "Peros_R11H009_ES_U_M", "Peros_R15G864_CH_U_M", "Peros_R15H078_IT_U_M", "Peros_R15H523_CH_U_M", "Peros_R15I269_AT_U_M", "Peros_R15I764_AT_U_M", "Peros_R15J298_FR_U_M", "Peros_R17E114_ES_U_M", "Peros_R17E160_ES_U_M", "Peros_R18D133_FR_U_M", "Peros_R18D135_ES_U_M", "Peros_R19D459_ES_U_M", "Peros_R19D908_ES_U_M", "Peros_R19D925_ES_U_M"],
+  "eros_italica": ["Peros_R14A083_IT_U_M", "Peros_R14A243_IT_U_M", "Peros_R15M837_IT_U_M"],
+  "eroides": ["Peroi_R09V958_BG_U_M", "Peroi_R09V961_BG_U_M", "Peroi_R10B402_BG_U_M", "Peroi_R14F306_RS_U_M", "Peroi_R14F313_RS_U_M", "Peroi_R14F612_GR_U_M", "Peroi_R14F617_GR_U_M", "Peros_R07D671_BG_U_M", "Peros_R10B401_BG_U_M", "Peros_R14C790_BG_U_M", "Peros_R14C958_BG_U_M", "Peros_R14F299_RS_U_M", "Peros_R14F605_GR_U_M", "Peros_R14G453_GR_U_M", "Peros_R16D592_RS_U_M", "Peros_R16D593_RS_U_M", "Peros_R17G381_AL_U_M"],
+  "eroides_AL": ["Peroi_R17F519_AL_U_M", "Peros_R17F517_AL_U_M", "Peros_R17F518_AL_U_M","Peros_R17T045_ME_U_M","Peros_R17T046_ME_U_M"],
+  "menelaos": ["Peroi_R14G072_GR_U_M", "Peros_R14F975_GR_U_M", "Peros_R14F984_GR_U_M", "Peros_R14G066_GR_U_M", "Peros_R14G085_GR_U_M", "Peros_R14G103_GR_U_M"],
+  "boisduvalii": ["Peros_R14N424_UA_U_M", "Peros_R14V059_UA_U_M"],
+  "Outgroup": ["Pceli_R08R500_IT_U_M", "Picar_R08M425_RO_U_M", "Picar_R17D470_GR_U_M"],
+}
+
+
+# require that 50% of samples have data in each group
+minmap = {i: 0.7 for i in imap}
+
+# init pca object with input data and (optional) parameter options
+#better with sample imputation because it has less effect on the missing data
+pca = ipa.pca(
+    data=data,
+    imap=imap,
+    minmap=minmap,
+    mincov=0.75, #min coverage. 25% missing data allowed
+    impute_method="sample",
+)
+
+# run the PCA analysis
+pca.run()
+
+# store the PC axes as a dataframe
+df = pd.DataFrame(pca.pcaxes[0], index=pca.names)
+
+# write the PC axes to a CSV file
+df.to_csv("pca_analysis.csv")
+
+# show the first ten samples and the first 10 PC axes
+df.iloc[:10, :10].round(2)
+
+# plot PC axes 0 and 2
+pca.draw(0, 2);
+
+# plot PC axes 0 and 1 with many replicate subsamples
+pca.run(nreplicates=50, seed=578)
+pca.draw(0, 1, outfile='./PCA_50rep_0.75micov_sample.pdf')
+
+# kmeans imputation
+pca3 = ipa.pca(
+    data=data,
+    imap=imap,
+    minmap=minmap,
+    mincov=0.75,
+    impute_method=7, #this means you are incorperating 7 groups
+)
+
+pca3.run(nreplicates=50, seed=578)
+
+# The outfile must end in either `.pdf` or `.svg`
+pca3.draw(outfile='./Kmeans_K7_50rep_0.75micov_sample.pdf') #the object has to be specified to be draw
+
+# .missing is a pandas DataFrame
+pca3.missing.sort_values(by="missing")
+
+#Running tSNE based on PCA
+pca.run_tsne(subsample=True, perplexity=4.0, n_iter=100000, seed=123)
+pca.draw(0, 1, outfile='./tSNE_10kInter_4pplex_samplePCA.pdf')
+
+pca3.run_tsne(subsample=True, perplexity=4.0, n_iter=100000, seed=257)
+pca3.draw(0, 1, outfile='./tSNE_10kInter_4pplex_Kmeans.pdf')
+
+pca4 = ipa.pca(
+    data=data,
+    imap=imap,
+    minmap=minmap,
+    mincov=0.5, #min coverage. 25% missing data allowed
+    impute_method="sample",
+)
+pca4.run(nreplicates=50, seed=5576)
+pca4.draw(0, 1, outfile='./PCA_50rep_0.5micov_sample.pdf')

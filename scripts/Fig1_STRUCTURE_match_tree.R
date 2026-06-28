@@ -1,7 +1,7 @@
 
 # STRUCTURE bar plot to match the tree ------------------------------------------------
-setwd("C:\\Users\\samue\\OneDrive - Oulun yliopisto\\003_GIS\\eros\\kmlfiles_icarusREF")
-#setwd("/Users/samuel_ntl/Library/CloudStorage/OneDrive-Oulunyliopisto/003_GIS/eros/kmlfiles_icarusREF/")
+setwd("$PATH")
+#setwd("$PATH")
 
 library(ggplot2)
 library(dplyr)

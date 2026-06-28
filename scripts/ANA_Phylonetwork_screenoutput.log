@@ -1,0 +1,978 @@
+julia> Pkg.add("PhyloPlots")
+  Installing known registries into `~/.julia`
+       Added `General` registry to ~/.julia/registries
+    Updating registry at `~/.julia/registries/General.toml`
+   Resolving package versions...
+   Installed Crayons ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v4.1.1
+   Installed NLopt_jll ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v2.10.0+0
+   Installed Twiddle ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.1.2
+   Installed BioGenerics ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v0.1.5
+   Installed Functors ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v0.5.2
+   Installed SIMD ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v3.7.2
+   Installed IrrationalConstants ¢w¢w¢w¢w¢w¢w¢w¢w¢w v0.2.6
+   Installed CSV ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v0.10.16
+   Installed Rmath ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v0.9.0
+   Installed Conda ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.10.3
+   Installed HypergeometricFunctions ¢w¢w¢w¢w¢w v0.3.28
+   Installed StatsFuns ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v2.0.1
+   Installed NLopt ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.2.1
+   Installed Preferences ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.5.2
+   Installed JSON ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.6.1
+   Installed PrettyTables ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v3.3.2
+   Installed PtrArrays ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.4.0
+   Installed Parsers ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v2.8.5
+   Installed Tables ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.12.1
+   Installed TableTraits ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.0.1
+   Installed WinReg ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.0.0
+   Installed SentinelArrays ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.4.10
+   Installed SpecialFunctions ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v2.8.0
+   Installed PDMats ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v0.11.37
+   Installed CategoricalArrays ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.1.1
+   Installed DataAPI ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.16.0
+   Installed PooledArrays ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.4.3
+   Installed InlineStrings ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.4.5
+   Installed BioSymbols ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v5.2.0
+   Installed IteratorInterfaceExtensions ¢w v1.0.0
+   Installed JLLWrappers ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.8.0
+   Installed StaticArrays ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.9.18
+   Installed StaticArraysCore ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.4.4
+   Installed RCall ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v0.14.13
+   Installed DataValueInterfaces ¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.0.0
+   Installed ConstructionBase ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.6.0
+   Installed PhyloNetworks ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.3.1
+   Installed VersionParsing ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.3.0
+   Installed OrderedCollections ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.8.2
+   Installed PrecompileTools ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.3.4
+   Installed WorkerUtilities ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.6.1
+   Installed BioSequences ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v3.5.1
+   Installed TranscodingStreams ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v0.11.3
+   Installed LaTeXStrings ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.4.0
+   Installed StringViews ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.3.7
+   Installed CEnum ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v0.5.0
+   Installed Combinatorics ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.1.0
+   Installed InvertedIndices ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.3.1
+   Installed FilePathsBase ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v0.9.24
+   Installed FillArrays ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.16.0
+   Installed Rmath_jll ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v0.5.1+0
+   Installed Reexport ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.2.2
+   Installed Statistics ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.11.1
+   Installed DataFrames ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.8.2
+   Installed QuadGK ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v2.11.3
+   Installed WeakRefStrings ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.4.3
+   Installed StatsModels ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v0.7.10
+   Installed DataStructures ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v0.18.22
+   Installed ShiftedArrays ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v2.0.0
+   Installed LogExpFunctions ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v0.3.29
+   Installed PhyloPlots ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v2.1.0
+   Installed StatsAPI ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.8.0
+   Installed AliasTables ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.1.3
+   Installed Requires ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.3.1
+   Installed Compat ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v4.18.1
+   Installed OpenSpecFun_jll ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v0.5.6+0
+   Installed CodecZlib ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v0.7.8
+   Installed Distributions ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v0.25.126
+   Installed StringManipulation ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v0.4.4
+   Installed StatsBase ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v0.34.11
+   Installed Automa ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.1.0
+   Installed SortingAlgorithms ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.2.2
+   Installed Missings ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v1.2.0
+   Installed FASTX ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v2.1.7
+   Installed DocStringExtensions ¢w¢w¢w¢w¢w¢w¢w¢w¢w v0.9.5
+   Installed StructUtils ¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w v2.8.2
+  Installing artifacts ???????????????????????????????????????? 4/4
+    Updating `~/.julia/environments/v1.12/Project.toml`
+  [c0d5b6db] + PhyloPlots v2.1.0
+    Updating `~/.julia/environments/v1.12/Manifest.toml`
+  [66dad0bd] + AliasTables v1.1.3
+  [67c07d97] + Automa v1.1.0
+  [47718e42] + BioGenerics v0.1.5
+  [7e6ae17a] + BioSequences v3.5.1
+  [3c28c6f8] + BioSymbols v5.2.0
+  [fa961155] + CEnum v0.5.0
+  [336ed68f] + CSV v0.10.16
+  [324d7699] + CategoricalArrays v1.1.1
+  [944b1d66] + CodecZlib v0.7.8
+  [861a8166] + Combinatorics v1.1.0
+  [34da2185] + Compat v4.18.1
+  [8f4d0f93] + Conda v1.10.3
+  [187b0558] + ConstructionBase v1.6.0
+  [a8cc5b0e] + Crayons v4.1.1
+  [9a962f9c] + DataAPI v1.16.0
+  [a93c6f00] + DataFrames v1.8.2
+? [864edb3b] + DataStructures v0.18.22
+  [e2d170a0] + DataValueInterfaces v1.0.0
+  [31c24e10] + Distributions v0.25.126
+  [ffbed154] + DocStringExtensions v0.9.5
+  [c2308a5c] + FASTX v2.1.7
+  [48062228] + FilePathsBase v0.9.24
+  [1a297f60] + FillArrays v1.16.0
+  [d9f16b24] + Functors v0.5.2
+  [34004b35] + HypergeometricFunctions v0.3.28
+  [842dd82b] + InlineStrings v1.4.5
+  [41ab1584] + InvertedIndices v1.3.1
+  [92d709cd] + IrrationalConstants v0.2.6
+  [82899510] + IteratorInterfaceExtensions v1.0.0
+  [692b3bcd] + JLLWrappers v1.8.0
+  [682c06a0] + JSON v1.6.1
+  [b964fa9f] + LaTeXStrings v1.4.0
+? [2ab3a3ac] + LogExpFunctions v0.3.29
+  [e1d29d7a] + Missings v1.2.0
+  [76087f3c] + NLopt v1.2.1
+? [bac558e1] + OrderedCollections v1.8.2
+  [90014a1f] + PDMats v0.11.37
+  [69de0a69] + Parsers v2.8.5
+  [33ad39ac] + PhyloNetworks v1.3.1
+  [c0d5b6db] + PhyloPlots v2.1.0
+  [2dfb63ee] + PooledArrays v1.4.3
+  [aea7be01] + PrecompileTools v1.3.4
+  [21216c6a] + Preferences v1.5.2
+  [08abe8d2] + PrettyTables v3.3.2
+  [43287f4e] + PtrArrays v1.4.0
+  [1fd47b50] + QuadGK v2.11.3
+  [6f49c342] + RCall v0.14.13
+  [189a3867] + Reexport v1.2.2
+  [ae029012] + Requires v1.3.1
+  [79098fc4] + Rmath v0.9.0
+  [fdea26ae] + SIMD v3.7.2
+  [91c51154] + SentinelArrays v1.4.10
+  [1277b4bf] + ShiftedArrays v2.0.0
+  [a2af1166] + SortingAlgorithms v1.2.2
+  [276daf66] + SpecialFunctions v2.8.0
+  [90137ffa] + StaticArrays v1.9.18
+  [1e83bf80] + StaticArraysCore v1.4.4
+  [10745b16] + Statistics v1.11.1
+  [82ae8749] + StatsAPI v1.8.0
+  [2913bbd2] + StatsBase v0.34.11
+  [4c63d2b9] + StatsFuns v2.0.1
+  [3eaba693] + StatsModels v0.7.10
+  [892a3eda] + StringManipulation v0.4.4
+  [354b36f9] + StringViews v1.3.7
+  [ec057cc2] + StructUtils v2.8.2
+  [3783bdb8] + TableTraits v1.0.1
+  [bd369af6] + Tables v1.12.1
+  [3bb67fe8] + TranscodingStreams v0.11.3
+  [7200193e] + Twiddle v1.1.2
+  [81def892] + VersionParsing v1.3.0
+  [ea10d353] + WeakRefStrings v1.4.3
+  [1b915085] + WinReg v1.0.0
+  [76eceee3] + WorkerUtilities v1.6.1
+  [079eb43e] + NLopt_jll v2.10.0+0
+  [efe28fd5] + OpenSpecFun_jll v0.5.6+0
+  [f50d1b31] + Rmath_jll v0.5.1+0
+  [0dad84c5] + ArgTools v1.1.2
+  [56f22d72] + Artifacts v1.11.0
+  [2a0f44e3] + Base64 v1.11.0
+  [ade2ca70] + Dates v1.11.0
+  [8ba89e20] + Distributed v1.11.0
+  [f43a241f] + Downloads v1.7.0
+  [7b1f6079] + FileWatching v1.11.0
+  [9fa8497b] + Future v1.11.0
+  [b77e0a4c] + InteractiveUtils v1.11.0
+  [ac6e5ff7] + JuliaSyntaxHighlighting v1.12.0
+  [b27032c2] + LibCURL v0.6.4
+  [8f399da3] + Libdl v1.11.0
+  [37e2e46d] + LinearAlgebra v1.12.0
+  [56ddb016] + Logging v1.11.0
+  [d6f4376e] + Markdown v1.11.0
+  [a63ad114] + Mmap v1.11.0
+  [ca575930] + NetworkOptions v1.3.0
+  [de0858da] + Printf v1.11.0
+  [3fa0cd96] + REPL v1.11.0
+  [9a3f8284] + Random v1.11.0
+  [ea8e919c] + SHA v0.7.0
+  [9e88b42a] + Serialization v1.11.0
+  [6462fe0b] + Sockets v1.11.0
+  [2f01184e] + SparseArrays v1.12.0
+  [f489334b] + StyledStrings v1.11.0
+  [4607b0f0] + SuiteSparse
+  [fa267f1f] + TOML v1.0.3
+  [cf7118a7] + UUIDs v1.11.0
+  [4ec0a83e] + Unicode v1.11.0
+  [e66e0078] + CompilerSupportLibraries_jll v1.3.0+1
+  [deac9b47] + LibCURL_jll v8.15.0+0
+  [29816b5a] + LibSSH2_jll v1.11.3+1
+  [14a3606d] + MozillaCACerts_jll v2025.11.4
+  [4536629a] + OpenBLAS_jll v0.3.29+0
+  [05823500] + OpenLibm_jll v0.8.7+0
+  [458c3c95] + OpenSSL_jll v3.5.4+0
+  [bea87d4a] + SuiteSparse_jll v7.8.3+2
+  [83775a58] + Zlib_jll v1.3.1+2
+  [8e850b90] + libblastrampoline_jll v5.15.0+0
+  [8e850ede] + nghttp2_jll v1.64.0+1
+        Info Packages marked with ? have new versions available but compatibility constraints restrict them from upgrading. To see why use `status --outdated -m`
+    Building Conda ¡÷ `~/.julia/scratchspaces/44cfe95a-1eb2-52ea-b672-e2afdf69b78f/8f06b0cfa4c514c7b9546756dbae91fcfbc92dc9/build.log`
+    Building RCall ¡÷ `~/.julia/scratchspaces/44cfe95a-1eb2-52ea-b672-e2afdf69b78f/a2be505c76807bf9ce4220cde4e1b464c726eb2f/build.log`
+  ? PhyloPlots
+Precompiling packages finished.
+  92 dependencies successfully precompiled in 90 seconds. 31 already precompiled.
+  1 dependencies failed but may be precompilable after restarting julia
+  1 dependency had output during precompilation:
+¢z PhyloPlots
+¢x  [ Info: No R installation found by RCall.jl. Precompilation of RCall and all dependent packages postponed. Importing RCall will fail until an R installation is configured beforehand.
+¢|
+
+julia> Pkg.add("PhyloNetworks")
+   Resolving package versions...
+    Updating `~/.julia/environments/v1.12/Project.toml`
+  [33ad39ac] + PhyloNetworks v1.3.1
+    Manifest No packages added to or removed from `~/.julia/environments/v1.12/Manifest.toml`
+  ? PhyloPlots
+
+julia> Pkg.add("CSV")
+   Resolving package versions...
+    Updating `~/.julia/environments/v1.12/Project.toml`
+  [336ed68f] + CSV v0.10.16
+    Manifest No packages added to or removed from `~/.julia/environments/v1.12/Manifest.toml`
+  ? PhyloPlots
+
+julia> Pkg.add("RCall")
+   Resolving package versions...
+    Updating `~/.julia/environments/v1.12/Project.toml`
+  [6f49c342] + RCall v0.14.13
+    Manifest No packages added to or removed from `~/.julia/environments/v1.12/Manifest.toml`
+  ? PhyloPlots
+
+julia> Pkg.add("DataFrames")
+   Resolving package versions...
+    Updating `~/.julia/environments/v1.12/Project.toml`
+  [a93c6f00] + DataFrames v1.8.2
+    Manifest No packages added to or removed from `~/.julia/environments/v1.12/Manifest.toml`
+  ? PhyloPlots
+
+julia> Pkg.update()
+    Updating registry at `~/.julia/registries/General.toml`
+     Project No packages added to or removed from `~/.julia/environments/v1.12/Project.toml`
+    Manifest No packages added to or removed from `~/.julia/environments/v1.12/Manifest.toml`
+  ? PhyloPlots
+        Info We haven't cleaned this depot up for a bit, running Pkg.gc()...
+      Active manifest files: 1 found
+      Active artifact files: 4 found
+      Active scratchspaces: 2 found
+     Deleted no artifacts, repos, packages or scratchspaces
+
+julia> ENV["R_HOME"] = "*"  ##it defines where R is, you need to do it only once
+
+julia> Pkg.add("RCall")
+   Resolving package versions...
+     Project No packages added to or removed from `~/.julia/environments/v1.12/Project.toml`
+    Manifest No packages added to or removed from `~/.julia/environments/v1.12/Manifest.toml`
+  ? PhyloPlots
+  
+julia> using PhyloNetworks # already installed
+
+julia> using CSV # already installed
+
+julia> using DataFrames # already installed
+
+julia> using Distributed #if doesn't work try add it as package
+
+julia> using RCall # already installed
+
+julia> using PhyloPlots # already installed
+
+julia> Pkg.status()
+Status `~/.julia/environments/v1.12/Project.toml`
+  [336ed68f] CSV v0.10.16
+  [a93c6f00] DataFrames v1.8.2
+? [33ad39ac] PhyloNetworks v0.16.4 ?
+? [c0d5b6db] PhyloPlots v1.0.1
+  [6f49c342] RCall v0.14.13
+Info Packages marked with ? have new versions available and may be upgradable.
+
+
+julia> pwd()
+"/scratch/project_2002599/ddRAD_demultiplexed_projects/004_eros_eroides_Jul2025/process_files/Eros_icarus_REF/PhyloNet"
+
+julia> cd("/scratch/project_2002599/ddRAD_demultiplexed_projects/004_eros_eroides_Jul2025/process_files/Eros_icarus_REF/PhyloNet/003_rerun_phylonetwork_n54_icaurs/")
+
+julia> pwd()
+"/scratch/project_2002599/ddRAD_demultiplexed_projects/004_eros_eroides_Jul2025/process_files/Eros_icarus_REF/PhyloNet/003_rerun_phylonetwork_n54_icaurs"
+
+julia> dt = CSV.read("eros_MAP_PHYLONET.txt",DataFrame)
+54¡Ñ2 DataFrame
+ Row ¢x specimen              species
+     ¢x String31              String7
+¢w¢w¢w¢w¢w¢q¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w
+   1 ¢x Peroi_R17F519_AL_U_M  ALME
+   2 ¢x Peros_R17F517_AL_U_M  ALME
+   3 ¢x Peros_R17F518_AL_U_M  ALME
+   4 ¢x Peros_R17T045_ME_U_M  ALME
+   5 ¢x Peros_R17T046_ME_U_M  ALME
+   6 ¢x Peroi_R09V958_BG_U_M  eroides
+   7 ¢x Peroi_R09V961_BG_U_M  eroides
+   8 ¢x Peroi_R10B402_BG_U_M  eroides
+   9 ¢x Peroi_R14F306_RS_U_M  eroides
+  10 ¢x Peroi_R14F313_RS_U_M  eroides
+  11 ¢x Peroi_R14F612_GR_U_M  eroides
+  12 ¢x Peroi_R14F617_GR_U_M  eroides
+  13 ¢x Peros_R07D671_BG_U_M  eroides
+  14 ¢x Peros_R10B401_BG_U_M  eroides
+  15 ¢x Peros_R14C790_BG_U_M  eroides
+  16 ¢x Peros_R14C958_BG_U_M  eroides
+  17 ¢x Peros_R14F299_RS_U_M  eroides
+  18 ¢x Peros_R14F605_GR_U_M  eroides
+  19 ¢x Peros_R14G453_GR_U_M  eroides
+  20 ¢x Peros_R16D592_RS_U_M  eroides
+  21 ¢x Peros_R16D593_RS_U_M  eroides
+  22 ¢x Peros_R17G381_AL_U_M  eroides
+  23 ¢x Peros_R14N424_UA_U_M  UA
+  24 ¢x Peros_R14V059_UA_U_M  UA
+  25 ¢x Peros_R07W163_ES_U_M  eros
+  ?  ¢x          ?               ?
+  31 ¢x Peros_R15G864_CH_U_M  eros
+  32 ¢x Peros_R15H078_IT_U_M  eros
+  33 ¢x Peros_R15H523_CH_U_M  eros
+  34 ¢x Peros_R15I269_AT_U_M  eros
+  35 ¢x Peros_R15I764_AT_U_M  eros
+  36 ¢x Peros_R15J298_FR_U_M  eros
+  37 ¢x Peros_R17E114_ES_U_M  eros
+  38 ¢x Peros_R17E160_ES_U_M  eros
+  39 ¢x Peros_R18D133_FR_U_M  eros
+  40 ¢x Peros_R18D135_ES_U_M  eros
+  41 ¢x Peros_R19D459_ES_U_M  eros
+  42 ¢x Peros_R19D908_ES_U_M  eros
+  43 ¢x Peros_R19D925_ES_U_M  eros
+  44 ¢x Peros_R14A083_IT_U_M  IT
+  45 ¢x Peros_R14A243_IT_U_M  IT
+  46 ¢x Peros_R15M837_IT_U_M  IT
+  47 ¢x Peroi_R14G072_GR_U_M  mene
+  48 ¢x Peros_R14F975_GR_U_M  mene
+  49 ¢x Peros_R14F984_GR_U_M  mene
+  50 ¢x Peros_R14G066_GR_U_M  mene
+  51 ¢x Peros_R14G085_GR_U_M  mene
+  52 ¢x Peros_R14G103_GR_U_M  mene
+  53 ¢x Picar_R08M425_RO_U_M  icar
+  54 ¢x Picar_R17D470_GR_U_M  icar
+                       5 rows omitted
+
+julia> taxonmap = Dict(dt[i,:specimen] => dt[i,:species] for i in 1:54) # 54 is the number of individuals
+Dict{String31, String7} with 54 entries:
+  "Peros_R14F975_GR_U_M" => "mene"
+  "Peroi_R14F612_GR_U_M" => "eroides"
+  "Peros_R14N424_UA_U_M" => "UA"
+  "Peros_R17T045_ME_U_M" => "ALME"
+  "Peros_R15I269_AT_U_M" => "eros"
+  "Peros_R17F518_AL_U_M" => "ALME"
+  "Peros_R14A083_IT_U_M" => "IT"
+  "Peros_R15H078_IT_U_M" => "eros"
+  "Peroi_R09V958_BG_U_M" => "eroides"
+  "Peroi_R10B402_BG_U_M" => "eroides"
+  "Peros_R19D925_ES_U_M" => "eros"
+  "Peros_R17E160_ES_U_M" => "eros"
+  "Peros_R16D593_RS_U_M" => "eroides"
+  "Peros_R15J298_FR_U_M" => "eros"
+  "Peros_R07D671_BG_U_M" => "eroides"
+  "Peros_R09V828_ES_U_M" => "eros"
+  "Peros_R15G864_CH_U_M" => "eros"
+  "Peros_R17T046_ME_U_M" => "ALME"
+  "Peros_R18D133_FR_U_M" => "eros"
+  "Peros_R10B863_FR_U_M" => "eros"
+  "Peros_R17E114_ES_U_M" => "eros"
+  "Peros_R14F605_GR_U_M" => "eroides"
+  "Peros_R14G103_GR_U_M" => "mene"
+  "Peros_R17F517_AL_U_M" => "ALME"
+  "Peros_R07W163_ES_U_M" => "eros"
+  "Picar_R08M425_RO_U_M" => "icar"
+  "Peros_R14F984_GR_U_M" => "mene"
+  "Peros_R11H009_ES_U_M" => "eros"
+  "Peros_R10B401_BG_U_M" => "eroides"
+  "Peroi_R09V961_BG_U_M" => "eroides"
+  "Peroi_R14F617_GR_U_M" => "eroides"
+  "Peros_R16D592_RS_U_M" => "eroides"
+  "Peros_R19D459_ES_U_M" => "eros"
+  "Peros_R15M837_IT_U_M" => "IT"
+  "Peros_R17G381_AL_U_M" => "eroides"
+  "Picar_R17D470_GR_U_M" => "icar"
+  "Peros_R14G085_GR_U_M" => "mene"
+  "Peros_R07W164_ES_U_M" => "eros"
+  "Peros_R19D908_ES_U_M" => "eros"
+  "Peros_R14A243_IT_U_M" => "IT"
+  "Peros_R14V059_UA_U_M" => "UA"
+  "Peros_R14C790_BG_U_M" => "eroides"
+  "Peros_R14C958_BG_U_M" => "eroides"
+  "Peros_R18D135_ES_U_M" => "eros"
+  "Peros_R14G453_GR_U_M" => "eroides"
+  "Peros_R14F299_RS_U_M" => "eroides"
+  "Peroi_R14G072_GR_U_M" => "mene"
+  "Peroi_R17F519_AL_U_M" => "ALME"
+  "Peros_R14G066_GR_U_M" => "mene"
+  "Peros_R15H523_CH_U_M" => "eros"
+  "Peroi_R14F313_RS_U_M" => "eroides"
+  "Peroi_R14F306_RS_U_M" => "eroides"
+  "Peros_R10C085_FR_U_M" => "eros"
+  "Peros_R15I764_AT_U_M" => "eros"
+
+julia> raxmltrees = "besttrees.tre"
+"besttrees.tre"
+
+julia> genetrees = readMultiTopology(raxmltrees)
+5765-element Vector{HybridNetwork}:
+ HybridNetwork, Rooted Network
+73 edges
+74 nodes: 38 tips, 0 hybrid nodes, 36 internal tree nodes.
+tip labels: Peros_R10B863_FR_U_M, Peros_R19D925_ES_U_M, Peros_R07W163_ES_U_M, Peros_R18D133_FR_U_M, ...
+(((Peros_R10B863_FR_U_M:0.0,Peros_R19D925_ES_U_M:0.0):0.0,(Peros_R07W163_ES_U_M:0.006,(Peros_R18D133_FR_U_M:0.0,((Peros_R17F517_AL_U_M:0.0,((((Peros_R14G085_GR_U_M:0.0,(Peros_R18D135_ES_U_M:0.0,(((Peros_R16D593_RS_U_M:0.0,((Peros_R14A083_IT_U_M:0.0,Peroi_R14G072_GR_U_M:0.0):0.0,(((((((Peroi_R10B402_BG_U_M:0.0,Peroi_R14F313_RS_U_M:0.0):0.0,((((Peros_R15H078_IT_U_M:0.0,Peros_R17F518_AL_U_M:0.0):0.0,(Peros_R07W164_ES_U_M:0.0,Peros_R14C790_BG_U_M:0.0):0.0):0.0,Peros_R19D459_ES_U_M:0.0):0.0,Peros_R10B401_BG_U_M:0.0):0.0):0.0,Peros_R15J298_FR_U_M:0.0):0.0,Peroi_R14F612_GR_U_M:0.0):0.0,Peros_R14G066_GR_U_M:0.0):0.0,Peros_R14V059_UA_U_M:0.0):0.0,(((Peroi_R14F306_RS_U_M:0.0,Peros_R16D592_RS_U_M:0.0):0.0,(Peros_R14F299_RS_U_M:0.0,Peroi_R09V961_BG_U_M:0.0):0.0):0.0,Peros_R15M837_IT_U_M:0.0):0.0):0.0):0.0):0.0,Peros_R15I269_AT_U_M:0.0):0.0,Peros_R14F975_GR_U_M:0.0):0.0):0.0):0.0,Peros_R14G103_GR_U_M:0.0):0.0,Peros_R11H009_ES_U_M:0.0):0.0,Peros_R14C958_BG_U_M:0.0):0.006):0.0,Peros_R14A243_IT_U_M:0.0):0.0):0.0):0.0):0.0,(Peros_R07D671_BG_U_M:0.0,(Peros_R17E114_ES_U_M:0.0,(Peros_R09V828_ES_U_M:0.0,Peros_R17E160_ES_U_M:0.0):0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+89 edges
+90 nodes: 46 tips, 0 hybrid nodes, 44 internal tree nodes.
+tip labels: Peros_R07D671_BG_U_M, Peros_R14F605_GR_U_M, Peros_R14G085_GR_U_M, Peros_R15M837_IT_U_M, ...
+((Peros_R07D671_BG_U_M:0.0,(((((Peros_R14F605_GR_U_M:0.0,Peros_R14G085_GR_U_M:0.0):0.0,((((Peros_R15M837_IT_U_M:0.0,(Peros_R07W163_ES_U_M:0.0,(Peros_R11H009_ES_U_M:0.0,(Peros_R19D459_ES_U_M:0.0,(Peros_R15H523_CH_U_M:0.006,(Peros_R15I269_AT_U_M:0.0,(((Peros_R10B863_FR_U_M:0.0,Peros_R15J298_FR_U_M:0.0):0.006,Peros_R10C085_FR_U_M:0.0):0.0,Peros_R17T046_ME_U_M:0.0):0.0):0.0):0.006):0.0):0.0):0.0):0.0,(Peros_R14C790_BG_U_M:0.0,((Peros_R09V828_ES_U_M:0.0,(Peros_R14G066_GR_U_M:0.0,(Peros_R14G103_GR_U_M:0.0,Peroi_R14G072_GR_U_M:0.0):0.0):0.0):0.0,Peros_R07W164_ES_U_M:0.0):0.0):0.0):0.0,(Peros_R14F975_GR_U_M:0.0,Peros_R14F984_GR_U_M:0.0):0.0):0.0,Peros_R17E160_ES_U_M:0.0):0.0):0.0,Peros_R17E114_ES_U_M:0.0):0.0,(Peroi_R09V961_BG_U_M:0.0,(Peroi_R14F617_GR_U_M:0.0,(Peros_R17G381_AL_U_M:0.0,Peros_R14G453_GR_U_M:0.0):0.0):0.0):0.0):0.0,(Picar_R08M425_RO_U_M:0.006,Picar_R17D470_GR_U_M:0.013):0.028):0.0):0.0,(((((((Peros_R15I764_AT_U_M:0.0,((((Peros_R14A083_IT_U_M:0.0,((Peros_R17T045_ME_U_M:0.0,((Peros_R17F518_AL_U_M:0.0,Peroi_R17F519_AL_U_M:0.0):0.0,Peroi_R14F612_GR_U_M:0.0):0.0):0.006,Peros_R16D592_RS_U_M:0.0):0.0):0.0,Peros_R19D925_ES_U_M:0.0):0.0,Peros_R18D135_ES_U_M:0.0):0.0,Peros_R16D593_RS_U_M:0.0):0.0):0.0,Peros_R14V059_UA_U_M:0.0):0.0,Peros_R14F299_RS_U_M:0.0):0.0,Peros_R10B401_BG_U_M:0.0):0.0,Peroi_R14F306_RS_U_M:0.0):0.0,Peroi_R10B402_BG_U_M:0.0):0.0,Peroi_R14F313_RS_U_M:0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+105 edges
+106 nodes: 54 tips, 0 hybrid nodes, 52 internal tree nodes.
+tip labels: Peros_R10B401_BG_U_M, Peros_R09V828_ES_U_M, Peros_R15J298_FR_U_M, Peroi_R14F306_RS_U_M, ...
+((((Peros_R10B401_BG_U_M:0.0,Peros_R09V828_ES_U_M:0.0):0.0,(Peros_R15J298_FR_U_M:0.0,Peroi_R14F306_RS_U_M:0.0):0.0):0.0,(Peros_R14V059_UA_U_M:0.0,(((Peros_R17E160_ES_U_M:0.0,(Peroi_R14F617_GR_U_M:0.0,(((((Peros_R11H009_ES_U_M:0.0,(Peroi_R10B402_BG_U_M:0.0,(Peros_R14G453_GR_U_M:0.0,(Peros_R07D671_BG_U_M:0.0,(Peros_R16D593_RS_U_M:0.0,(Peroi_R14F612_GR_U_M:0.0,(Peros_R14C958_BG_U_M:0.0,((Peros_R15H523_CH_U_M:0.0,(Peros_R19D908_ES_U_M:0.0,(Peros_R07W163_ES_U_M:0.0,(Peros_R18D133_FR_U_M:0.0,((Peros_R19D459_ES_U_M:0.0,(Peros_R17F517_AL_U_M:0.0,(Peros_R17T046_ME_U_M:0.0,((Peros_R14F984_GR_U_M:0.0,Peros_R17T045_ME_U_M:0.0):0.0,((Peros_R14F975_GR_U_M:0.0,(Peroi_R17F519_AL_U_M:0.0,(((Peroi_R14G072_GR_U_M:0.0,Peros_R14G085_GR_U_M:0.0):0.0,Peros_R17F518_AL_U_M:0.0):0.0,((Peros_R14G066_GR_U_M:0.0,(Peros_R15G864_CH_U_M:0.0,Peros_R14G103_GR_U_M:0.0):0.0):0.0,Peros_R10B863_FR_U_M:0.0):0.0):0.0):0.0):0.0,Peros_R14C790_BG_U_M:0.0):0.0):0.0):0.0):0.0):0.0,(Peros_R14F605_GR_U_M:0.0,(((Peros_R19D925_ES_U_M:0.0,(Peros_R15H078_IT_U_M:0.0,((Picar_R08M425_RO_U_M:0.0,Picar_R17D470_GR_U_M:0.0):0.0,(Peros_R14A243_IT_U_M:0.0,(Peros_R15M837_IT_U_M:0.0,Peros_R14A083_IT_U_M:0.0):0.007):0.0):0.0):0.01):0.01,Peros_R10C085_FR_U_M:0.0):0.0,Peros_R07W164_ES_U_M:0.0):0.0):0.0):0.007):0.0):0.0):0.0):0.0,Peros_R15I764_AT_U_M:0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0,Peroi_R09V961_BG_U_M:0.0):0.0,Peros_R18D135_ES_U_M:0.0):0.0,Peros_R15I269_AT_U_M:0.0):0.0,((Peros_R17E114_ES_U_M:0.0,Peros_R14F299_RS_U_M:0.0):0.0,Peros_R17G381_AL_U_M:0.0):0.0):0.0):0.0):0.0,Peros_R14N424_UA_U_M:0.0):0.0,Peros_R16D592_RS_U_M:0.0):0.0):0.0):0.0,Peroi_R14F313_RS_U_M:0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+95 edges
+96 nodes: 49 tips, 0 hybrid nodes, 47 internal tree nodes.
+tip labels: Peros_R17E160_ES_U_M, Peros_R07W164_ES_U_M, Peros_R07W163_ES_U_M, Peros_R10B863_FR_U_M, ...
+(((((((Peros_R17E160_ES_U_M:0.0,(Peros_R07W164_ES_U_M:0.0,(Peros_R07W163_ES_U_M:0.0,(Peros_R10B863_FR_U_M:0.0,(Peros_R14V059_UA_U_M:0.0,((Peros_R15H523_CH_U_M:0.0,(Peros_R15J298_FR_U_M:0.0,(((Peros_R14G066_GR_U_M:0.0,Peros_R14G085_GR_U_M:0.0):0.0,(((Peros_R19D925_ES_U_M:0.0,(Peros_R14A243_IT_U_M:0.0,(Peros_R14A083_IT_U_M:0.006,((((Peros_R07D671_BG_U_M:0.0,((Peroi_R14F617_GR_U_M:0.0,(Peros_R17G381_AL_U_M:0.0,Peros_R16D593_RS_U_M:0.0):0.0):0.0,(Peroi_R14F306_RS_U_M:0.0,Peroi_R14F612_GR_U_M:0.0):0.0):0.0):0.005,Peros_R14C958_BG_U_M:0.0):0.0,Peros_R10B401_BG_U_M:0.0):0.0,(Peros_R15I764_AT_U_M:0.0,Peros_R16D592_RS_U_M:0.0):0.005):0.005):0.0):0.0):0.0,Peros_R11H009_ES_U_M:0.0):0.0,Picar_R17D470_GR_U_M:0.0):0.0):0.0,Picar_R08M425_RO_U_M:0.0):0.017):0.0):0.0,(Peros_R15G864_CH_U_M:0.0,(((Peros_R15M837_IT_U_M:0.0,Peros_R15I269_AT_U_M:0.0):0.0,Peros_R10C085_FR_U_M:0.0):0.0,(Peros_R17F518_AL_U_M:0.0,Peros_R09V828_ES_U_M:0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0,Peros_R19D908_ES_U_M:0.0):0.0,Peros_R17E114_ES_U_M:0.0):0.0,Peros_R14G103_GR_U_M:0.0):0.0,Peros_R15H078_IT_U_M:0.0):0.0,Peros_R14F299_RS_U_M:0.0):0.0,(Peroi_R14G072_GR_U_M:0.0,(Peros_R17T045_ME_U_M:0.0,(Peros_R18D133_FR_U_M:0.0,(((Peroi_R17F519_AL_U_M:0.0,Peros_R18D135_ES_U_M:0.0):0.0,(Peros_R17T046_ME_U_M:0.0,(((Peros_R14N424_UA_U_M:0.0,Peros_R14G453_GR_U_M:0.0):0.0,(Peroi_R14F313_RS_U_M:0.0,Peroi_R09V961_BG_U_M:0.0):0.0):0.0,Peros_R17F517_AL_U_M:0.0):0.0):0.0):0.0,Peros_R19D459_ES_U_M:0.0):0.0):0.005):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+91 edges
+92 nodes: 47 tips, 0 hybrid nodes, 45 internal tree nodes.
+tip labels: Peros_R19D908_ES_U_M, Peros_R10C085_FR_U_M, Peroi_R14F612_GR_U_M, Peros_R10B401_BG_U_M, ...
+(Peros_R19D908_ES_U_M:0.0,(((Peros_R10C085_FR_U_M:0.0,(Peroi_R14F612_GR_U_M:0.0,Peros_R10B401_BG_U_M:0.0):0.0):0.0,((((((Peros_R15H078_IT_U_M:0.0,(((((((Peros_R10B863_FR_U_M:0.0,Peros_R17F517_AL_U_M:0.0):0.0,Peros_R17T045_ME_U_M:0.0):0.0,Peros_R14A243_IT_U_M:0.0):0.0,Peros_R17F518_AL_U_M:0.0):0.0,Peros_R14F605_GR_U_M:0.0):0.0,Peros_R17E114_ES_U_M:0.0):0.0,(Peros_R09V828_ES_U_M:0.0,(Peroi_R14G072_GR_U_M:0.0,Peros_R19D925_ES_U_M:0.0):0.0):0.0):0.0):0.0,(((((Peros_R15J298_FR_U_M:0.0,Peros_R07W164_ES_U_M:0.0):0.0,((((Peroi_R09V961_BG_U_M:0.0,Peros_R14F984_GR_U_M:0.0):0.0,Peros_R14F299_RS_U_M:0.0):0.0,(Peros_R15I764_AT_U_M:0.0,Peros_R17G381_AL_U_M:0.0):0.0):0.0,((Peros_R11H009_ES_U_M:0.0,Peros_R14G085_GR_U_M:0.0):0.0,((Peros_R07D671_BG_U_M:0.0,Peroi_R14F313_RS_U_M:0.0):0.0,(((((Peros_R14F975_GR_U_M:0.0,Peros_R16D592_RS_U_M:0.0):0.0,Peros_R15M837_IT_U_M:0.0):0.0,Peros_R14N424_UA_U_M:0.0):0.0,Peros_R16D593_RS_U_M:0.0):0.0,Peros_R17E160_ES_U_M:0.0):0.0):0.0):0.0):0.0):0.0,Peros_R14G103_GR_U_M:0.0):0.0,Peros_R15I269_AT_U_M:0.0):0.0,Peros_R14G453_GR_U_M:0.0):0.0):0.0,Peros_R14C958_BG_U_M:0.0):0.0,(((Peroi_R14F617_GR_U_M:0.0,Peros_R14V059_UA_U_M:0.0):0.0,(Peroi_R10B402_BG_U_M:0.0,Peros_R14C790_BG_U_M:0.0):0.0):0.0,Peros_R17T046_ME_U_M:0.0):0.0):0.0,Peros_R15H523_CH_U_M:0.0):0.0,Peros_R19D459_ES_U_M:0.0):0.0):0.0,(Peros_R14G066_GR_U_M:0.0,(Peroi_R14F306_RS_U_M:0.0,Peros_R14A083_IT_U_M:0.0):0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+95 edges
+96 nodes: 49 tips, 0 hybrid nodes, 47 internal tree nodes.
+tip labels: Peroi_R14G072_GR_U_M, Peroi_R09V961_BG_U_M, Peros_R11H009_ES_U_M, Peroi_R14F306_RS_U_M, ...
+((Peroi_R14G072_GR_U_M:0.0,(Peroi_R09V961_BG_U_M:0.0,(((Peros_R11H009_ES_U_M:0.0,((Peroi_R14F306_RS_U_M:0.0,Peros_R16D593_RS_U_M:0.0):0.0,Peros_R14C958_BG_U_M:0.0):0.0):0.0,Peros_R15H078_IT_U_M:0.0):0.0,Peros_R09V828_ES_U_M:0.0):0.0):0.0):0.0,((Peros_R14G066_GR_U_M:0.0,(((Peroi_R14F617_GR_U_M:0.0,(Peros_R17F518_AL_U_M:0.0,(((((Peros_R07W163_ES_U_M:0.0,(((Peros_R14G453_GR_U_M:0.0,(Peros_R10C085_FR_U_M:0.0,(Peros_R14G085_GR_U_M:0.0,(Peroi_R10B402_BG_U_M:0.0,((Peroi_R14F612_GR_U_M:0.0,(Peros_R15J298_FR_U_M:0.0,((((((Peros_R19D908_ES_U_M:0.0,((Peros_R15I269_AT_U_M:0.0,((((Peros_R14F975_GR_U_M:0.0,((Peros_R17F517_AL_U_M:0.0,Peros_R17T045_ME_U_M:0.0):0.006,(Peroi_R17F519_AL_U_M:0.0,(Picar_R08M425_RO_U_M:0.0,(((Peros_R17T046_ME_U_M:0.0,Picar_R17D470_GR_U_M:0.003):0.0,Peros_R14A243_IT_U_M:0.0):0.023,Peros_R14A083_IT_U_M:0.0):0.0):0.0):0.01):0.0):0.0,Peros_R14G103_GR_U_M:0.0):0.0,Peros_R17E114_ES_U_M:0.0):0.0,Peros_R10B401_BG_U_M:0.0):0.0):0.0,Peros_R14V059_UA_U_M:0.0):0.0):0.0,Peros_R07D671_BG_U_M:0.0):0.0,Peros_R15M837_IT_U_M:0.0):0.0,Peros_R19D925_ES_U_M:0.0):0.0,Peros_R15H523_CH_U_M:0.0):0.0,Peros_R17G381_AL_U_M:0.0):0.0):0.0):0.0,Peros_R14F605_GR_U_M:0.0):0.0):0.0):0.0):0.0):0.0,Peros_R14F984_GR_U_M:0.0):0.0,Peros_R17E160_ES_U_M:0.0):0.0):0.0,Peros_R15G864_CH_U_M:0.006):0.0,Peros_R16D592_RS_U_M:0.0):0.0,Peros_R14C790_BG_U_M:0.0):0.0,Peros_R10B863_FR_U_M:0.0):0.0):0.0):0.0,Peros_R15I764_AT_U_M:0.0):0.0,Peros_R18D135_ES_U_M:0.0):0.0):0.0,Peros_R19D459_ES_U_M:0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+73 edges
+74 nodes: 38 tips, 0 hybrid nodes, 36 internal tree nodes.
+tip labels: Peros_R15H523_CH_U_M, Peros_R18D135_ES_U_M, Peros_R17E114_ES_U_M, Peroi_R14F612_GR_U_M, ...
+((Peros_R15H523_CH_U_M:0.0,(Peros_R18D135_ES_U_M:0.0,(Peros_R17E114_ES_U_M:0.005,((Peroi_R14F612_GR_U_M:0.0,(Peros_R14G453_GR_U_M:0.0,(Peros_R16D593_RS_U_M:0.0,(((Peros_R14F299_RS_U_M:0.005,(Peros_R14F605_GR_U_M:0.0,Peros_R09V828_ES_U_M:0.0):0.0):0.0,Peros_R17T045_ME_U_M:0.0):0.0,Peros_R18D133_FR_U_M:0.0):0.0):0.0):0.0):0.0,Peros_R14C958_BG_U_M:0.0):0.0):0.0):0.0):0.0,(((Picar_R08M425_RO_U_M:0.0,(Picar_R17D470_GR_U_M:0.0,((((Peros_R15J298_FR_U_M:0.0,(((Peros_R17F517_AL_U_M:0.0,(Peros_R17F518_AL_U_M:0.0,((Peros_R07W163_ES_U_M:0.0,(Peros_R15I764_AT_U_M:0.0,(((Peros_R07W164_ES_U_M:0.0,(Peroi_R17F519_AL_U_M:0.0,(Peroi_R14G072_GR_U_M:0.0,(Peros_R14G103_GR_U_M:0.0,(Peros_R10C085_FR_U_M:0.0,(Peros_R07D671_BG_U_M:0.0,Peroi_R14F306_RS_U_M:0.0):0.0):0.0):0.0):0.0):0.0):0.0,Peros_R11H009_ES_U_M:0.0):0.0,Peros_R15I269_AT_U_M:0.0):0.0):0.0):0.0,Peros_R15M837_IT_U_M:0.0):0.0):0.0):0.008,Peroi_R10B402_BG_U_M:0.0):0.0,Peros_R17G381_AL_U_M:0.0):0.0):0.015,Peroi_R09V961_BG_U_M:0.0):0.0,Peroi_R14F313_RS_U_M:0.0):0.0,(Peros_R14A083_IT_U_M:0.003,Peros_R14V059_UA_U_M:0.0):0.0):0.0):0.0):0.006,Peros_R19D459_ES_U_M:0.0):0.0,Peroi_R14F617_GR_U_M:0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+87 edges
+88 nodes: 45 tips, 0 hybrid nodes, 43 internal tree nodes.
+tip labels: Peroi_R10B402_BG_U_M, Peroi_R14F617_GR_U_M, Peros_R10B863_FR_U_M, Peroi_R14F313_RS_U_M, ...
+((Peroi_R10B402_BG_U_M:0.0,(Peroi_R14F617_GR_U_M:0.0,((((((Peros_R10B863_FR_U_M:0.0,Peroi_R14F313_RS_U_M:0.0):0.0,Peros_R17F517_AL_U_M:0.0):0.0,Peros_R17T046_ME_U_M:0.0):0.0,Picar_R17D470_GR_U_M:0.0):0.0,((Picar_R08M425_RO_U_M:0.0,Peros_R15M837_IT_U_M:0.0):0.0,(Peroi_R17F519_AL_U_M:0.0,(Peros_R10C085_FR_U_M:0.0,(Peros_R14G103_GR_U_M:0.0,Peros_R14F975_GR_U_M:0.0):0.0):0.0):0.0):0.0):0.0,((Peroi_R14G072_GR_U_M:0.0,(((((Peros_R14C958_BG_U_M:0.0,(Peros_R10B401_BG_U_M:0.0,Peros_R17T045_ME_U_M:0.007):0.0):0.0,Peros_R17E114_ES_U_M:0.0):0.0,Peros_R19D459_ES_U_M:0.0):0.0,Peroi_R14F612_GR_U_M:0.0):0.0,(Peros_R14N424_UA_U_M:0.0,(Peros_R07W163_ES_U_M:0.0,(((((Peros_R14F299_RS_U_M:0.0,Peros_R14V059_UA_U_M:0.0):0.0,Peros_R16D593_RS_U_M:0.0):0.0,Peros_R15I269_AT_U_M:0.0):0.0,Peros_R07W164_ES_U_M:0.0):0.0,Peros_R17F518_AL_U_M:0.0):0.0):0.0):0.007):0.0):0.0,(Peroi_R14F306_RS_U_M:0.0,(Peros_R07D671_BG_U_M:0.0,((Peros_R14F605_GR_U_M:0.0,Peros_R09V828_ES_U_M:0.0):0.0,((Peros_R15I764_AT_U_M:0.0,(((Peros_R14C790_BG_U_M:0.0,(Peros_R17E160_ES_U_M:0.0,(Peros_R17G381_AL_U_M:0.0,Peros_R19D925_ES_U_M:0.0):0.0):0.0):0.0,((Peros_R11H009_ES_U_M:0.0,Peroi_R09V961_BG_U_M:0.0):0.0,(Peros_R14A243_IT_U_M:0.0,Peros_R14A083_IT_U_M:0.0):0.0):0.0):0.0,Peros_R14G085_GR_U_M:0.0):0.0):0.0,Peros_R14G453_GR_U_M:0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0,Peros_R16D592_RS_U_M:0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+95 edges
+96 nodes: 49 tips, 0 hybrid nodes, 47 internal tree nodes.
+tip labels: Peroi_R14F313_RS_U_M, Peros_R18D135_ES_U_M, Peros_R14G453_GR_U_M, Peroi_R14F612_GR_U_M, ...
+(Peroi_R14F313_RS_U_M:0.0,((Peros_R18D135_ES_U_M:0.0,Peros_R14G453_GR_U_M:0.0):0.0,((Peroi_R14F612_GR_U_M:0.0,(((Peros_R14C790_BG_U_M:0.0,Peros_R16D592_RS_U_M:0.0):0.0,(Peros_R14F605_GR_U_M:0.0,Peroi_R14F306_RS_U_M:0.0):0.0):0.0,(((((Peroi_R14G072_GR_U_M:0.0,(Peroi_R09V961_BG_U_M:0.0,((((((((Picar_R17D470_GR_U_M:0.018,Picar_R08M425_RO_U_M:0.0):0.02,((((Peros_R09V828_ES_U_M:0.0,(((Peros_R14F975_GR_U_M:0.0,(Peros_R14F984_GR_U_M:0.0,(Peros_R15I764_AT_U_M:0.0,((Peros_R15M837_IT_U_M:0.0,((((Peros_R11H009_ES_U_M:0.0,((Peros_R15J298_FR_U_M:0.0,((Peros_R17F518_AL_U_M:0.0,(Peros_R10C085_FR_U_M:0.0,(((Peros_R15I269_AT_U_M:0.0,Peros_R07W164_ES_U_M:0.0):0.0,Peroi_R17F519_AL_U_M:0.0):0.0,Peros_R17F517_AL_U_M:0.0):0.01):0.0):0.0,Peros_R17E114_ES_U_M:0.0):0.0):0.0,Peros_R17E160_ES_U_M:0.0):0.0):0.0,Peroi_R14F617_GR_U_M:0.0):0.0,Peros_R14G066_GR_U_M:0.0):0.0,Peros_R14A083_IT_U_M:0.0):0.0):0.0,Peros_R14G085_GR_U_M:0.0):0.0):0.0):0.0):0.0,Peros_R14A243_IT_U_M:0.0):0.0,Peros_R17T045_ME_U_M:0.0):0.0):0.0,Peros_R07W163_ES_U_M:0.0):0.0,Peros_R19D459_ES_U_M:0.0):0.0,Peros_R19D925_ES_U_M:0.0):0.0):0.006,Peros_R15G864_CH_U_M:0.0):0.0,Peros_R14C958_BG_U_M:0.0):0.0,Peros_R14G103_GR_U_M:0.0):0.0,Peros_R16D593_RS_U_M:0.0):0.0,Peros_R14N424_UA_U_M:0.0):0.0,Peros_R10B401_BG_U_M:0.0):0.0):0.0):0.0,Peros_R14V059_UA_U_M:0.0):0.0,Peroi_R10B402_BG_U_M:0.0):0.0,Peros_R17G381_AL_U_M:0.0):0.0,Peros_R15H523_CH_U_M:0.0):0.0):0.0):0.0,(Peros_R14F299_RS_U_M:0.0,Peros_R07D671_BG_U_M:0.0):0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+85 edges
+86 nodes: 44 tips, 0 hybrid nodes, 42 internal tree nodes.
+tip labels: Peroi_R14F617_GR_U_M, Peros_R17E160_ES_U_M, Peros_R14V059_UA_U_M, Peros_R14F299_RS_U_M, ...
+(((Peroi_R14F617_GR_U_M:0.0,Peros_R17E160_ES_U_M:0.0):0.0,(((Peros_R14V059_UA_U_M:0.0,(Peros_R14F299_RS_U_M:0.0,Peroi_R17F519_AL_U_M:0.0):0.0):0.0,Peros_R14G066_GR_U_M:0.0):0.0,Peros_R14F605_GR_U_M:0.0):0.0):0.0,((Peroi_R14F306_RS_U_M:0.0,(Peros_R17G381_AL_U_M:0.0,(Peros_R07D671_BG_U_M:0.0,Peros_R14C790_BG_U_M:0.005):0.0):0.0):0.0,((Peros_R15H078_IT_U_M:0.0,(Peros_R17F518_AL_U_M:0.0,(((Peros_R07W164_ES_U_M:0.0,Peros_R19D925_ES_U_M:0.0):0.0,((Peros_R19D459_ES_U_M:0.0,Peros_R15I269_AT_U_M:0.0):0.0,(Peros_R14N424_UA_U_M:0.0,(Peros_R17E114_ES_U_M:0.0,(Peros_R14A243_IT_U_M:0.0,((Picar_R17D470_GR_U_M:0.0,Picar_R08M425_RO_U_M:0.0):0.011,Peros_R15M837_IT_U_M:0.0):0.0):0.0):0.0):0.0):0.0):0.0,Peroi_R14G072_GR_U_M:0.0):0.0):0.0):0.0,(((Peros_R14G453_GR_U_M:0.0,(Peros_R10B863_FR_U_M:0.0,Peroi_R10B402_BG_U_M:0.0):0.0):0.0,(Peros_R16D593_RS_U_M:0.0,(Peroi_R14F612_GR_U_M:0.0,(Peroi_R09V961_BG_U_M:0.0,Peros_R15H523_CH_U_M:0.0):0.0):0.0):0.0):0.0,((Peros_R15J298_FR_U_M:0.0,((Peros_R14G085_GR_U_M:0.0,(Peros_R11H009_ES_U_M:0.0,((Peros_R14A083_IT_U_M:0.0,Peros_R18D135_ES_U_M:0.0):0.0,Peros_R15I764_AT_U_M:0.0):0.0):0.0):0.0,Peros_R07W163_ES_U_M:0.0):0.0):0.0,(((Peros_R14G103_GR_U_M:0.0,Peros_R09V828_ES_U_M:0.0):0.0,(Peros_R16D592_RS_U_M:0.0,Peros_R17T046_ME_U_M:0.0):0.0):0.0,Peros_R10C085_FR_U_M:0.0):0.0):0.0):0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+75 edges
+76 nodes: 39 tips, 0 hybrid nodes, 37 internal tree nodes.
+tip labels: Peros_R17F518_AL_U_M, Peroi_R09V961_BG_U_M, Peros_R15I764_AT_U_M, Peros_R07W164_ES_U_M, ...
+(Peros_R17F518_AL_U_M:0.0,(((Peroi_R09V961_BG_U_M:0.0,Peros_R15I764_AT_U_M:0.0):0.0,(Peros_R07W164_ES_U_M:0.021,(Peros_R17E160_ES_U_M:0.0,(Peros_R11H009_ES_U_M:0.0,Peros_R19D459_ES_U_M:0.0):0.026):0.0):0.0):0.0,(((Peros_R09V828_ES_U_M:0.0,(Peros_R14C790_BG_U_M:0.0,Peros_R07D671_BG_U_M:0.0):0.0):0.0,((Peros_R17G381_AL_U_M:0.0,Peros_R14G066_GR_U_M:0.0):0.0,(((Peroi_R14F612_GR_U_M:0.0,Peroi_R14F306_RS_U_M:0.0):0.0,((((Peros_R18D135_ES_U_M:0.0,(Peroi_R17F519_AL_U_M:0.0,Peros_R15G864_CH_U_M:0.0):0.0):0.0,Peros_R14A083_IT_U_M:0.0):0.0,(Peros_R17F517_AL_U_M:0.0,(((Peros_R14F975_GR_U_M:0.0,Peros_R17E114_ES_U_M:0.0):0.0,Peros_R14V059_UA_U_M:0.0):0.0,Peroi_R14F617_GR_U_M:0.0):0.0):0.0):0.0,Peros_R14G103_GR_U_M:0.0):0.0):0.0,(Peros_R19D925_ES_U_M:0.0,Peros_R10B401_BG_U_M:0.0):0.0):0.0):0.0):0.0,(((((Peroi_R14F313_RS_U_M:0.0,(Peros_R14G085_GR_U_M:0.0,Peros_R17T046_ME_U_M:0.0):0.0):0.0,(((Peros_R10C085_FR_U_M:0.0,Peros_R14G453_GR_U_M:0.0):0.0,Peros_R15J298_FR_U_M:0.0):0.0,((Peros_R10B863_FR_U_M:0.0,Peros_R15I269_AT_U_M:0.0):0.0,Peroi_R14G072_GR_U_M:0.0):0.0):0.0):0.0,Peroi_R10B402_BG_U_M:0.0):0.0,Peros_R17T045_ME_U_M:0.0):0.0,Peros_R14F605_GR_U_M:0.0):0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+71 edges
+72 nodes: 37 tips, 0 hybrid nodes, 35 internal tree nodes.
+tip labels: Peros_R14V059_UA_U_M, Peros_R14F299_RS_U_M, Peros_R14F605_GR_U_M, Peros_R19D925_ES_U_M, ...
+(((((Peros_R14V059_UA_U_M:0.0,(Peros_R14F299_RS_U_M:0.0,(Peros_R14F605_GR_U_M:0.0,(Peros_R19D925_ES_U_M:0.007,(((Peros_R14C958_BG_U_M:0.0,(Peros_R17E114_ES_U_M:0.0,(((Peros_R10B863_FR_U_M:0.0,(Peros_R17E160_ES_U_M:0.0,Peros_R18D135_ES_U_M:0.0):0.0):0.007,Peroi_R09V961_BG_U_M:0.0):0.0,Peros_R17G381_AL_U_M:0.0):0.0):0.0):0.0,Peroi_R10B402_BG_U_M:0.0):0.0,(Peros_R17F518_AL_U_M:0.0,(Peros_R15I269_AT_U_M:0.0,Peros_R15J298_FR_U_M:0.0):0.007):0.0):0.0):0.0):0.0):0.0):0.0,(Peroi_R14G072_GR_U_M:0.0,Peroi_R17F519_AL_U_M:0.0):0.0):0.0,((Peroi_R14F617_GR_U_M:0.0,Peros_R14A083_IT_U_M:0.0):0.0,Peros_R17T046_ME_U_M:0.0):0.0):0.0,(Peros_R16D592_RS_U_M:0.0,(Peros_R17F517_AL_U_M:0.0,Peros_R15I764_AT_U_M:0.0):0.0):0.0):0.0,((((Peroi_R14F306_RS_U_M:0.0,Peros_R16D593_RS_U_M:0.0):0.0,(Peroi_R14F612_GR_U_M:0.0,Peroi_R14F313_RS_U_M:0.0):0.0):0.0,(Peros_R15M837_IT_U_M:0.0,(Peros_R07D671_BG_U_M:0.0,Peros_R11H009_ES_U_M:0.0):0.0):0.0):0.0,((Peros_R17T045_ME_U_M:0.0,((Peros_R15H078_IT_U_M:0.0,Peros_R09V828_ES_U_M:0.0):0.0,Peros_R14G103_GR_U_M:0.0):0.0):0.0,(Peros_R14F984_GR_U_M:0.0,Peros_R14G453_GR_U_M:0.0):0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+91 edges
+92 nodes: 47 tips, 0 hybrid nodes, 45 internal tree nodes.
+tip labels: Peroi_R14F612_GR_U_M, Peros_R19D925_ES_U_M, Peros_R17E160_ES_U_M, Peros_R17G381_AL_U_M, ...
+((((Peroi_R14F612_GR_U_M:0.0,((Peros_R19D925_ES_U_M:0.0,((Peros_R17E160_ES_U_M:0.0,Peros_R17G381_AL_U_M:0.0):0.0,Peros_R14C958_BG_U_M:0.0):0.0):0.0,(Peros_R16D593_RS_U_M:0.0,(((Peros_R15M837_IT_U_M:0.0,(Peros_R10B863_FR_U_M:0.0,((Peros_R17T045_ME_U_M:0.0,((Peros_R15G864_CH_U_M:0.0,((Peros_R11H009_ES_U_M:0.0,((Peros_R07W163_ES_U_M:0.0,Peros_R15H523_CH_U_M:0.0):0.0,Peros_R14F975_GR_U_M:0.0):0.0):0.0,Peroi_R09V961_BG_U_M:0.0):0.0):0.0,Peros_R14C790_BG_U_M:0.0):0.0):0.0,(Peros_R17T046_ME_U_M:0.0,Peroi_R14F313_RS_U_M:0.0):0.0):0.0):0.0):0.0,Peros_R15I269_AT_U_M:0.0):0.0,Peros_R14G085_GR_U_M:0.0):0.0):0.0):0.0):0.0,(Peros_R14G103_GR_U_M:0.0,Peros_R07W164_ES_U_M:0.0):0.0):0.0,Peros_R14G066_GR_U_M:0.0):0.0,(((((Peros_R14G453_GR_U_M:0.0,(Peros_R09V828_ES_U_M:0.0,(((((((Peros_R16D592_RS_U_M:0.0,(Peros_R10B401_BG_U_M:0.0,Peroi_R17F519_AL_U_M:0.0):0.0):0.0,((Peros_R19D459_ES_U_M:0.0,Peros_R17E114_ES_U_M:0.0):0.0,(Peros_R14A083_IT_U_M:0.0,Peros_R14V059_UA_U_M:0.0):0.0):0.0):0.0,Peros_R14F299_RS_U_M:0.0):0.0,((Peroi_R14F306_RS_U_M:0.0,Peroi_R10B402_BG_U_M:0.0):0.0,Peros_R17F517_AL_U_M:0.0):0.0):0.0,Peros_R15J298_FR_U_M:0.0):0.0,Peros_R14F984_GR_U_M:0.0):0.0,((Peros_R17F518_AL_U_M:0.0,Peros_R18D135_ES_U_M:0.0):0.0,Peros_R15I764_AT_U_M:0.0):0.0):0.0):0.0):0.0,Peros_R07D671_BG_U_M:0.0):0.0,Peroi_R14F617_GR_U_M:0.0):0.0,Peros_R14F605_GR_U_M:0.0):0.0,(Peros_R10C085_FR_U_M:0.0,Peroi_R14G072_GR_U_M:0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+83 edges
+84 nodes: 43 tips, 0 hybrid nodes, 41 internal tree nodes.
+tip labels: Peros_R07W164_ES_U_M, Peroi_R10B402_BG_U_M, Peros_R07D671_BG_U_M, Peroi_R14F313_RS_U_M, ...
+((((Peros_R07W164_ES_U_M:0.0,Peroi_R10B402_BG_U_M:0.0):0.0,(Peros_R07D671_BG_U_M:0.0,((Peroi_R14F313_RS_U_M:0.0,((((((Peros_R14C958_BG_U_M:0.0,Peros_R09V828_ES_U_M:0.0):0.0,Peros_R07W163_ES_U_M:0.0):0.0,(Peros_R15M837_IT_U_M:0.0,Peros_R14G453_GR_U_M:0.0):0.0):0.0,((((Peros_R16D593_RS_U_M:0.0,(((Peros_R14G103_GR_U_M:0.0,Peros_R14G066_GR_U_M:0.0):0.0,((Peros_R17F518_AL_U_M:0.0,Peros_R18D135_ES_U_M:0.0):0.0,Peros_R14F975_GR_U_M:0.0):0.0):0.0,((Peros_R10B401_BG_U_M:0.0,((Peros_R19D925_ES_U_M:0.0,(((Peros_R15J298_FR_U_M:0.0,Peros_R11H009_ES_U_M:0.0):0.0,Peros_R17E160_ES_U_M:0.0):0.0,Peroi_R17F519_AL_U_M:0.0):0.0):0.0,Peros_R14C790_BG_U_M:0.0):0.0):0.0,Peros_R10B863_FR_U_M:0.0):0.0):0.0):0.0,Peroi_R14F306_RS_U_M:0.0):0.0,Peros_R15H078_IT_U_M:0.0):0.0,((Peros_R17G381_AL_U_M:0.0,(Peros_R18D133_FR_U_M:0.0,Peroi_R09V961_BG_U_M:0.0):0.0):0.0,(Peroi_R14G072_GR_U_M:0.0,Peros_R15I764_AT_U_M:0.0):0.0):0.0):0.0):0.0,Peros_R14G085_GR_U_M:0.0):0.0,Peros_R14F299_RS_U_M:0.0):0.0):0.0,Peros_R17T046_ME_U_M:0.0):0.0):0.0):0.0,Peros_R14V059_UA_U_M:0.0):0.0,((((Peroi_R14F617_GR_U_M:0.0,Peros_R15I269_AT_U_M:0.0):0.0,((Peros_R15H523_CH_U_M:0.0,Peros_R19D459_ES_U_M:0.0):0.0,Peros_R17F517_AL_U_M:0.0):0.0):0.0,Peroi_R14F612_GR_U_M:0.0):0.0,(Peros_R17E114_ES_U_M:0.0,Peros_R14A083_IT_U_M:0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+73 edges
+74 nodes: 38 tips, 0 hybrid nodes, 36 internal tree nodes.
+tip labels: Picar_R17D470_GR_U_M, Picar_R08M425_RO_U_M, Peros_R14C790_BG_U_M, Peros_R19D925_ES_U_M, ...
+((Picar_R17D470_GR_U_M:0.0,(Picar_R08M425_RO_U_M:0.0,((((Peros_R14C790_BG_U_M:0.0,((((Peros_R19D925_ES_U_M:0.0,(((Peros_R16D592_RS_U_M:0.0,(Peros_R07W164_ES_U_M:0.0,(((Peros_R14G103_GR_U_M:0.0,Peroi_R14G072_GR_U_M:0.0):0.0,Peros_R14A243_IT_U_M:0.0):0.0,Peros_R17T045_ME_U_M:0.0):0.0):0.0):0.0,Peros_R10B863_FR_U_M:0.0):0.0,Peros_R18D135_ES_U_M:0.0):0.0):0.0,Peros_R14G066_GR_U_M:0.0):0.0,Peros_R14F975_GR_U_M:0.0):0.0,Peroi_R14F617_GR_U_M:0.0):0.0):0.0,Peroi_R14F612_GR_U_M:0.0):0.0,Peros_R14F984_GR_U_M:0.0):0.0,Peros_R14G085_GR_U_M:0.0):0.0):0.0):0.004,((((((Peros_R10C085_FR_U_M:0.0,(((Peros_R07D671_BG_U_M:0.0,(Peros_R15M837_IT_U_M:0.0,(((Peros_R14F299_RS_U_M:0.0,(((Peros_R14N424_UA_U_M:0.0,(Peros_R17F518_AL_U_M:0.0,(Peroi_R14F313_RS_U_M:0.0,Peros_R07W163_ES_U_M:0.0):0.0):0.0):0.009,Peros_R16D593_RS_U_M:0.0):0.0,Peros_R14V059_UA_U_M:0.0):0.0):0.001,Peros_R17E160_ES_U_M:0.0):0.0,Peros_R14A083_IT_U_M:0.0):0.0):0.0):0.0,Peroi_R14F306_RS_U_M:0.0):0.0,Peroi_R17F519_AL_U_M:0.0):0.0):0.0,Peroi_R10B402_BG_U_M:0.0):0.0,Peros_R14C958_BG_U_M:0.0):0.0,Peros_R14F605_GR_U_M:0.0):0.0,Peros_R14G453_GR_U_M:0.0):0.0,Peros_R17F517_AL_U_M:0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+85 edges
+86 nodes: 44 tips, 0 hybrid nodes, 42 internal tree nodes.
+tip labels: Peros_R15G864_CH_U_M, Peroi_R14F617_GR_U_M, Peros_R14N424_UA_U_M, Peros_R15J298_FR_U_M, ...
+((((Peros_R15G864_CH_U_M:0.0,((Peroi_R14F617_GR_U_M:0.0,(Peros_R14N424_UA_U_M:0.0,(Peros_R15J298_FR_U_M:0.0,Peros_R17F518_AL_U_M:0.006):0.011):0.0):0.0,Peros_R17G381_AL_U_M:0.0):0.0):0.0,(Peros_R10B401_BG_U_M:0.0,(Peros_R14F299_RS_U_M:0.0,Peroi_R14F313_RS_U_M:0.006):0.0):0.0):0.0,Peroi_R10B402_BG_U_M:0.0):0.0,((Peros_R07D671_BG_U_M:0.0,Peroi_R09V961_BG_U_M:0.0):0.0,(((((Peroi_R14F306_RS_U_M:0.0,Peros_R14C790_BG_U_M:0.0):0.0,((Peros_R17E160_ES_U_M:0.007,Peros_R17E114_ES_U_M:0.0):0.0,((((Peros_R19D925_ES_U_M:0.0,Peros_R15I269_AT_U_M:0.0):0.0,Peros_R18D135_ES_U_M:0.0):0.0,Peros_R18D133_FR_U_M:0.0):0.0,Peros_R14G453_GR_U_M:0.0):0.0):0.0):0.0,((((((((Peros_R15I764_AT_U_M:0.0,Peros_R19D459_ES_U_M:0.0):0.0,(Peros_R19D908_ES_U_M:0.0,Peros_R14V059_UA_U_M:0.0):0.0):0.0,((Peros_R14G103_GR_U_M:0.0,Peros_R14A243_IT_U_M:0.0):0.0,(Peroi_R17F519_AL_U_M:0.0,Peros_R16D593_RS_U_M:0.0):0.0):0.0):0.0,Peros_R15M837_IT_U_M:0.0):0.0,Peros_R10C085_FR_U_M:0.0):0.0,((Peros_R17F517_AL_U_M:0.0,Peros_R14G066_GR_U_M:0.0):0.0,(Peros_R14C958_BG_U_M:0.0,Peros_R14A083_IT_U_M:0.0):0.0):0.0):0.0,Peros_R17T046_ME_U_M:0.0):0.0,Peroi_R14F612_GR_U_M:0.0):0.0):0.0,(Peros_R10B863_FR_U_M:0.0,Peros_R15H523_CH_U_M:0.0):0.0):0.0,((Peros_R11H009_ES_U_M:0.0,(Peros_R07W163_ES_U_M:0.0,Peros_R14F605_GR_U_M:0.0):0.0):0.0,Peros_R07W164_ES_U_M:0.0):0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+81 edges
+82 nodes: 42 tips, 0 hybrid nodes, 40 internal tree nodes.
+tip labels: Peros_R17F518_AL_U_M, Peros_R17T045_ME_U_M, Peros_R07W164_ES_U_M, Peros_R10B863_FR_U_M, ...
+(((Peros_R17F518_AL_U_M:0.0,Peros_R17T045_ME_U_M:0.0):0.005,((Peros_R07W164_ES_U_M:0.0,((Peros_R10B863_FR_U_M:0.0,(Peros_R19D908_ES_U_M:0.0,((Peros_R17E114_ES_U_M:0.0,Peros_R15I269_AT_U_M:0.0):0.0,Peros_R09V828_ES_U_M:0.0):0.005):0.0):0.0,Peros_R10C085_FR_U_M:0.0):0.0):0.0,Peros_R17E160_ES_U_M:0.0):0.0):0.0,(((Peros_R15I764_AT_U_M:0.0,(Peros_R07D671_BG_U_M:0.0,((Peros_R15M837_IT_U_M:0.0,(((((Peros_R14C958_BG_U_M:0.0,((Peros_R14V059_UA_U_M:0.0,Peroi_R10B402_BG_U_M:0.0):0.0,(Peroi_R14F313_RS_U_M:0.0,(((((Peros_R14A243_IT_U_M:0.0,(((Peros_R14G085_GR_U_M:0.0,((Peros_R15H078_IT_U_M:0.005,Peros_R11H009_ES_U_M:0.0):0.0,Peros_R19D925_ES_U_M:0.0):0.0):0.0,(((Peros_R15H523_CH_U_M:0.0,Peroi_R14G072_GR_U_M:0.0):0.0,Peros_R14G103_GR_U_M:0.0):0.0,(Picar_R08M425_RO_U_M:0.0,Picar_R17D470_GR_U_M:0.005):0.016):0.005):0.005,Peros_R18D135_ES_U_M:0.0):0.0):0.0,Peros_R07W163_ES_U_M:0.0):0.0,Peroi_R17F519_AL_U_M:0.0):0.0,Peros_R17F517_AL_U_M:0.0):0.0,Peros_R17T046_ME_U_M:0.0):0.0):0.0):0.0):0.0,Peros_R14A083_IT_U_M:0.0):0.0,Peros_R16D592_RS_U_M:0.0):0.0,Peros_R16D593_RS_U_M:0.0):0.0,Peros_R15J298_FR_U_M:0.0):0.0):0.0,Peroi_R14F617_GR_U_M:0.0):0.0):0.0):0.0,(Peroi_R14F306_RS_U_M:0.0,(Peros_R17G381_AL_U_M:0.0,Peroi_R14F612_GR_U_M:0.0):0.0):0.0):0.0,Peros_R10B401_BG_U_M:0.0):0.0,Peroi_R09V961_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+91 edges
+92 nodes: 47 tips, 0 hybrid nodes, 45 internal tree nodes.
+tip labels: Peroi_R10B402_BG_U_M, Peroi_R14F617_GR_U_M, Peros_R17T046_ME_U_M, Peros_R15I269_AT_U_M, ...
+(((Peroi_R10B402_BG_U_M:0.0,(Peroi_R14F617_GR_U_M:0.0,(Peros_R17T046_ME_U_M:0.0,(Peros_R15I269_AT_U_M:0.0,(((((Peros_R14A083_IT_U_M:0.0,(Peros_R14F984_GR_U_M:0.0,(Peros_R17F518_AL_U_M:0.0,(Peros_R11H009_ES_U_M:0.0,((Peros_R14G066_GR_U_M:0.0,((Peros_R18D133_FR_U_M:0.0,Peros_R14G085_GR_U_M:0.0):0.0,((Peros_R15G864_CH_U_M:0.0,Peros_R17E160_ES_U_M:0.0):0.0,Peroi_R17F519_AL_U_M:0.0):0.0):0.0):0.0,(Peros_R15H078_IT_U_M:0.0,Peros_R17G381_AL_U_M:0.0):0.0):0.0):0.0):0.0):0.0):0.0,Peros_R10B863_FR_U_M:0.0):0.0,Peros_R10C085_FR_U_M:0.0):0.0,(Peroi_R14F306_RS_U_M:0.0,Peros_R15J298_FR_U_M:0.0):0.0):0.0,Peros_R17T045_ME_U_M:0.0):0.0):0.0):0.0):0.0):0.0,Peros_R07D671_BG_U_M:0.0):0.0,(((((((Peros_R07W164_ES_U_M:0.0,(Peros_R14V059_UA_U_M:0.0,(Peros_R16D593_RS_U_M:0.0,(Peros_R16D592_RS_U_M:0.0,((((Peros_R15M837_IT_U_M:0.0,(Picar_R17D470_GR_U_M:0.0,((Peroi_R09V961_BG_U_M:0.0,(Peros_R14C790_BG_U_M:0.0,(Peros_R09V828_ES_U_M:0.0,(Peroi_R14F313_RS_U_M:0.0,(Peros_R14F299_RS_U_M:0.0,(Peros_R07W163_ES_U_M:0.0,(Peroi_R14G072_GR_U_M:0.007,Peros_R14N424_UA_U_M:0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.019,Peros_R14G453_GR_U_M:0.0):0.0):0.0):0.006,Peros_R19D908_ES_U_M:0.0):0.0,Peros_R17F517_AL_U_M:0.0):0.0,Peros_R17E114_ES_U_M:0.0):0.0):0.0):0.0):0.0):0.0,Peros_R14C958_BG_U_M:0.0):0.0,Peroi_R14F612_GR_U_M:0.0):0.0,Picar_R08M425_RO_U_M:0.0):0.0,Peros_R19D925_ES_U_M:0.0):0.0,Peros_R19D459_ES_U_M:0.0):0.0,Peros_R14F605_GR_U_M:0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+85 edges
+86 nodes: 44 tips, 0 hybrid nodes, 42 internal tree nodes.
+tip labels: Peros_R10C085_FR_U_M, Peros_R15I764_AT_U_M, Peros_R15M837_IT_U_M, Peros_R17F517_AL_U_M, ...
+(Peros_R10C085_FR_U_M:0.0,((((Peros_R15I764_AT_U_M:0.0,Peros_R15M837_IT_U_M:0.0):0.0,((Peros_R17F517_AL_U_M:0.0,Peros_R17T045_ME_U_M:0.0):0.0,(Peros_R17T046_ME_U_M:0.0,(((Peros_R10B401_BG_U_M:0.0,(Peros_R15I269_AT_U_M:0.0,Peros_R17F518_AL_U_M:0.0):0.0):0.0,Peros_R14V059_UA_U_M:0.0):0.0,Peros_R14A083_IT_U_M:0.0):0.0):0.0):0.0):0.0,(Peroi_R17F519_AL_U_M:0.0,((Peros_R14G453_GR_U_M:0.0,Peroi_R09V961_BG_U_M:0.0):0.0,(Peroi_R14F617_GR_U_M:0.0,Picar_R08M425_RO_U_M:0.0):0.0):0.0):0.0):0.0,(Picar_R17D470_GR_U_M:0.0,(((((Peros_R14F605_GR_U_M:0.0,(Peros_R17E160_ES_U_M:0.0,((Peros_R07W164_ES_U_M:0.0,((((((Peros_R17E114_ES_U_M:0.0,((Peros_R07W163_ES_U_M:0.0,(Peros_R09V828_ES_U_M:0.0,((((((Peros_R07D671_BG_U_M:0.0,Peros_R15H078_IT_U_M:0.0):0.0,Peros_R19D908_ES_U_M:0.0):0.0,(Peros_R19D925_ES_U_M:0.0,Peros_R18D133_FR_U_M:0.0):0.0):0.0,Peros_R16D592_RS_U_M:0.0):0.0,Peroi_R14F612_GR_U_M:0.0):0.0,(Peros_R19D459_ES_U_M:0.0,Peros_R14F299_RS_U_M:0.0):0.0):0.0):0.0):0.0,Peros_R18D135_ES_U_M:0.0):0.0):0.02,Peros_R14C958_BG_U_M:0.008):0.0,Peros_R10B863_FR_U_M:0.0):0.0,Peros_R14C790_BG_U_M:0.0):0.0,Peroi_R14G072_GR_U_M:0.0):0.0,Peros_R15J298_FR_U_M:0.0):0.0):0.0,Peros_R17G381_AL_U_M:0.0):0.0):0.0):0.0,Peros_R16D593_RS_U_M:0.0):0.0,Peros_R11H009_ES_U_M:0.0):0.0,Peroi_R10B402_BG_U_M:0.0):0.0,Peroi_R14F306_RS_U_M:0.0):0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+73 edges
+74 nodes: 38 tips, 0 hybrid nodes, 36 internal tree nodes.
+tip labels: Peros_R17E114_ES_U_M, Peros_R14A083_IT_U_M, Peroi_R17F519_AL_U_M, Peros_R18D135_ES_U_M, ...
+((Peros_R17E114_ES_U_M:0.0,(Peros_R14A083_IT_U_M:0.0,(Peroi_R17F519_AL_U_M:0.0,(Peros_R18D135_ES_U_M:0.0,(Peros_R14F299_RS_U_M:0.0,((Peros_R15M837_IT_U_M:0.0,(Peros_R14G066_GR_U_M:0.0,(Peros_R14F984_GR_U_M:0.0,((Peros_R14G103_GR_U_M:0.0,(Peros_R17G381_AL_U_M:0.0,(Peroi_R14G072_GR_U_M:0.0,Peros_R15I269_AT_U_M:0.0):0.0):0.0):0.0,(Peros_R14G085_GR_U_M:0.0,Peros_R14F975_GR_U_M:0.0):0.0):0.0):0.0):0.006):0.0,(Peros_R17E160_ES_U_M:0.0,(Peros_R11H009_ES_U_M:0.0,(Peros_R07W164_ES_U_M:0.0,Peros_R15I764_AT_U_M:0.0):0.0):0.0):0.019):0.0):0.0):0.0):0.0):0.0):0.0,(Peros_R16D593_RS_U_M:0.0,(((((((((((((((((Peros_R15G864_CH_U_M:0.0,Peros_R14G453_GR_U_M:0.0):0.0,Peros_R14N424_UA_U_M:0.0):0.0,Peroi_R14F612_GR_U_M:0.0):0.0,Peroi_R10B402_BG_U_M:0.0):0.0,Peros_R14C958_BG_U_M:0.0):0.0,Peros_R14F605_GR_U_M:0.0):0.0,Peros_R17F517_AL_U_M:0.0):0.0,Peros_R14A243_IT_U_M:0.0):0.0,Peros_R14V059_UA_U_M:0.0):0.0,Peros_R17T045_ME_U_M:0.0):0.0,Peroi_R09V961_BG_U_M:0.0):0.0,Peroi_R14F617_GR_U_M:0.0):0.0,Peros_R17T046_ME_U_M:0.0):0.0,Peros_R10C085_FR_U_M:0.0):0.0,Peros_R09V828_ES_U_M:0.0):0.0,Peros_R17F518_AL_U_M:0.0):0.0,Peros_R10B401_BG_U_M:0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+75 edges
+76 nodes: 39 tips, 0 hybrid nodes, 37 internal tree nodes.
+tip labels: Peroi_R14F313_RS_U_M, Peros_R14V059_UA_U_M, Peros_R07D671_BG_U_M, Peroi_R14F612_GR_U_M, ...
+(Peroi_R14F313_RS_U_M:0.0,(((Peros_R14V059_UA_U_M:0.0,Peros_R07D671_BG_U_M:0.0):0.0,((((((Peroi_R14F612_GR_U_M:0.0,(Peroi_R10B402_BG_U_M:0.0,Peros_R15I764_AT_U_M:0.0):0.0):0.0,(((Peros_R16D593_RS_U_M:0.0,Peroi_R14F617_GR_U_M:0.0):0.0,(Peros_R14G453_GR_U_M:0.0,Peros_R10B401_BG_U_M:0.0):0.0):0.0,Peros_R14F975_GR_U_M:0.0):0.0):0.0,Peros_R10C085_FR_U_M:0.0):0.0,Peroi_R14F306_RS_U_M:0.0):0.0,((Peroi_R17F519_AL_U_M:0.0,Peroi_R14G072_GR_U_M:0.0):0.0,(Peroi_R09V961_BG_U_M:0.0,((Peros_R15M837_IT_U_M:0.0,(Peros_R19D908_ES_U_M:0.0,((Peros_R14F605_GR_U_M:0.0,((((Peros_R09V828_ES_U_M:0.0,Peros_R11H009_ES_U_M:0.0):0.0,Peros_R07W164_ES_U_M:0.0):0.0,(Picar_R17D470_GR_U_M:0.0,((Picar_R08M425_RO_U_M:0.0,(Peros_R18D135_ES_U_M:0.0,Peros_R14C958_BG_U_M:0.0):0.0):0.0,(Peros_R15H523_CH_U_M:0.0,Peros_R17T045_ME_U_M:0.0):0.0):0.0):0.006):0.006,Peros_R17E160_ES_U_M:0.0):0.0):0.0,Peros_R17F518_AL_U_M:0.0):0.0):0.0):0.0,Peros_R14G103_GR_U_M:0.0):0.0):0.0):0.0):0.0,((Peros_R14A083_IT_U_M:0.0,Peros_R10B863_FR_U_M:0.0):0.0,(Peros_R14F299_RS_U_M:0.0,Peros_R17G381_AL_U_M:0.0):0.0):0.0):0.0):0.0,(Peros_R19D925_ES_U_M:0.0,(Peros_R18D133_FR_U_M:0.0,Peros_R17F517_AL_U_M:0.0):0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+67 edges
+68 nodes: 35 tips, 0 hybrid nodes, 33 internal tree nodes.
+tip labels: Peroi_R14F306_RS_U_M, Peros_R15G864_CH_U_M, Peros_R14G066_GR_U_M, Peros_R15M837_IT_U_M, ...
+(Peroi_R14F306_RS_U_M:0.0,((Peros_R15G864_CH_U_M:0.0,((Peros_R14G066_GR_U_M:0.0,Peros_R15M837_IT_U_M:0.0):0.0,Peros_R14G103_GR_U_M:0.0):0.006):0.0,((Peros_R16D593_RS_U_M:0.0,(Peros_R15I764_AT_U_M:0.0,((Peros_R14F299_RS_U_M:0.0,(Peroi_R14F612_GR_U_M:0.0,(Peros_R09V828_ES_U_M:0.0,Peroi_R14G072_GR_U_M:0.0):0.0):0.0):0.0,((Peros_R14C790_BG_U_M:0.0,(Peros_R14F605_GR_U_M:0.0,((Peros_R17E114_ES_U_M:0.0,(Peros_R07D671_BG_U_M:0.0,(((Peros_R07W164_ES_U_M:0.0,(Peroi_R17F519_AL_U_M:0.0,Peros_R15I269_AT_U_M:0.0):0.0):0.0,(Peros_R14V059_UA_U_M:0.0,Peros_R16D592_RS_U_M:0.0):0.0):0.0,(((Peros_R19D925_ES_U_M:0.0,Peros_R14A243_IT_U_M:0.0):0.0,(Peros_R19D908_ES_U_M:0.0,Peros_R17F518_AL_U_M:0.0):0.0):0.0,((Peros_R19D459_ES_U_M:0.0,((Peroi_R14F617_GR_U_M:0.0,Peros_R11H009_ES_U_M:0.0):0.0,Peros_R17T046_ME_U_M:0.0):0.0):0.0,(Peros_R07W163_ES_U_M:0.0,Peros_R18D135_ES_U_M:0.0):0.0):0.0):0.0):0.0):0.013):0.0,Peros_R10B401_BG_U_M:0.0):0.0):0.0):0.0,(Peros_R14A083_IT_U_M:0.0,Peros_R17G381_AL_U_M:0.0):0.0):0.013):0.013):0.0):0.0,Peros_R14G085_GR_U_M:0.0):0.0):0.0,Peroi_R09V961_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+75 edges
+76 nodes: 39 tips, 0 hybrid nodes, 37 internal tree nodes.
+tip labels: Peros_R15I764_AT_U_M, Peros_R14V059_UA_U_M, Peros_R14A083_IT_U_M, Picar_R08M425_RO_U_M, ...
+((((((Peros_R15I764_AT_U_M:0.006,Peros_R14V059_UA_U_M:0.0):0.0,(((Peros_R14A083_IT_U_M:0.0,((Picar_R08M425_RO_U_M:0.0,Peros_R14G453_GR_U_M:0.0):0.0,Peros_R14G103_GR_U_M:0.0):0.0):0.0,(Peros_R14G085_GR_U_M:0.0,Peros_R14A243_IT_U_M:0.0):0.0):0.0,((Peros_R15M837_IT_U_M:0.006,Peros_R15G864_CH_U_M:0.006):0.0,(Picar_R17D470_GR_U_M:0.006,((Peros_R17T046_ME_U_M:0.0,((Peros_R14F299_RS_U_M:0.0,(Peroi_R14F306_RS_U_M:0.0,(Peroi_R17F519_AL_U_M:0.0,(((((Peros_R07W164_ES_U_M:0.0,((Peroi_R14G072_GR_U_M:0.0,(Peros_R10C085_FR_U_M:0.0,(Peroi_R14F612_GR_U_M:0.0,Peros_R16D592_RS_U_M:0.0):0.0):0.006):0.0,Peros_R19D925_ES_U_M:0.0):0.0):0.0,(Peros_R19D459_ES_U_M:0.0,Peros_R11H009_ES_U_M:0.0):0.006):0.0,(Peros_R17F517_AL_U_M:0.0,Peros_R07D671_BG_U_M:0.0):0.0):0.006,Peroi_R10B402_BG_U_M:0.0):0.0,Peros_R16D593_RS_U_M:0.0):0.0):0.0):0.0):0.0,Peros_R17F518_AL_U_M:0.0):0.0):0.0,Peroi_R14F617_GR_U_M:0.0):0.0):0.0):0.0):0.0):0.006,Peros_R15J298_FR_U_M:0.0):0.0,(Peros_R14F605_GR_U_M:0.0,Peros_R15I269_AT_U_M:0.0):0.0):0.0,Peros_R14N424_UA_U_M:0.0):0.006,(Peros_R17E114_ES_U_M:0.0,(Peros_R09V828_ES_U_M:0.0,(Peros_R10B863_FR_U_M:0.0,(Peros_R18D135_ES_U_M:0.0,Peros_R07W163_ES_U_M:0.0):0.0):0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+87 edges
+88 nodes: 45 tips, 0 hybrid nodes, 43 internal tree nodes.
+tip labels: Peroi_R14F617_GR_U_M, Peros_R10B401_BG_U_M, Peros_R14G103_GR_U_M, Peroi_R14G072_GR_U_M, ...
+((Peroi_R14F617_GR_U_M:0.0,(Peros_R10B401_BG_U_M:0.0,(((Peros_R14G103_GR_U_M:0.005,Peroi_R14G072_GR_U_M:0.0):0.0,(Peros_R19D908_ES_U_M:0.0,(((Peros_R19D925_ES_U_M:0.0,((Peros_R10C085_FR_U_M:0.0,Peroi_R14F612_GR_U_M:0.0):0.0,(Peros_R15I269_AT_U_M:0.0,(Peros_R17G381_AL_U_M:0.0,((Peros_R16D592_RS_U_M:0.0,(Peros_R18D133_FR_U_M:0.0,(Peros_R14N424_UA_U_M:0.0,Peros_R14G453_GR_U_M:0.0):0.0):0.0):0.0,(((((Peros_R15H523_CH_U_M:0.0,(Peros_R07W164_ES_U_M:0.0,Peros_R19D459_ES_U_M:0.0):0.0):0.0,Peros_R07W163_ES_U_M:0.0):0.0,Peros_R14A083_IT_U_M:0.0):0.0,((((Peros_R17E114_ES_U_M:0.0,Peros_R17E160_ES_U_M:0.0):0.0,Peros_R16D593_RS_U_M:0.0):0.0,(Peros_R14C958_BG_U_M:0.005,Peros_R15I764_AT_U_M:0.005):0.0):0.0,Peros_R09V828_ES_U_M:0.0):0.0):0.0,(((Peros_R18D135_ES_U_M:0.0,(Peros_R14A243_IT_U_M:0.0,Peros_R10B863_FR_U_M:0.0):0.0):0.0,Peros_R15G864_CH_U_M:0.0):0.0,Peroi_R09V961_BG_U_M:0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0,Peros_R15M837_IT_U_M:0.0):0.0,Peros_R11H009_ES_U_M:0.0):0.0):0.0):0.0,((Peros_R17F517_AL_U_M:0.0,(Peros_R17F518_AL_U_M:0.017,Peroi_R17F519_AL_U_M:0.0):0.0):0.0,Peros_R07D671_BG_U_M:0.0):0.0):0.0):0.0):0.005,(((Peroi_R10B402_BG_U_M:0.0,(Peroi_R14F313_RS_U_M:0.0,((Picar_R08M425_RO_U_M:0.0,Picar_R17D470_GR_U_M:0.0):0.023,(Peros_R14F299_RS_U_M:0.0,Peros_R14V059_UA_U_M:0.0):0.0):0.0):0.0):0.0,Peroi_R14F306_RS_U_M:0.0):0.0,Peros_R15J298_FR_U_M:0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+73 edges
+74 nodes: 38 tips, 0 hybrid nodes, 36 internal tree nodes.
+tip labels: Peros_R16D592_RS_U_M, Peroi_R14F306_RS_U_M, Peroi_R14F612_GR_U_M, Peros_R07W164_ES_U_M, ...
+((Peros_R16D592_RS_U_M:0.007,(((Peroi_R14F306_RS_U_M:0.0,(Peroi_R14F612_GR_U_M:0.0,(((Peros_R07W164_ES_U_M:0.0,((Peroi_R09V961_BG_U_M:0.0,(Peros_R10B401_BG_U_M:0.0,(Peros_R14C790_BG_U_M:0.0,(((((((Peros_R14A083_IT_U_M:0.0,((Peros_R14G066_GR_U_M:0.0,(Peros_R14G103_GR_U_M:0.0,((((((((((Peroi_R14G072_GR_U_M:0.0,Peroi_R10B402_BG_U_M:0.0):0.0,Peros_R19D459_ES_U_M:0.0):0.0,Peros_R14N424_UA_U_M:0.0):0.0,Peros_R07D671_BG_U_M:0.0):0.004,Peros_R19D925_ES_U_M:0.0):0.0,Peros_R14F975_GR_U_M:0.0):0.0,Peros_R14G085_GR_U_M:0.0):0.0,Peros_R16D593_RS_U_M:0.0):0.0,Peros_R18D135_ES_U_M:0.0):0.0,Peros_R17F517_AL_U_M:0.0):0.0):0.0):0.0,Peros_R14V059_UA_U_M:0.0):0.0):0.0,Peros_R10B863_FR_U_M:0.0):0.0,Peros_R15I764_AT_U_M:0.0):0.0,Peros_R17E160_ES_U_M:0.0):0.0,Peros_R15M837_IT_U_M:0.0):0.0,Peros_R07W163_ES_U_M:0.0):0.0,Peros_R14F984_GR_U_M:0.0):0.0):0.0):0.0):0.0,Peros_R17E114_ES_U_M:0.0):0.0):0.0,Peroi_R14F617_GR_U_M:0.0):0.0,Peroi_R14F313_RS_U_M:0.0):0.0):0.0):0.0,(Peroi_R17F519_AL_U_M:0.0,Peros_R17T046_ME_U_M:0.0):0.0):0.007,(Peros_R14G453_GR_U_M:0.0,Peros_R15I269_AT_U_M:0.0):0.004):0.0):0.0,(Picar_R08M425_RO_U_M:0.008,Peros_R11H009_ES_U_M:0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+67 edges
+68 nodes: 35 tips, 0 hybrid nodes, 33 internal tree nodes.
+tip labels: Peros_R09V828_ES_U_M, Peroi_R14F306_RS_U_M, Peros_R07W163_ES_U_M, Peros_R15M837_IT_U_M, ...
+((((Peros_R09V828_ES_U_M:0.0,(Peroi_R14F306_RS_U_M:0.0,Peros_R07W163_ES_U_M:0.0):0.0):0.0,Peros_R15M837_IT_U_M:0.0):0.0,Peros_R15J298_FR_U_M:0.0):0.001,(Peroi_R14F612_GR_U_M:0.0,(Peros_R19D908_ES_U_M:0.0,(((((Peros_R15H523_CH_U_M:0.0,Peros_R17F517_AL_U_M:0.0):0.0,(((Peros_R18D133_FR_U_M:0.0,Peros_R17E160_ES_U_M:0.0):0.0,((Peros_R14G453_GR_U_M:0.0,Peros_R15H078_IT_U_M:0.0):0.0,(Peros_R10C085_FR_U_M:0.0,Peros_R15G864_CH_U_M:0.0):0.0):0.0):0.0,Peros_R16D592_RS_U_M:0.0):0.0):0.0,Peros_R07D671_BG_U_M:0.0):0.0,(((((Peros_R07W164_ES_U_M:0.0,Peros_R17E114_ES_U_M:0.0):0.0,((Peros_R18D135_ES_U_M:0.005,Peros_R10B863_FR_U_M:0.004):0.0,Peros_R19D925_ES_U_M:0.0):0.0):0.0,(Peroi_R14G072_GR_U_M:0.0,(Peros_R17G381_AL_U_M:0.0,Peros_R16D593_RS_U_M:0.0):0.0):0.0):0.0,(Peros_R15I764_AT_U_M:0.0,Peroi_R17F519_AL_U_M:0.0):0.0):0.0,(Peros_R17F518_AL_U_M:0.0,(Peros_R15I269_AT_U_M:0.0,Peros_R14N424_UA_U_M:0.0):0.0):0.0):0.0):0.0,(Peros_R14A083_IT_U_M:0.0,(Peros_R14G103_GR_U_M:0.013,(Peros_R17T046_ME_U_M:0.0,Peroi_R09V961_BG_U_M:0.0):0.0):0.0):0.008):0.003):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+67 edges
+68 nodes: 35 tips, 0 hybrid nodes, 33 internal tree nodes.
+tip labels: Peros_R17T046_ME_U_M, Picar_R08M425_RO_U_M, Peroi_R14F313_RS_U_M, Peros_R07D671_BG_U_M, ...
+((Peros_R17T046_ME_U_M:0.0,((((Picar_R08M425_RO_U_M:0.0,(Peroi_R14F313_RS_U_M:0.0,(Peros_R07D671_BG_U_M:0.0,(Peros_R07W164_ES_U_M:0.0,(Peros_R07W163_ES_U_M:0.0,(Peros_R09V828_ES_U_M:0.0,Peros_R14F605_GR_U_M:0.0):0.0):0.0):0.0):0.0):0.0):0.0,Peroi_R09V961_BG_U_M:0.0):0.0,Peros_R17F517_AL_U_M:0.0):0.0,Peros_R14C790_BG_U_M:0.0):0.0):0.001,(Peros_R14F299_RS_U_M:0.0,((Peros_R18D135_ES_U_M:0.0,(Peros_R19D459_ES_U_M:0.0,(Peros_R17E160_ES_U_M:0.0,(Peros_R17F518_AL_U_M:0.0,((Peros_R15I269_AT_U_M:0.0,(Peros_R14G085_GR_U_M:0.0,(Peros_R14G453_GR_U_M:0.0,(((Peros_R17T045_ME_U_M:0.0,(((((Peros_R14N424_UA_U_M:0.019,(Peroi_R14F306_RS_U_M:0.0,(Picar_R17D470_GR_U_M:0.003,Peros_R16D593_RS_U_M:0.0):0.0):0.0):0.0,(Peros_R14C958_BG_U_M:0.0,(Peroi_R14G072_GR_U_M:0.0,Peroi_R17F519_AL_U_M:0.0):0.0):0.0):0.002,Peros_R11H009_ES_U_M:0.0):0.0,Peros_R14G103_GR_U_M:0.0):0.0,Peros_R19D925_ES_U_M:0.0):0.0):0.0,Peros_R14V059_UA_U_M:0.0):0.0,Peroi_R10B402_BG_U_M:0.0):0.0):0.0):0.0):0.0,Peros_R17E114_ES_U_M:0.0):0.0):0.0):0.0):0.0):0.0,Peros_R15M837_IT_U_M:0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ ?
+ HybridNetwork, Rooted Network
+77 edges
+78 nodes: 40 tips, 0 hybrid nodes, 38 internal tree nodes.
+tip labels: Peroi_R10B402_BG_U_M, Peroi_R14F306_RS_U_M, Peros_R14C790_BG_U_M, Peros_R14G103_GR_U_M, ...
+(((Peroi_R10B402_BG_U_M:0.0,(Peroi_R14F306_RS_U_M:0.0,(Peros_R14C790_BG_U_M:0.0,(Peros_R14G103_GR_U_M:0.0,(Peros_R10B401_BG_U_M:0.0,Peros_R14C958_BG_U_M:0.0):0.0):0.0):0.0):0.0):0.0,(Peros_R15M837_IT_U_M:0.0,(((((Peros_R14F299_RS_U_M:0.0,Peroi_R14G072_GR_U_M:0.0):0.0,(Peros_R15I269_AT_U_M:0.0,Peros_R15I764_AT_U_M:0.0):0.0):0.0,Peroi_R14F612_GR_U_M:0.0):0.0,(Peros_R07D671_BG_U_M:0.0,Peros_R17T045_ME_U_M:0.0):0.0):0.0,Peros_R14G453_GR_U_M:0.0):0.0):0.0):0.0,((Peroi_R14F313_RS_U_M:0.0,(Peroi_R09V961_BG_U_M:0.0,((Peros_R15J298_FR_U_M:0.0,(Peros_R10C085_FR_U_M:0.0,((((Peros_R18D135_ES_U_M:0.0,(Peros_R14F605_GR_U_M:0.0,Peros_R14A243_IT_U_M:0.0):0.0):0.0,(Peros_R16D592_RS_U_M:0.0,(Peros_R15G864_CH_U_M:0.0,Peros_R14F975_GR_U_M:0.0):0.0):0.0):0.0,Peros_R19D459_ES_U_M:0.0):0.0,(Peros_R19D925_ES_U_M:0.0,(Picar_R08M425_RO_U_M:0.008,Peros_R14N424_UA_U_M:0.0):0.0):0.0):0.0):0.0):0.0,((Peros_R14F984_GR_U_M:0.0,(Peros_R14V059_UA_U_M:0.0,Peros_R14G066_GR_U_M:0.0):0.0):0.0,((Peros_R14A083_IT_U_M:0.0,((Peros_R16D593_RS_U_M:0.0,Peros_R10B863_FR_U_M:0.0):0.0,(Peroi_R14F617_GR_U_M:0.0,Peros_R17G381_AL_U_M:0.0):0.0):0.0):0.0,Peros_R14G085_GR_U_M:0.0):0.0):0.0):0.0):0.0):0.0,Peros_R17T046_ME_U_M:0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+75 edges
+76 nodes: 39 tips, 0 hybrid nodes, 37 internal tree nodes.
+tip labels: Peroi_R10B402_BG_U_M, Peros_R14F975_GR_U_M, Peroi_R14F617_GR_U_M, Peros_R07D671_BG_U_M, ...
+((Peroi_R10B402_BG_U_M:0.0,(((((((Peros_R14F975_GR_U_M:0.0,(((((Peroi_R14F617_GR_U_M:0.0,(Peros_R07D671_BG_U_M:0.0,(Peros_R11H009_ES_U_M:0.0,(Peros_R14A083_IT_U_M:0.0,(Peros_R14V059_UA_U_M:0.0,(Peros_R16D593_RS_U_M:0.0,((Peros_R09V828_ES_U_M:0.0,(Peros_R07W163_ES_U_M:0.0,((Peros_R15J298_FR_U_M:0.0,(Peroi_R14F313_RS_U_M:0.0,((Peros_R15H078_IT_U_M:0.0,(Peroi_R14F612_GR_U_M:0.0,(Peros_R10B401_BG_U_M:0.0,(Picar_R17D470_GR_U_M:0.0,Picar_R08M425_RO_U_M:0.0):0.017):0.0):0.0):0.0,Peros_R18D133_FR_U_M:0.0):0.0):0.0):0.0,Peros_R14C958_BG_U_M:0.0):0.0):0.0):0.0,Peros_R17E114_ES_U_M:0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0,Peroi_R14F306_RS_U_M:0.0):0.0,Peroi_R17F519_AL_U_M:0.0):0.0,Peroi_R09V961_BG_U_M:0.0):0.0,Peros_R14G066_GR_U_M:0.0):0.0):0.0,Peros_R14G085_GR_U_M:0.0):0.0,Peros_R15M837_IT_U_M:0.0):0.0,Peros_R17E160_ES_U_M:0.0):0.0,Peros_R14G103_GR_U_M:0.0):0.0,Peros_R17F517_AL_U_M:0.0):0.0,Peros_R07W164_ES_U_M:0.0):0.0):0.003,(Peros_R14F299_RS_U_M:0.0,((Peros_R19D925_ES_U_M:0.0,(Peros_R17T045_ME_U_M:0.0,(((Peros_R15I764_AT_U_M:0.0,Peroi_R14G072_GR_U_M:0.0):0.0,Peros_R14G453_GR_U_M:0.0):0.0,Peros_R15I269_AT_U_M:0.0):0.0):0.0):0.0,Peros_R19D459_ES_U_M:0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+73 edges
+74 nodes: 38 tips, 0 hybrid nodes, 36 internal tree nodes.
+tip labels: Peros_R14G085_GR_U_M, Peros_R17T046_ME_U_M, Peros_R15J298_FR_U_M, Peroi_R14G072_GR_U_M, ...
+(((((((((Peros_R14G085_GR_U_M:0.0,Peros_R17T046_ME_U_M:0.0):0.0,Peros_R15J298_FR_U_M:0.0):0.0,((Peroi_R14G072_GR_U_M:0.0,Peros_R18D135_ES_U_M:0.0):0.0,Peroi_R14F306_RS_U_M:0.0):0.0):0.0,(Peroi_R14F313_RS_U_M:0.0,Peros_R14G103_GR_U_M:0.0):0.0):0.0,((((Peros_R07W164_ES_U_M:0.0,(Peroi_R17F519_AL_U_M:0.0,(Peros_R07W163_ES_U_M:0.0,(Peros_R17E114_ES_U_M:0.0,(((((Peros_R14F605_GR_U_M:0.0,Peros_R19D459_ES_U_M:0.0):0.0,((Peros_R11H009_ES_U_M:0.0,Peros_R14C790_BG_U_M:0.0):0.0,(Peros_R07D671_BG_U_M:0.0,Peros_R10B401_BG_U_M:0.0):0.0):0.0):0.0,Peros_R14A083_IT_U_M:0.0):0.0,((Peros_R16D593_RS_U_M:0.0,Peroi_R14F617_GR_U_M:0.007):0.0,Peros_R14C958_BG_U_M:0.0):0.0):0.0,(((((Peros_R17F518_AL_U_M:0.0,Peros_R17T045_ME_U_M:0.0):0.007,Peros_R17G381_AL_U_M:0.0):0.0,Peros_R19D925_ES_U_M:0.0):0.0,Peros_R10C085_FR_U_M:0.0):0.0,Peros_R17F517_AL_U_M:0.0):0.0):0.007):0.0):0.0):0.0):0.0,Peros_R14V059_UA_U_M:0.0):0.0,Peros_R17E160_ES_U_M:0.0):0.0,Peros_R09V828_ES_U_M:0.0):0.0):0.0,(Peros_R14F299_RS_U_M:0.0,Peros_R14A243_IT_U_M:0.0):0.0):0.0,(Peros_R15I764_AT_U_M:0.0,Peros_R15M837_IT_U_M:0.0):0.0):0.0,Peros_R15I269_AT_U_M:0.0):0.0,Peros_R14G453_GR_U_M:0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+77 edges
+78 nodes: 40 tips, 0 hybrid nodes, 38 internal tree nodes.
+tip labels: Peroi_R14F612_GR_U_M, Peros_R15M837_IT_U_M, Peros_R14G453_GR_U_M, Peros_R18D135_ES_U_M, ...
+((Peroi_R14F612_GR_U_M:0.0,((Peros_R15M837_IT_U_M:0.0,((Peros_R14G453_GR_U_M:0.0,((((((Peros_R18D135_ES_U_M:0.0,Peros_R14G085_GR_U_M:0.0):0.0,Peros_R14F984_GR_U_M:0.0):0.0,(Peros_R15I269_AT_U_M:0.0,Peros_R15J298_FR_U_M:0.0):0.0):0.0,Peros_R14G066_GR_U_M:0.0):0.008,Peroi_R14G072_GR_U_M:0.0):0.005,Picar_R17D470_GR_U_M:0.019):0.0):0.0,Peros_R17E114_ES_U_M:0.0):0.0):0.0,Peros_R07W163_ES_U_M:0.0):0.0):0.003,(((Peros_R09V828_ES_U_M:0.0,(Peros_R11H009_ES_U_M:0.0,(((((((Peros_R14A243_IT_U_M:0.0,(Peros_R14V059_UA_U_M:0.0,(Peros_R19D459_ES_U_M:0.0,((Peros_R14C790_BG_U_M:0.0,((((Peros_R17F517_AL_U_M:0.0,(Peros_R17G381_AL_U_M:0.0,(Peros_R15I764_AT_U_M:0.013,((Picar_R08M425_RO_U_M:0.014,(Peros_R14F605_GR_U_M:0.007,(Peros_R14C958_BG_U_M:0.0,Peros_R16D593_RS_U_M:0.0):0.0):0.0):0.0,Peroi_R17F519_AL_U_M:0.0):0.0):0.0):0.0):0.0,Peros_R14G103_GR_U_M:0.0):0.0,Peroi_R09V961_BG_U_M:0.0):0.0,Peros_R17E160_ES_U_M:0.0):0.0):0.0,Peros_R14F299_RS_U_M:0.0):0.0):0.0):0.0):0.0,Peros_R14A083_IT_U_M:0.0):0.0,Peroi_R14F306_RS_U_M:0.0):0.0,Peros_R07D671_BG_U_M:0.0):0.0,Peroi_R10B402_BG_U_M:0.0):0.0,Peros_R17F518_AL_U_M:0.0):0.0,Peroi_R14F617_GR_U_M:0.0):0.0):0.0):0.0,Peros_R17T046_ME_U_M:0.0):0.0,Peros_R19D925_ES_U_M:0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+101 edges
+102 nodes: 52 tips, 0 hybrid nodes, 50 internal tree nodes.
+tip labels: Peros_R14F299_RS_U_M, Peros_R17T045_ME_U_M, Peros_R15I764_AT_U_M, Peros_R17E114_ES_U_M, ...
+(Peros_R14F299_RS_U_M:0.0,((((Peros_R17T045_ME_U_M:0.0,((((((Peros_R15I764_AT_U_M:0.0,((Peros_R17E114_ES_U_M:0.0,(((Peros_R19D459_ES_U_M:0.0,(Peros_R19D908_ES_U_M:0.0,Peroi_R14F306_RS_U_M:0.0):0.0):0.0,Peros_R11H009_ES_U_M:0.0):0.0,(((Peros_R18D133_FR_U_M:0.0,Peros_R16D592_RS_U_M:0.0):0.0,Peros_R14V059_UA_U_M:0.0):0.0,Peros_R15G864_CH_U_M:0.0):0.0):0.0):0.0,Peros_R07W164_ES_U_M:0.0):0.0):0.0,((Peroi_R10B402_BG_U_M:0.0,(Peroi_R14F617_GR_U_M:0.0,((Peros_R16D593_RS_U_M:0.0,(Peros_R09V828_ES_U_M:0.0,(Peros_R14A083_IT_U_M:0.0,Peros_R07W163_ES_U_M:0.0):0.0):0.0):0.0,Peros_R15M837_IT_U_M:0.0):0.0):0.0):0.0,Peros_R10C085_FR_U_M:0.0):0.0):0.0,Peroi_R14F313_RS_U_M:0.0):0.0,(Peroi_R14F612_GR_U_M:0.0,Peros_R17F517_AL_U_M:0.0):0.0):0.0,((((((Peros_R17F518_AL_U_M:0.0,Peros_R17T046_ME_U_M:0.0):0.0,((Peros_R14F984_GR_U_M:0.0,Peros_R14N424_UA_U_M:0.0):0.0,((Peros_R19D925_ES_U_M:0.0,Peros_R17E160_ES_U_M:0.0):0.0,(Peros_R10B401_BG_U_M:0.0,((Peroi_R17F519_AL_U_M:0.0,Peros_R10B863_FR_U_M:0.0):0.0,((Peros_R14F605_GR_U_M:0.0,Peros_R14A243_IT_U_M:0.0):0.0,Peroi_R09V961_BG_U_M:0.0):0.0):0.0):0.0):0.0):0.0):0.0,(Picar_R08M425_RO_U_M:0.065,(Peros_R14G453_GR_U_M:0.0,Peros_R18D135_ES_U_M:0.009):0.004):0.0):0.0,Peros_R14C958_BG_U_M:0.0):0.0,(((Peroi_R14G072_GR_U_M:0.0,Peros_R14G103_GR_U_M:0.0):0.0,Peros_R14F975_GR_U_M:0.0):0.0,Peros_R14G085_GR_U_M:0.0):0.0):0.0,((Peros_R15J298_FR_U_M:0.0,Peros_R14G066_GR_U_M:0.0):0.0,Peros_R07D671_BG_U_M:0.0):0.0):0.0):0.0,Peros_R15I269_AT_U_M:0.0):0.004):0.0,Peros_R15H523_CH_U_M:0.0):0.0,Peros_R15H078_IT_U_M:0.0):0.0,Peros_R17G381_AL_U_M:0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+95 edges
+96 nodes: 49 tips, 0 hybrid nodes, 47 internal tree nodes.
+tip labels: Peros_R14F984_GR_U_M, Peros_R10C085_FR_U_M, Peroi_R10B402_BG_U_M, Peroi_R09V961_BG_U_M, ...
+((Peros_R14F984_GR_U_M:0.0,(Peros_R10C085_FR_U_M:0.0,(Peroi_R10B402_BG_U_M:0.0,(Peroi_R09V961_BG_U_M:0.0,(Peros_R14N424_UA_U_M:0.0,(Peroi_R14F313_RS_U_M:0.0,(((((Peroi_R14F617_GR_U_M:0.0,(Peros_R17T046_ME_U_M:0.0,Peros_R17F518_AL_U_M:0.0):0.0):0.0,((Peros_R17F517_AL_U_M:0.0,(Picar_R08M425_RO_U_M:0.0,Picar_R17D470_GR_U_M:0.0):0.0):0.0,(Peros_R17T045_ME_U_M:0.0,((Peros_R14G085_GR_U_M:0.0,Peros_R14F975_GR_U_M:0.0):0.0,Peroi_R17F519_AL_U_M:0.0):0.0):0.0):0.0):0.0,Peros_R14C958_BG_U_M:0.0):0.0,Peros_R15M837_IT_U_M:0.0):0.0,(((Peros_R15I764_AT_U_M:0.0,((Peros_R19D925_ES_U_M:0.0,(((Peros_R15H078_IT_U_M:0.0,Peros_R07W163_ES_U_M:0.0):0.0,(Peros_R11H009_ES_U_M:0.0,Peros_R17E160_ES_U_M:0.0):0.0):0.0,Peros_R14A243_IT_U_M:0.0):0.0):0.0,Peros_R19D459_ES_U_M:0.0):0.0):0.006,Peros_R14G453_GR_U_M:0.0):0.0,Peros_R10B863_FR_U_M:0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0,((Peros_R15I269_AT_U_M:0.0,(((((Peros_R14G066_GR_U_M:0.0,((Peros_R15J298_FR_U_M:0.0,(Peroi_R14G072_GR_U_M:0.0,(Peros_R07D671_BG_U_M:0.0,((((Peroi_R14F612_GR_U_M:0.0,((Peroi_R14F306_RS_U_M:0.0,Peros_R14F299_RS_U_M:0.0):0.0,((Peros_R10B401_BG_U_M:0.0,Peros_R17E114_ES_U_M:0.0):0.0,Peros_R14A083_IT_U_M:0.0):0.0):0.0):0.0,Peros_R14F605_GR_U_M:0.0):0.0,Peros_R14V059_UA_U_M:0.0):0.0,Peros_R16D593_RS_U_M:0.0):0.006):0.0):0.0):0.0,Peros_R16D592_RS_U_M:0.0):0.0):0.0,Peros_R17G381_AL_U_M:0.0):0.0,Peros_R07W164_ES_U_M:0.0):0.0,Peros_R09V828_ES_U_M:0.0):0.0,Peros_R18D135_ES_U_M:0.0):0.0):0.0,Peros_R14G103_GR_U_M:0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+79 edges
+80 nodes: 41 tips, 0 hybrid nodes, 39 internal tree nodes.
+tip labels: Peros_R17T045_ME_U_M, Peroi_R14G072_GR_U_M, Peros_R14V059_UA_U_M, Peros_R19D459_ES_U_M, ...
+(Peros_R17T045_ME_U_M:0.0,((Peroi_R14G072_GR_U_M:0.0,(((Peros_R14V059_UA_U_M:0.0,((Peros_R19D459_ES_U_M:0.0,(((Peroi_R10B402_BG_U_M:0.0,((Picar_R08M425_RO_U_M:0.014,(Peros_R15I764_AT_U_M:0.0,Picar_R17D470_GR_U_M:0.0):0.006):0.064,(Peroi_R14F306_RS_U_M:0.006,Peros_R14C958_BG_U_M:0.0):0.0):0.0):0.0,((((Peroi_R14F313_RS_U_M:0.0,(((Peros_R16D592_RS_U_M:0.0,Peros_R15M837_IT_U_M:0.0):0.0,(Peros_R19D925_ES_U_M:0.0,Peros_R15H523_CH_U_M:0.0):0.0):0.0,(Peros_R14F605_GR_U_M:0.0,Peros_R14G066_GR_U_M:0.0):0.0):0.0):0.0,(Peros_R10C085_FR_U_M:0.0,(Peros_R17E160_ES_U_M:0.0,Peros_R17E114_ES_U_M:0.0):0.0):0.0):0.0,Peros_R14G103_GR_U_M:0.0):0.0,Peros_R14A243_IT_U_M:0.0):0.0):0.0,Peros_R17G381_AL_U_M:0.0):0.0):0.0,(((Peros_R14A083_IT_U_M:0.0,Peros_R07W164_ES_U_M:0.0):0.0,Peros_R14F984_GR_U_M:0.0):0.0,(((Peros_R15I269_AT_U_M:0.0,Peros_R11H009_ES_U_M:0.0):0.0,((Peros_R14G085_GR_U_M:0.0,((Peroi_R09V961_BG_U_M:0.0,Peros_R09V828_ES_U_M:0.0):0.0,Peros_R15J298_FR_U_M:0.0):0.0):0.0,(Peroi_R17F519_AL_U_M:0.0,Peros_R17F518_AL_U_M:0.0):0.0):0.0):0.0,Peros_R14F975_GR_U_M:0.0):0.0):0.0):0.0):0.0,((Peros_R16D593_RS_U_M:0.0,Peroi_R14F617_GR_U_M:0.0):0.0,Peros_R07D671_BG_U_M:0.0):0.0):0.0,Peros_R14C790_BG_U_M:0.0):0.0):0.0,Peros_R17F517_AL_U_M:0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+91 edges
+92 nodes: 47 tips, 0 hybrid nodes, 45 internal tree nodes.
+tip labels: Peros_R11H009_ES_U_M, Peros_R07W164_ES_U_M, Picar_R08M425_RO_U_M, Picar_R17D470_GR_U_M, ...
+((Peros_R11H009_ES_U_M:0.0,Peros_R07W164_ES_U_M:0.0):0.0,((Picar_R08M425_RO_U_M:0.0,Picar_R17D470_GR_U_M:0.0):0.0,(((((Peros_R19D908_ES_U_M:0.0,(((Peros_R17G381_AL_U_M:0.0,Peros_R07D671_BG_U_M:0.0):0.0,((Peros_R15H078_IT_U_M:0.0,Peroi_R17F519_AL_U_M:0.0):0.0,(Peroi_R14F617_GR_U_M:0.0,(((Peros_R15M837_IT_U_M:0.0,Peros_R09V828_ES_U_M:0.0):0.0,(Peros_R16D593_RS_U_M:0.0,Peros_R14G453_GR_U_M:0.0):0.0):0.0,(((((Peros_R18D133_FR_U_M:0.0,(Peros_R15I269_AT_U_M:0.0,Peros_R14A083_IT_U_M:0.0):0.0):0.0,((Peros_R10B863_FR_U_M:0.0,(((Peros_R19D925_ES_U_M:0.0,Peros_R17E114_ES_U_M:0.0):0.0,Peros_R17E160_ES_U_M:0.0):0.0,(Peros_R17T046_ME_U_M:0.0,Peros_R17T045_ME_U_M:0.0):0.0):0.0):0.0,Peros_R14N424_UA_U_M:0.0):0.0):0.0,Peros_R15J298_FR_U_M:0.0):0.0,Peros_R14F299_RS_U_M:0.0):0.0,(Peros_R15G864_CH_U_M:0.0,(Peroi_R14F612_GR_U_M:0.0,((Peros_R14G085_GR_U_M:0.0,(((Peros_R14G103_GR_U_M:0.0,Peros_R14F975_GR_U_M:0.0):0.0,Peros_R14F984_GR_U_M:0.0):0.0,Peroi_R14G072_GR_U_M:0.0):0.0):0.005,((Peros_R16D592_RS_U_M:0.005,Peros_R14C958_BG_U_M:0.0):0.0,Peros_R10B401_BG_U_M:0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0,((Peros_R15I764_AT_U_M:0.0,Peros_R10C085_FR_U_M:0.0):0.0,Peros_R07W163_ES_U_M:0.0):0.0):0.0):0.0,Peros_R14V059_UA_U_M:0.0):0.0,(Peroi_R10B402_BG_U_M:0.0,(Peroi_R09V961_BG_U_M:0.0,Peros_R17F518_AL_U_M:0.0):0.0):0.0):0.0,(Peros_R18D135_ES_U_M:0.0,Peroi_R14F313_RS_U_M:0.0):0.0):0.0,Peros_R17F517_AL_U_M:0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+71 edges
+72 nodes: 37 tips, 0 hybrid nodes, 35 internal tree nodes.
+tip labels: Peros_R07D671_BG_U_M, Peros_R07W164_ES_U_M, Peros_R19D908_ES_U_M, Peros_R15I269_AT_U_M, ...
+(Peros_R07D671_BG_U_M:0.0,((Peros_R07W164_ES_U_M:0.0,((((Peros_R19D908_ES_U_M:0.0,(Peros_R15I269_AT_U_M:0.0,Peroi_R14F313_RS_U_M:0.0):0.0):0.0,Peros_R15G864_CH_U_M:0.0):0.0,((((((Peros_R15M837_IT_U_M:0.0,Peros_R10C085_FR_U_M:0.0):0.0,Peros_R17F517_AL_U_M:0.0):0.0,(Peros_R16D593_RS_U_M:0.0,(Peroi_R17F519_AL_U_M:0.0,((((Peros_R11H009_ES_U_M:0.0,Peros_R14C958_BG_U_M:0.0):0.0,Peros_R17T045_ME_U_M:0.0):0.0,(((((Peros_R19D459_ES_U_M:0.0,Peros_R14G103_GR_U_M:0.0):0.0,Peros_R07W163_ES_U_M:0.0):0.0,(Peros_R15J298_FR_U_M:0.0,(((Peroi_R14F617_GR_U_M:0.0,Peros_R15H523_CH_U_M:0.0):0.0,Peros_R14A083_IT_U_M:0.0):0.0,Peros_R14V059_UA_U_M:0.0):0.0):0.0):0.0,(Peros_R19D925_ES_U_M:0.0,((Peros_R18D135_ES_U_M:0.0,Peros_R17E114_ES_U_M:0.0):0.0,Peros_R14N424_UA_U_M:0.0):0.0):0.0):0.0,Peros_R15I764_AT_U_M:0.0):0.0):0.0,Peros_R09V828_ES_U_M:0.0):0.0):0.0):0.0):0.0,Peros_R10B863_FR_U_M:0.0):0.0,(Peros_R15H078_IT_U_M:0.0,Peros_R14F299_RS_U_M:0.0):0.0):0.0,(Peros_R17G381_AL_U_M:0.0,Peros_R14G453_GR_U_M:0.0):0.0):0.0):0.0,Peros_R17E160_ES_U_M:0.0):0.0):0.0,(Peroi_R14F306_RS_U_M:0.0,Peros_R18D133_FR_U_M:0.0):0.0):0.0,Peroi_R09V961_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+91 edges
+92 nodes: 47 tips, 0 hybrid nodes, 45 internal tree nodes.
+tip labels: Peros_R15M837_IT_U_M, Peros_R07D671_BG_U_M, Peros_R17E160_ES_U_M, Peros_R14V059_UA_U_M, ...
+(Peros_R15M837_IT_U_M:0.0,((((((Peros_R07D671_BG_U_M:0.0,Peros_R17E160_ES_U_M:0.0):0.0,((Peros_R14V059_UA_U_M:0.0,Peros_R17F517_AL_U_M:0.0):0.0,(Peros_R14F975_GR_U_M:0.0,(Peros_R14C790_BG_U_M:0.0,(((((Peros_R17F518_AL_U_M:0.0,((((Peros_R15J298_FR_U_M:0.0,Peros_R14F605_GR_U_M:0.0):0.0,Peroi_R09V961_BG_U_M:0.0):0.0,Peros_R15I764_AT_U_M:0.0):0.0,((Peros_R14A243_IT_U_M:0.012,Peros_R14A083_IT_U_M:0.0):0.0,Peros_R15H078_IT_U_M:0.0):0.0):0.0):0.0,Peroi_R14F617_GR_U_M:0.0):0.0,Peroi_R14F306_RS_U_M:0.0):0.0,Peros_R11H009_ES_U_M:0.0):0.0,Peros_R14G085_GR_U_M:0.0):0.0):0.0):0.0):0.0):0.0,((Peros_R15I269_AT_U_M:0.0,Peros_R18D135_ES_U_M:0.0):0.0,Peros_R19D459_ES_U_M:0.0):0.0):0.0,(Peros_R17T046_ME_U_M:0.0,Peros_R17E114_ES_U_M:0.0):0.0):0.0,(((Peros_R10B401_BG_U_M:0.0,((((Peroi_R14F313_RS_U_M:0.006,(((Picar_R17D470_GR_U_M:0.0,Picar_R08M425_RO_U_M:0.0):0.006,Peroi_R10B402_BG_U_M:0.0):0.0,Peros_R14G103_GR_U_M:0.0):0.0):0.0,((Peros_R17T045_ME_U_M:0.006,Peroi_R17F519_AL_U_M:0.0):0.0,Peros_R14G453_GR_U_M:0.017):0.0):0.0,(Peros_R15H523_CH_U_M:0.0,(((Peros_R16D593_RS_U_M:0.0,Peros_R19D908_ES_U_M:0.0):0.0,(Peros_R14C958_BG_U_M:0.0,((Peros_R14F299_RS_U_M:0.0,Peroi_R14F612_GR_U_M:0.0):0.0,Peros_R07W164_ES_U_M:0.0):0.0):0.0):0.0,(Peros_R19D925_ES_U_M:0.0,Peros_R07W163_ES_U_M:0.0):0.0):0.0):0.0):0.0,Peros_R14G066_GR_U_M:0.0):0.0):0.0,Peros_R09V828_ES_U_M:0.0):0.0,Peros_R17G381_AL_U_M:0.0):0.0):0.0,Peroi_R14G072_GR_U_M:0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+91 edges
+92 nodes: 47 tips, 0 hybrid nodes, 45 internal tree nodes.
+tip labels: Peros_R14A243_IT_U_M, Peros_R14G103_GR_U_M, Peros_R07D671_BG_U_M, Peros_R17F517_AL_U_M, ...
+(((Peros_R14A243_IT_U_M:0.0,(Peros_R14G103_GR_U_M:0.0,(Peros_R07D671_BG_U_M:0.0,(Peros_R17F517_AL_U_M:0.0,(Peroi_R14F612_GR_U_M:0.0,(Peros_R16D592_RS_U_M:0.0,(Peros_R14F984_GR_U_M:0.0,(Peros_R17T046_ME_U_M:0.0,((((Peros_R14F975_GR_U_M:0.0,Peros_R15M837_IT_U_M:0.0):0.0,Peros_R19D925_ES_U_M:0.0):0.0,(((((Peroi_R17F519_AL_U_M:0.0,Peroi_R14F313_RS_U_M:0.0):0.0,Peros_R10C085_FR_U_M:0.0):0.0,((Peros_R17G381_AL_U_M:0.0,(Peros_R14C958_BG_U_M:0.0,Peroi_R14G072_GR_U_M:0.0):0.0):0.0,Peros_R10B401_BG_U_M:0.0):0.0):0.0,((Peros_R17E114_ES_U_M:0.0,Peros_R18D135_ES_U_M:0.0):0.0,(Peros_R09V828_ES_U_M:0.0,((Peros_R14C790_BG_U_M:0.0,Peros_R14G066_GR_U_M:0.0):0.0,Peros_R16D593_RS_U_M:0.0):0.0):0.0):0.0):0.0,(Peroi_R10B402_BG_U_M:0.0,(Peros_R14G453_GR_U_M:0.0,Peros_R15G864_CH_U_M:0.0):0.0):0.0):0.0):0.0,(((Peroi_R14F306_RS_U_M:0.0,Peros_R17F518_AL_U_M:0.0):0.0,Peros_R15I764_AT_U_M:0.0):0.0,Peroi_R14F617_GR_U_M:0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0,(((((((((Peros_R11H009_ES_U_M:0.0,(Peros_R19D908_ES_U_M:0.0,(Peros_R15I269_AT_U_M:0.006,(Picar_R17D470_GR_U_M:0.0,Picar_R08M425_RO_U_M:0.0):0.013):0.0):0.0):0.0,Peros_R17E160_ES_U_M:0.0):0.0,(Peros_R14V059_UA_U_M:0.0,Peros_R17T045_ME_U_M:0.0):0.0):0.0,Peros_R14F299_RS_U_M:0.0):0.0,Peros_R07W164_ES_U_M:0.0):0.0,Peros_R15J298_FR_U_M:0.0):0.0,Peros_R14G085_GR_U_M:0.0):0.0,Peros_R14F605_GR_U_M:0.0):0.0,Peros_R19D459_ES_U_M:0.0):0.0):0.0,Peroi_R09V961_BG_U_M:0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+73 edges
+74 nodes: 38 tips, 0 hybrid nodes, 36 internal tree nodes.
+tip labels: Peroi_R14G072_GR_U_M, Peros_R14G085_GR_U_M, Peros_R17G381_AL_U_M, Peros_R07W163_ES_U_M, ...
+(Peroi_R14G072_GR_U_M:0.0,((((((((Peros_R14G085_GR_U_M:0.0,(Peros_R17G381_AL_U_M:0.0,(((((((Peros_R07W163_ES_U_M:0.0,((((Peros_R10C085_FR_U_M:0.0,(Peros_R15M837_IT_U_M:0.0,(((Peros_R15I269_AT_U_M:0.0,(Peros_R07D671_BG_U_M:0.0,Peros_R14F299_RS_U_M:0.0):0.0):0.0,Peroi_R14F313_RS_U_M:0.0):0.0,Peros_R17E160_ES_U_M:0.0):0.0):0.0):0.0,Peros_R17F517_AL_U_M:0.0):0.0,(Peros_R17T045_ME_U_M:0.0,Peros_R14F605_GR_U_M:0.0):0.0):0.0,Peros_R19D925_ES_U_M:0.0):0.0):0.0,Peros_R16D593_RS_U_M:0.0):0.0,Peroi_R14F617_GR_U_M:0.0):0.0,((Peros_R11H009_ES_U_M:0.0,((Peroi_R17F519_AL_U_M:0.0,Peros_R17T046_ME_U_M:0.0):0.0,Peros_R09V828_ES_U_M:0.0):0.0):0.0,Peros_R14C958_BG_U_M:0.0):0.0):0.0,Peros_R17E114_ES_U_M:0.0):0.0,(((Peros_R14G103_GR_U_M:0.0,Peros_R17F518_AL_U_M:0.0):0.0,(Peros_R14G453_GR_U_M:0.0,(Peros_R16D592_RS_U_M:0.0,Peroi_R10B402_BG_U_M:0.0):0.0):0.0):0.0,Peroi_R14F306_RS_U_M:0.0):0.0):0.004,Picar_R08M425_RO_U_M:0.004):0.001):0.0):0.0,Peros_R18D135_ES_U_M:0.0):0.0,Peroi_R14F612_GR_U_M:0.0):0.0,Peros_R19D459_ES_U_M:0.0):0.0,Peros_R15I764_AT_U_M:0.0):0.0,Peros_R14V059_UA_U_M:0.0):0.0,Peros_R14G066_GR_U_M:0.0):0.006,Peros_R14A243_IT_U_M:0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+91 edges
+92 nodes: 47 tips, 0 hybrid nodes, 45 internal tree nodes.
+tip labels: Peros_R07W163_ES_U_M, Peroi_R14F306_RS_U_M, Peros_R14C958_BG_U_M, Peros_R14A083_IT_U_M, ...
+((Peros_R07W163_ES_U_M:0.0,((Peroi_R14F306_RS_U_M:0.0,(((((Peros_R14C958_BG_U_M:0.0,Peros_R14A083_IT_U_M:0.0):0.0,(Peros_R11H009_ES_U_M:0.0,Peros_R17E160_ES_U_M:0.0):0.0):0.0,(Peroi_R14G072_GR_U_M:0.0,Peros_R15I269_AT_U_M:0.0):0.0):0.0,Peros_R17E114_ES_U_M:0.0):0.0,((Picar_R08M425_RO_U_M:0.0,Picar_R17D470_GR_U_M:0.0):0.059,Peros_R15J298_FR_U_M:0.0):0.0):0.0):0.0,Peros_R14G453_GR_U_M:0.0):0.0):0.0,(Peroi_R14F313_RS_U_M:0.0,(Peroi_R14F612_GR_U_M:0.0,(Peros_R14F299_RS_U_M:0.0,((Peros_R15G864_CH_U_M:0.0,((Peros_R14G103_GR_U_M:0.0,((Peros_R19D925_ES_U_M:0.0,(Peros_R17F518_AL_U_M:0.0,(((((((((((Peros_R10B401_BG_U_M:0.0,((Peros_R17F517_AL_U_M:0.0,(Peros_R14A243_IT_U_M:0.0,(Peros_R15M837_IT_U_M:0.0,(Peros_R17T045_ME_U_M:0.0,(Peros_R18D135_ES_U_M:0.0,(((Peros_R07W164_ES_U_M:0.0,(Peros_R07D671_BG_U_M:0.0,(Peroi_R14F617_GR_U_M:0.0,Peros_R14F605_GR_U_M:0.0):0.0):0.0):0.0,Peros_R16D593_RS_U_M:0.0):0.0,Peroi_R09V961_BG_U_M:0.0):0.004):0.0):0.0):0.0):0.0):0.0,Peros_R14N424_UA_U_M:0.0):0.0):0.0,Peroi_R17F519_AL_U_M:0.0):0.0,Peros_R09V828_ES_U_M:0.0):0.0,Peros_R10B863_FR_U_M:0.0):0.0,Peros_R10C085_FR_U_M:0.0):0.0,Peros_R14F975_GR_U_M:0.0):0.0,Peros_R15H523_CH_U_M:0.0):0.0,Peros_R15I764_AT_U_M:0.0):0.0,Peros_R17G381_AL_U_M:0.0):0.0,Peros_R18D133_FR_U_M:0.0):0.0,Peros_R19D459_ES_U_M:0.0):0.0):0.0):0.0,Peroi_R10B402_BG_U_M:0.0):0.0):0.0,Peros_R15H078_IT_U_M:0.0):0.0):0.0,Peros_R14V059_UA_U_M:0.0):0.0):0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+81 edges
+82 nodes: 42 tips, 0 hybrid nodes, 40 internal tree nodes.
+tip labels: Peroi_R09V961_BG_U_M, Peros_R07W163_ES_U_M, Peroi_R14F617_GR_U_M, Peroi_R14F313_RS_U_M, ...
+(((((((Peroi_R09V961_BG_U_M:0.0,Peros_R07W163_ES_U_M:0.0):0.0,((Peroi_R14F617_GR_U_M:0.0,Peroi_R14F313_RS_U_M:0.0):0.0,Peros_R17E160_ES_U_M:0.0):0.0):0.0,(Peros_R15I764_AT_U_M:0.0,Peroi_R14F612_GR_U_M:0.0):0.0):0.0,Peros_R14V059_UA_U_M:0.0):0.0,(Peroi_R17F519_AL_U_M:0.0,Peroi_R10B402_BG_U_M:0.0):0.0):0.0,((Peros_R17E114_ES_U_M:0.0,(((Peros_R07D671_BG_U_M:0.0,(Peros_R14F299_RS_U_M:0.0,((Peroi_R14F306_RS_U_M:0.0,((Peros_R17F517_AL_U_M:0.0,(Peros_R19D459_ES_U_M:0.0,(((Picar_R08M425_RO_U_M:0.0,Picar_R17D470_GR_U_M:0.0):0.018,Peros_R19D925_ES_U_M:0.0):0.0,(Peros_R16D593_RS_U_M:0.0,(Peros_R14G453_GR_U_M:0.0,Peros_R16D592_RS_U_M:0.0):0.0):0.0):0.006):0.0):0.0,Peros_R15J298_FR_U_M:0.0):0.0):0.0,Peros_R17G381_AL_U_M:0.0):0.0):0.0):0.0,Peros_R07W164_ES_U_M:0.0):0.0,((Peros_R14G103_GR_U_M:0.0,(((Peroi_R14G072_GR_U_M:0.0,(Peros_R15M837_IT_U_M:0.0,Peros_R11H009_ES_U_M:0.0):0.0):0.0,Peros_R10B863_FR_U_M:0.0):0.0,Peros_R15I269_AT_U_M:0.0):0.0):0.0,(((Peros_R14G085_GR_U_M:0.0,((Peros_R18D135_ES_U_M:0.0,Peros_R17T046_ME_U_M:0.0):0.0,Peros_R09V828_ES_U_M:0.0):0.0):0.0,(Peros_R10C085_FR_U_M:0.0,(Peros_R14G066_GR_U_M:0.0,Peros_R15H523_CH_U_M:0.0):0.0):0.0):0.0,Peros_R17T045_ME_U_M:0.0):0.006):0.0):0.0):0.0,Peros_R14A083_IT_U_M:0.0):0.0):0.0,Peros_R17F518_AL_U_M:0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+91 edges
+92 nodes: 47 tips, 0 hybrid nodes, 45 internal tree nodes.
+tip labels: Peros_R17F518_AL_U_M, Peros_R17T046_ME_U_M, Peros_R15H523_CH_U_M, Peros_R10B863_FR_U_M, ...
+(Peros_R17F518_AL_U_M:0.0,(Peros_R17T046_ME_U_M:0.0,(((Peros_R15H523_CH_U_M:0.0,(((Peros_R10B863_FR_U_M:0.0,((Peroi_R14F617_GR_U_M:0.0,(Peros_R15I764_AT_U_M:0.0,(Peros_R15I269_AT_U_M:0.0,((Peros_R10C085_FR_U_M:0.006,Peroi_R09V961_BG_U_M:0.0):0.0,Peros_R14A083_IT_U_M:0.0):0.0):0.0):0.0):0.0,(((Peros_R19D459_ES_U_M:0.0,(Peros_R07D671_BG_U_M:0.0,(Peros_R14G066_GR_U_M:0.0,(Peros_R14F605_GR_U_M:0.0,(Peros_R14F975_GR_U_M:0.0,(((Peros_R14V059_UA_U_M:0.0,Peros_R14F984_GR_U_M:0.0):0.0,((Peros_R17E160_ES_U_M:0.0,Peroi_R14G072_GR_U_M:0.0):0.0,(Peros_R14G103_GR_U_M:0.0,(Peros_R11H009_ES_U_M:0.0,Peros_R14G085_GR_U_M:0.0):0.0):0.0):0.0):0.0,Peros_R16D593_RS_U_M:0.0):0.0):0.013):0.0):0.0):0.0):0.0,Peroi_R14F313_RS_U_M:0.0):0.0,((Peros_R07W164_ES_U_M:0.0,(Peroi_R14F306_RS_U_M:0.0,((Peros_R14C958_BG_U_M:0.0,(Peros_R10B401_BG_U_M:0.0,((Peros_R15J298_FR_U_M:0.0,(Peroi_R10B402_BG_U_M:0.0,((Picar_R17D470_GR_U_M:0.006,Picar_R08M425_RO_U_M:0.006):0.006,(Peros_R07W163_ES_U_M:0.0,((Peros_R19D925_ES_U_M:0.0,Peros_R17G381_AL_U_M:0.0):0.0,Peros_R17E114_ES_U_M:0.0):0.0):0.0):0.006):0.0):0.0,Peros_R09V828_ES_U_M:0.0):0.0):0.0):0.0,Peroi_R14F612_GR_U_M:0.0):0.0):0.0):0.0,Peros_R18D135_ES_U_M:0.0):0.0):0.0):0.006):0.0,Peros_R14F299_RS_U_M:0.0):0.0,Peros_R16D592_RS_U_M:0.0):0.0):0.0,Peros_R14G453_GR_U_M:0.0):0.0,(((Peros_R15M837_IT_U_M:0.0,Peroi_R17F519_AL_U_M:0.0):0.0,Peros_R17T045_ME_U_M:0.0):0.0,Peros_R17F517_AL_U_M:0.0):0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+67 edges
+68 nodes: 35 tips, 0 hybrid nodes, 33 internal tree nodes.
+tip labels: Peros_R10B401_BG_U_M, Peros_R19D925_ES_U_M, Peros_R14V059_UA_U_M, Peroi_R14F617_GR_U_M, ...
+(Peros_R10B401_BG_U_M:0.0,(((Peros_R19D925_ES_U_M:0.0,(Peros_R14V059_UA_U_M:0.0,Peroi_R14F617_GR_U_M:0.0):0.0):0.0,((((Peros_R07W164_ES_U_M:0.0,Peros_R14G453_GR_U_M:0.0):0.0,((Peros_R15M837_IT_U_M:0.0,Peros_R15I764_AT_U_M:0.0):0.0,(Peros_R19D459_ES_U_M:0.0,Peros_R10B863_FR_U_M:0.0):0.0):0.0):0.0,Peroi_R10B402_BG_U_M:0.0):0.0,((Peros_R18D135_ES_U_M:0.005,((Peros_R17G381_AL_U_M:0.0,((Peros_R07D671_BG_U_M:0.0,Peroi_R17F519_AL_U_M:0.0):0.0,(Peros_R09V828_ES_U_M:0.0,Peros_R17F517_AL_U_M:0.0):0.0):0.005):0.0,(((Peroi_R14F306_RS_U_M:0.0,(Peros_R15J298_FR_U_M:0.0,(Peros_R14G103_GR_U_M:0.0,(Peros_R10C085_FR_U_M:0.0,(Peros_R14A083_IT_U_M:0.0,(Peroi_R14G072_GR_U_M:0.0,(((Peros_R17F518_AL_U_M:0.0,Peros_R14F299_RS_U_M:0.0):0.0,(Peros_R17T046_ME_U_M:0.0,Peros_R07W163_ES_U_M:0.0):0.0):0.0,(Peros_R11H009_ES_U_M:0.0,(Picar_R08M425_RO_U_M:0.0,Picar_R17D470_GR_U_M:0.0):0.005):0.0):0.005):0.0):0.0):0.0):0.0):0.0):0.0,Peroi_R14F612_GR_U_M:0.0):0.0,Peros_R17E160_ES_U_M:0.0):0.0):0.0):0.0,Peroi_R09V961_BG_U_M:0.0):0.0):0.0):0.0,Peros_R15I269_AT_U_M:0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+73 edges
+74 nodes: 38 tips, 0 hybrid nodes, 36 internal tree nodes.
+tip labels: Peros_R10B401_BG_U_M, Peroi_R14F313_RS_U_M, Peroi_R14F617_GR_U_M, Peroi_R14F306_RS_U_M, ...
+(Peros_R10B401_BG_U_M:0.0,(Peroi_R14F313_RS_U_M:0.0,(Peroi_R14F617_GR_U_M:0.0,(Peroi_R14F306_RS_U_M:0.0,(((Peroi_R14G072_GR_U_M:0.0,((Peros_R15M837_IT_U_M:0.0,(((Peros_R14F299_RS_U_M:0.0,(((Peros_R07D671_BG_U_M:0.0,(Peros_R16D593_RS_U_M:0.0,((Peros_R16D592_RS_U_M:0.0,((Peros_R14G103_GR_U_M:0.0,(((((((Peros_R15I269_AT_U_M:0.006,Picar_R17D470_GR_U_M:0.0):0.003,Peros_R15J298_FR_U_M:0.0):0.0,Peros_R17E114_ES_U_M:0.0):0.003,(Peros_R14G453_GR_U_M:0.0,(Peroi_R09V961_BG_U_M:0.0,(Peros_R07W164_ES_U_M:0.0,(((((Peros_R07W163_ES_U_M:0.0,(Peros_R11H009_ES_U_M:0.0,Peros_R18D133_FR_U_M:0.0):0.0):0.0,Peros_R19D459_ES_U_M:0.0):0.0,Peros_R09V828_ES_U_M:0.0):0.012,Peros_R14A083_IT_U_M:0.003):0.0,Peros_R15H523_CH_U_M:0.0):0.0):0.0):0.0):0.0):0.0,Peros_R15I764_AT_U_M:0.0):0.0,Peros_R17E160_ES_U_M:0.0):0.0,Peroi_R14F612_GR_U_M:0.0):0.0):0.0,Peros_R14V059_UA_U_M:0.0):0.0):0.0,Peroi_R10B402_BG_U_M:0.0):0.0):0.0):0.0,Peros_R14F605_GR_U_M:0.0):0.0,Peros_R19D925_ES_U_M:0.0):0.0):0.0,Peros_R10B863_FR_U_M:0.0):0.0,Peros_R10C085_FR_U_M:0.0):0.0):0.0,Peros_R18D135_ES_U_M:0.0):0.003):0.003,Peros_R14C958_BG_U_M:0.0):0.0,Peros_R17G381_AL_U_M:0.0):0.0):0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+91 edges
+92 nodes: 47 tips, 0 hybrid nodes, 45 internal tree nodes.
+tip labels: Peros_R16D592_RS_U_M, Peros_R17E114_ES_U_M, Peros_R19D459_ES_U_M, Peros_R14G453_GR_U_M, ...
+(Peros_R16D592_RS_U_M:0.0,(Peros_R17E114_ES_U_M:0.0,(((Peros_R19D459_ES_U_M:0.0,(Peros_R14G453_GR_U_M:0.0,Peroi_R14F612_GR_U_M:0.0):0.0):0.0,Peros_R09V828_ES_U_M:0.0):0.0,(((((Peros_R16D593_RS_U_M:0.0,((((((Peros_R07D671_BG_U_M:0.0,((((Peroi_R14F306_RS_U_M:0.0,((Peroi_R14F617_GR_U_M:0.0,((Peros_R07W163_ES_U_M:0.0,(Peros_R11H009_ES_U_M:0.0,(Peros_R17E160_ES_U_M:0.0,Peros_R15I269_AT_U_M:0.0):0.012):0.0):0.0,Peroi_R10B402_BG_U_M:0.0):0.0):0.0,Peros_R14C790_BG_U_M:0.0):0.0):0.0,(Peros_R15J298_FR_U_M:0.0,(Peros_R14C958_BG_U_M:0.0,Peros_R14F299_RS_U_M:0.0):0.0):0.0):0.0,Peroi_R14F313_RS_U_M:0.0):0.0,Peros_R14G103_GR_U_M:0.0):0.0):0.0,(Peros_R19D925_ES_U_M:0.0,Peros_R14F975_GR_U_M:0.0):0.0):0.0,Peros_R14G085_GR_U_M:0.0):0.0,Peros_R14F984_GR_U_M:0.0):0.0,Peros_R14A083_IT_U_M:0.0):0.0,Peros_R15M837_IT_U_M:0.0):0.0):0.0,(Peros_R18D135_ES_U_M:0.0,Peroi_R14G072_GR_U_M:0.0):0.0):0.0,Peros_R15I764_AT_U_M:0.0):0.0,Peros_R17G381_AL_U_M:0.0):0.0,(Peros_R07W164_ES_U_M:0.0,(Peros_R14A243_IT_U_M:0.0,(Peros_R10C085_FR_U_M:0.0,((Peros_R14V059_UA_U_M:0.0,((Peros_R19D908_ES_U_M:0.006,((Peros_R17F517_AL_U_M:0.0,(Peros_R17T046_ME_U_M:0.0,(Peroi_R09V961_BG_U_M:0.0,Peroi_R17F519_AL_U_M:0.006):0.0):0.0):0.0,Peros_R17F518_AL_U_M:0.0):0.0):0.0,(Picar_R17D470_GR_U_M:0.006,Peros_R17T045_ME_U_M:0.0):0.0):0.0):0.0,((Picar_R08M425_RO_U_M:0.0,Peros_R14F605_GR_U_M:0.0):0.0,Peros_R10B863_FR_U_M:0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+89 edges
+90 nodes: 46 tips, 0 hybrid nodes, 44 internal tree nodes.
+tip labels: Peros_R15M837_IT_U_M, Peros_R10B863_FR_U_M, Peros_R10C085_FR_U_M, Peros_R14A243_IT_U_M, ...
+(((Peros_R15M837_IT_U_M:0.0,(((((((Peros_R10B863_FR_U_M:0.0,(Peros_R10C085_FR_U_M:0.0,(Peros_R14A243_IT_U_M:0.0,((((Peroi_R14G072_GR_U_M:0.0,Peros_R14F975_GR_U_M:0.0):0.003,(Peros_R16D592_RS_U_M:0.0,Peros_R17F518_AL_U_M:0.0):0.0):0.0,Peros_R16D593_RS_U_M:0.0):0.0,Peroi_R14F612_GR_U_M:0.0):0.0):0.0):0.0):0.0,Peros_R14G066_GR_U_M:0.0):0.0,Peros_R14V059_UA_U_M:0.0):0.0,Peros_R09V828_ES_U_M:0.0):0.0,Peroi_R17F519_AL_U_M:0.0):0.0,Peros_R19D925_ES_U_M:0.0):0.0,Peros_R18D135_ES_U_M:0.0):0.0):0.0,Peroi_R14F306_RS_U_M:0.0):0.003,((Peros_R17T045_ME_U_M:0.0,((Peros_R10B401_BG_U_M:0.0,((Picar_R08M425_RO_U_M:0.012,((((Peros_R14G453_GR_U_M:0.0,((Peros_R17G381_AL_U_M:0.0,((((Peros_R14G103_GR_U_M:0.0,(Peros_R14A083_IT_U_M:0.0,(Peroi_R09V961_BG_U_M:0.0,(Peros_R15J298_FR_U_M:0.0,(Peroi_R14F617_GR_U_M:0.0,(Peros_R07D671_BG_U_M:0.0,(Peros_R07W163_ES_U_M:0.0,(Peros_R07W164_ES_U_M:0.0,(((Peros_R19D459_ES_U_M:0.0,(Peros_R11H009_ES_U_M:0.0,Peros_R15G864_CH_U_M:0.0):0.003):0.0,Peros_R14F299_RS_U_M:0.0):0.0,Peros_R18D133_FR_U_M:0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0,Peros_R17E160_ES_U_M:0.0):0.0,Peros_R17T046_ME_U_M:0.0):0.0,Peros_R17E114_ES_U_M:0.0):0.0):0.0,Peros_R14N424_UA_U_M:0.0):0.0):0.0,Peros_R14F605_GR_U_M:0.0):0.0,Peros_R15I764_AT_U_M:0.0):0.0,Picar_R17D470_GR_U_M:0.0):0.0):0.0,Peros_R15H523_CH_U_M:0.0):0.0):0.0,Peroi_R10B402_BG_U_M:0.0):0.0):0.0,Peros_R15I269_AT_U_M:0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+71 edges
+72 nodes: 37 tips, 0 hybrid nodes, 35 internal tree nodes.
+tip labels: Peroi_R14F617_GR_U_M, Peroi_R10B402_BG_U_M, Peros_R07W163_ES_U_M, Peros_R17E114_ES_U_M, ...
+(((Peroi_R14F617_GR_U_M:0.0,((Peroi_R10B402_BG_U_M:0.0,(Peros_R07W163_ES_U_M:0.0,((((Peros_R17E114_ES_U_M:0.0,(Peros_R14G453_GR_U_M:0.0,Peros_R09V828_ES_U_M:0.0):0.0):0.0,(Peros_R17F518_AL_U_M:0.0,((Peros_R15H078_IT_U_M:0.0,Peros_R14F984_GR_U_M:0.0):0.0,Peros_R19D925_ES_U_M:0.0):0.0):0.0):0.0,(Peros_R18D133_FR_U_M:0.0,(Peros_R17T045_ME_U_M:0.0,Peros_R17E160_ES_U_M:0.0):0.0):0.0):0.0,(Peroi_R14F306_RS_U_M:0.0,Peros_R15I764_AT_U_M:0.0):0.0):0.0):0.0):0.0,Peroi_R14G072_GR_U_M:0.0):0.0):0.0,((((((((((((Peros_R15H523_CH_U_M:0.0,(Peros_R14A083_IT_U_M:0.0,Peros_R15I269_AT_U_M:0.0):0.0):0.0,(Peros_R16D593_RS_U_M:0.0,Peros_R15J298_FR_U_M:0.0):0.0):0.0,Peros_R14V059_UA_U_M:0.0):0.0,Peroi_R17F519_AL_U_M:0.0):0.0,Peroi_R14F612_GR_U_M:0.0):0.0,(Peros_R10C085_FR_U_M:0.0,Peros_R17F517_AL_U_M:0.0):0.0):0.0,(Peros_R07D671_BG_U_M:0.0,Peros_R10B863_FR_U_M:0.0):0.0):0.0,Peros_R14C958_BG_U_M:0.0):0.0,Peros_R14G066_GR_U_M:0.0):0.0,Peroi_R14F313_RS_U_M:0.0):0.0,Peros_R14G085_GR_U_M:0.0):0.0,Peros_R15M837_IT_U_M:0.0):0.0):0.0,(Peros_R14G103_GR_U_M:0.0,(Peroi_R09V961_BG_U_M:0.0,Picar_R08M425_RO_U_M:0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+91 edges
+92 nodes: 47 tips, 0 hybrid nodes, 45 internal tree nodes.
+tip labels: Peros_R14F299_RS_U_M, Peros_R07W163_ES_U_M, Peros_R07W164_ES_U_M, Peroi_R14F617_GR_U_M, ...
+(((Peros_R14F299_RS_U_M:0.0,(((Peros_R07W163_ES_U_M:0.0,Peros_R07W164_ES_U_M:0.0):0.0,Peroi_R14F617_GR_U_M:0.0):0.0,Peroi_R14F313_RS_U_M:0.0):0.0):0.0,Peros_R07D671_BG_U_M:0.0):0.0,(((Peros_R15I764_AT_U_M:0.0,(Peros_R15H523_CH_U_M:0.0,Peros_R15I269_AT_U_M:0.0):0.0):0.0,(((Peros_R17E160_ES_U_M:0.0,(Peros_R17E114_ES_U_M:0.0,Peroi_R09V961_BG_U_M:0.0):0.0):0.0,Peros_R11H009_ES_U_M:0.0):0.0,(Peros_R10B863_FR_U_M:0.0,Peros_R09V828_ES_U_M:0.0):0.0):0.0):0.0,((Peros_R10B401_BG_U_M:0.0,Peroi_R14F306_RS_U_M:0.0):0.0,(((Peros_R19D908_ES_U_M:0.0,((Peros_R18D133_FR_U_M:0.0,Peros_R19D925_ES_U_M:0.0):0.0,Peros_R18D135_ES_U_M:0.0):0.006):0.0,((Peros_R15H078_IT_U_M:0.0,Peros_R15G864_CH_U_M:0.006):0.0,(Peros_R10C085_FR_U_M:0.0,(Peros_R17F518_AL_U_M:0.0,((Peros_R17F517_AL_U_M:0.0,(Peroi_R14F612_GR_U_M:0.0,(Peros_R15J298_FR_U_M:0.0,((Peros_R19D459_ES_U_M:0.006,((Peros_R14N424_UA_U_M:0.0,((Peros_R17G381_AL_U_M:0.0,Peros_R14G453_GR_U_M:0.011):0.0,Peroi_R10B402_BG_U_M:0.0):0.0):0.0,((Peros_R14F975_GR_U_M:0.0,(((Peros_R15M837_IT_U_M:0.0,(Picar_R08M425_RO_U_M:0.0,Picar_R17D470_GR_U_M:0.0):0.0):0.0,((Peros_R14G103_GR_U_M:0.0,Peros_R14G085_GR_U_M:0.0):0.0,Peroi_R14G072_GR_U_M:0.0):0.0):0.0,(Peros_R14A243_IT_U_M:0.0,Peros_R14A083_IT_U_M:0.0):0.0):0.0):0.0,Peros_R16D592_RS_U_M:0.0):0.0):0.012):0.006,Peros_R16D593_RS_U_M:0.0):0.0):0.0):0.0):0.0,Peroi_R17F519_AL_U_M:0.0):0.0):0.0):0.0):0.0):0.0,Peros_R14C958_BG_U_M:0.0):0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+93 edges
+94 nodes: 48 tips, 0 hybrid nodes, 46 internal tree nodes.
+tip labels: Peros_R17E160_ES_U_M, Peroi_R14G072_GR_U_M, Peros_R14V059_UA_U_M, Peroi_R09V961_BG_U_M, ...
+((Peros_R17E160_ES_U_M:0.0,(Peroi_R14G072_GR_U_M:0.0,((Peros_R14V059_UA_U_M:0.0,(Peroi_R09V961_BG_U_M:0.0,Peros_R17E114_ES_U_M:0.0):0.0):0.0,(Peros_R19D925_ES_U_M:0.0,(Peros_R07D671_BG_U_M:0.0,((Peros_R15G864_CH_U_M:0.0,Peros_R14C958_BG_U_M:0.0):0.0,((Peros_R14G103_GR_U_M:0.0,(((Peroi_R14F612_GR_U_M:0.0,(Picar_R17D470_GR_U_M:0.0,Picar_R08M425_RO_U_M:0.0):0.018):0.0,((Peros_R10B401_BG_U_M:0.0,(Peros_R15I269_AT_U_M:0.0,((((Peroi_R14F313_RS_U_M:0.0,((Peroi_R14F306_RS_U_M:0.0,(Peroi_R14F617_GR_U_M:0.0,((Peroi_R17F519_AL_U_M:0.0,((Peros_R17T045_ME_U_M:0.0,(Peros_R17T046_ME_U_M:0.0,Peroi_R10B402_BG_U_M:0.0):0.0):0.0,Peros_R17F518_AL_U_M:0.0):0.0):0.006,Peros_R14F299_RS_U_M:0.0):0.0):0.0):0.0,(Peros_R14A243_IT_U_M:0.0,Peros_R16D593_RS_U_M:0.0):0.0):0.006):0.0,Peros_R15I764_AT_U_M:0.0):0.0,Peros_R17G381_AL_U_M:0.0):0.0,Peros_R17F517_AL_U_M:0.0):0.0):0.0):0.0,Peros_R07W163_ES_U_M:0.0):0.0):0.0,((Peros_R09V828_ES_U_M:0.0,((Peros_R11H009_ES_U_M:0.0,Peros_R14N424_UA_U_M:0.0):0.0,(((Peros_R16D592_RS_U_M:0.0,Peros_R18D135_ES_U_M:0.0):0.0,((Peros_R15M837_IT_U_M:0.0,(Peros_R19D459_ES_U_M:0.0,Peros_R14A083_IT_U_M:0.0):0.0):0.0,(Peros_R07W164_ES_U_M:0.0,Peros_R19D908_ES_U_M:0.0):0.0):0.0):0.0,(Peros_R14G453_GR_U_M:0.0,(Peros_R14F975_GR_U_M:0.0,Peros_R14C790_BG_U_M:0.0):0.0):0.0):0.0):0.0):0.0,Peros_R15J298_FR_U_M:0.0):0.0):0.0):0.0,Peros_R10C085_FR_U_M:0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0,(Peros_R14G085_GR_U_M:0.0,Peros_R14F605_GR_U_M:0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+75 edges
+76 nodes: 39 tips, 0 hybrid nodes, 37 internal tree nodes.
+tip labels: Peros_R07W164_ES_U_M, Peros_R07W163_ES_U_M, Picar_R17D470_GR_U_M, Picar_R08M425_RO_U_M, ...
+(((((((Peros_R07W164_ES_U_M:0.0,(Peros_R07W163_ES_U_M:0.0,((Picar_R17D470_GR_U_M:0.0,Picar_R08M425_RO_U_M:0.0):0.006,((Peros_R15I764_AT_U_M:0.0,(((Peroi_R14F617_GR_U_M:0.0,((Peros_R14F299_RS_U_M:0.0,(((Peros_R18D135_ES_U_M:0.0,(Peros_R16D593_RS_U_M:0.0,Peros_R15J298_FR_U_M:0.0):0.0):0.0,Peroi_R09V961_BG_U_M:0.0):0.0,Peros_R17G381_AL_U_M:0.0):0.005):0.0,Peros_R16D592_RS_U_M:0.0):0.0):0.0,Peros_R15M837_IT_U_M:0.0):0.0,Peros_R10B401_BG_U_M:0.0):0.0):0.0,Peros_R14F605_GR_U_M:0.0):0.001):0.019):0.0):0.0,(Peroi_R14F306_RS_U_M:0.006,Peros_R17F518_AL_U_M:0.0):0.0):0.0,Peros_R17E160_ES_U_M:0.0):0.0,((Peroi_R17F519_AL_U_M:0.0,Peros_R17T046_ME_U_M:0.0):0.0,((Peros_R11H009_ES_U_M:0.0,Peros_R14A083_IT_U_M:0.0):0.0,Peroi_R14G072_GR_U_M:0.0):0.0):0.0):0.0,((((Peros_R19D459_ES_U_M:0.0,(((Peros_R15I269_AT_U_M:0.0,Peros_R19D925_ES_U_M:0.0):0.0,Peros_R14F984_GR_U_M:0.0):0.0,((Peros_R10B863_FR_U_M:0.0,Peros_R14A243_IT_U_M:0.0):0.0,(Peros_R14G085_GR_U_M:0.0,Peros_R14F975_GR_U_M:0.0):0.0):0.0):0.0):0.0,Peros_R09V828_ES_U_M:0.0):0.0,Peros_R14V059_UA_U_M:0.0):0.0,Peros_R14G453_GR_U_M:0.0):0.0):0.0,(Peros_R14G103_GR_U_M:0.0,Peroi_R10B402_BG_U_M:0.0):0.0):0.0,Peros_R07D671_BG_U_M:0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+67 edges
+68 nodes: 35 tips, 0 hybrid nodes, 33 internal tree nodes.
+tip labels: Peros_R14G453_GR_U_M, Peros_R15M837_IT_U_M, Peroi_R17F519_AL_U_M, Peros_R14F605_GR_U_M, ...
+(Peros_R14G453_GR_U_M:0.0,(((Peros_R15M837_IT_U_M:0.0,Peroi_R17F519_AL_U_M:0.0):0.0,((Peros_R14F605_GR_U_M:0.0,(Peros_R14G066_GR_U_M:0.0,((Picar_R08M425_RO_U_M:0.0,Picar_R17D470_GR_U_M:0.0):0.008,Peros_R14V059_UA_U_M:0.0):0.0):0.0):0.0,(((Peros_R19D459_ES_U_M:0.0,(Peros_R15I764_AT_U_M:0.0,(Peros_R15H523_CH_U_M:0.0,(Peroi_R14F313_RS_U_M:0.0,(Peros_R07D671_BG_U_M:0.0,(Peros_R14F299_RS_U_M:0.0,(Peros_R10B863_FR_U_M:0.0,Peros_R19D925_ES_U_M:0.0):0.0):0.007):0.0):0.0):0.0):0.0):0.0,Peroi_R10B402_BG_U_M:0.0):0.0,Peroi_R09V961_BG_U_M:0.0):0.0):0.0):0.0,(((Peros_R14A083_IT_U_M:0.0,Peros_R17F518_AL_U_M:0.0):0.0,(Peros_R15J298_FR_U_M:0.0,((Peros_R11H009_ES_U_M:0.0,Peroi_R14F306_RS_U_M:0.0):0.0,((Peros_R07W164_ES_U_M:0.0,Peroi_R14G072_GR_U_M:0.0):0.0,(Peros_R14G103_GR_U_M:0.0,(Peroi_R14F612_GR_U_M:0.0,(Peros_R17T046_ME_U_M:0.0,(Peros_R16D593_RS_U_M:0.0,Peros_R17E160_ES_U_M:0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0,((Peros_R17G381_AL_U_M:0.0,(Peros_R17F517_AL_U_M:0.0,Peros_R17E114_ES_U_M:0.0):0.0):0.0,Peros_R15I269_AT_U_M:0.0):0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+85 edges
+86 nodes: 44 tips, 0 hybrid nodes, 42 internal tree nodes.
+tip labels: Peros_R14A083_IT_U_M, Peros_R18D135_ES_U_M, Peroi_R14G072_GR_U_M, Peros_R14G103_GR_U_M, ...
+((Peros_R14A083_IT_U_M:0.0,Peros_R18D135_ES_U_M:0.0):0.0,((Peroi_R14G072_GR_U_M:0.0,Peros_R14G103_GR_U_M:0.0):0.0,(((Peroi_R14F617_GR_U_M:0.0,(((((Peros_R19D908_ES_U_M:0.0,(((Peros_R15M837_IT_U_M:0.0,Peros_R16D593_RS_U_M:0.0):0.0,((((((Peros_R09V828_ES_U_M:0.0,Peros_R17F518_AL_U_M:0.0):0.0,Peros_R15J298_FR_U_M:0.0):0.0,Peros_R17F517_AL_U_M:0.0):0.0,(Peros_R15H523_CH_U_M:0.0,Peroi_R17F519_AL_U_M:0.0):0.0):0.0,(((Peros_R14C790_BG_U_M:0.0,((Peros_R19D459_ES_U_M:0.0,(Peros_R14G085_GR_U_M:0.0,(Peros_R14V059_UA_U_M:0.0,(Peros_R15I764_AT_U_M:0.0,((Peros_R14C958_BG_U_M:0.0,((Peroi_R14F306_RS_U_M:0.0,(Peros_R14G453_GR_U_M:0.0,(((Peros_R17G381_AL_U_M:0.0,Peros_R10B401_BG_U_M:0.0):0.0,Peros_R07D671_BG_U_M:0.0):0.0,Peroi_R14F612_GR_U_M:0.0):0.0):0.0):0.0,Peroi_R09V961_BG_U_M:0.0):0.003):0.0,Peros_R15I269_AT_U_M:0.0):0.0):0.0):0.0):0.0):0.0,Peros_R19D925_ES_U_M:0.0):0.0):0.0,Peros_R17E160_ES_U_M:0.0):0.0,Peros_R10C085_FR_U_M:0.0):0.0):0.0,(Peroi_R14F313_RS_U_M:0.0,Peros_R10B863_FR_U_M:0.0):0.0):0.0):0.0,(((Peros_R07W163_ES_U_M:0.0,Peros_R17E114_ES_U_M:0.0):0.0,Peros_R07W164_ES_U_M:0.0):0.0,Peros_R11H009_ES_U_M:0.0):0.003):0.003):0.0,Picar_R08M425_RO_U_M:0.0):0.0,Peros_R14F975_GR_U_M:0.0):0.0,Peros_R14G066_GR_U_M:0.0):0.0,Peros_R14A243_IT_U_M:0.0):0.0):0.0,Peros_R14F299_RS_U_M:0.0):0.0,Peroi_R10B402_BG_U_M:0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+ HybridNetwork, Rooted Network
+81 edges
+82 nodes: 42 tips, 0 hybrid nodes, 40 internal tree nodes.
+tip labels: Peros_R14V059_UA_U_M, Peros_R10B863_FR_U_M, Peros_R15M837_IT_U_M, Picar_R17D470_GR_U_M, ...
+((Peros_R14V059_UA_U_M:0.0,((((Peros_R10B863_FR_U_M:0.0,(Peros_R15M837_IT_U_M:0.0,(Picar_R17D470_GR_U_M:0.0,(Peros_R19D459_ES_U_M:0.0,(Picar_R08M425_RO_U_M:0.0,(Peroi_R14G072_GR_U_M:0.0,(Peros_R14A083_IT_U_M:0.0,(Peros_R10C085_FR_U_M:0.0,(Peros_R14F984_GR_U_M:0.0,(Peros_R14G103_GR_U_M:0.0,(Peros_R16D592_RS_U_M:0.0,(Peros_R18D135_ES_U_M:0.0,((Peros_R16D593_RS_U_M:0.012,Peros_R14F299_RS_U_M:0.005):0.004,(Peroi_R17F519_AL_U_M:0.0,(Peros_R14C958_BG_U_M:0.0,(Peros_R17T045_ME_U_M:0.0,(Peros_R07W164_ES_U_M:0.0,(Peros_R09V828_ES_U_M:0.0,(Peros_R14F975_GR_U_M:0.0,(Peros_R14G085_GR_U_M:0.0,Peros_R14G066_GR_U_M:0.0):0.0):0.003):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0):0.0,Peroi_R14F617_GR_U_M:0.0):0.0,Peros_R14F605_GR_U_M:0.0):0.0,Peroi_R10B402_BG_U_M:0.0):0.0):0.0,((Peros_R15I269_AT_U_M:0.0,((Peros_R10B401_BG_U_M:0.0,(Peros_R17G381_AL_U_M:0.0,(Peroi_R09V961_BG_U_M:0.0,(((Peros_R11H009_ES_U_M:0.0,(Peros_R17E160_ES_U_M:0.0,Peros_R19D925_ES_U_M:0.0):0.0):0.0,Peros_R17E114_ES_U_M:0.0):0.0,Peros_R19D908_ES_U_M:0.0):0.007):0.0):0.0):0.0,(Peros_R14G453_GR_U_M:0.0,((Peroi_R14F612_GR_U_M:0.0,Peroi_R14F306_RS_U_M:0.0):0.0,Peros_R07D671_BG_U_M:0.0):0.0):0.0):0.0):0.0,(Peros_R14C790_BG_U_M:0.0,Peros_R15I764_AT_U_M:0.0):0.0):0.0,Peroi_R09V958_BG_U_M:0.0);
+
+
+
+
+julia> #this step does not work
+       df_sp = writeTableCF(countquartetsintrees(genetrees, taxonmap)...) # taxon names should be species names, not allele names here
+Reading in trees, looking at 35 quartets in each...
+0+--------------------------------------------------+100%
+  **************************************************
+35¡Ñ9 DataFrame
+ Row ¢x qind   t1       t2       t3       t4       CF12_34   CF13_24   CF14_23   ngenes
+     ¢x Int64  String7  String7  String7  String7  Float64   Float64   Float64   Float64
+¢w¢w¢w¢w¢w¢q¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w¢w
+   1 ¢x     1  ALME     IT       UA       eroides  0.343977  0.32997   0.326053   5363.0
+   2 ¢x     2  ALME     IT       UA       eros     0.328598  0.345961  0.325441   5363.0
+   3 ¢x     3  ALME     IT       eroides  eros     0.325805  0.34537   0.328825   5679.0
+   4 ¢x     4  ALME     UA       eroides  eros     0.3262    0.32947   0.34433    5389.0
+   5 ¢x     5  IT       UA       eroides  eros     0.317768  0.325713  0.356519   5414.0
+   6 ¢x     6  ALME     IT       UA       icar     0.32075   0.365772  0.313478   4246.0
+   7 ¢x     7  ALME     IT       eroides  icar     0.329493  0.355933  0.314574   4506.0
+   8 ¢x     8  ALME     UA       eroides  icar     0.334923  0.322929  0.342147   4255.0
+   9 ¢x     9  IT       UA       eroides  icar     0.315911  0.310173  0.373917   4285.0
+  10 ¢x    10  ALME     IT       eros     icar     0.316694  0.353242  0.330064   4506.0
+  11 ¢x    11  ALME     UA       eros     icar     0.337602  0.329674  0.332723   4255.0
+  12 ¢x    12  IT       UA       eros     icar     0.313626  0.32795   0.358424   4285.0
+  13 ¢x    13  ALME     eroides  eros     icar     0.332838  0.340788  0.326374   4517.0
+  14 ¢x    14  IT       eroides  eros     icar     0.313598  0.340563  0.345839   4549.0
+  15 ¢x    15  UA       eroides  eros     icar     0.346796  0.335285  0.317919   4295.0
+  16 ¢x    16  ALME     IT       UA       mene     0.319597  0.355703  0.3247     5274.0
+  17 ¢x    17  ALME     IT       eroides  mene     0.325717  0.350856  0.323426   5584.0
+  18 ¢x    18  ALME     UA       eroides  mene     0.333604  0.322216  0.34418    5298.0
+  19 ¢x    19  IT       UA       eroides  mene     0.32144   0.313286  0.365274   5324.0
+  20 ¢x    20  ALME     IT       eros     mene     0.319957  0.346413  0.33363    5584.0
+  21 ¢x    21  ALME     UA       eros     mene     0.336934  0.328473  0.334593   5298.0
+  22 ¢x    22  IT       UA       eros     mene     0.320107  0.328891  0.351002   5324.0
+  23 ¢x    23  ALME     eroides  eros     mene     0.335231  0.336264  0.328505   5611.0
+  24 ¢x    24  IT       eroides  eros     mene     0.320472  0.335856  0.343672   5639.0
+  25 ¢x    25  UA       eroides  eros     mene     0.346776  0.333568  0.319656   5349.0
+  26 ¢x    26  ALME     IT       icar     mene     0.335634  0.327593  0.336773   4451.0
+  27 ¢x    27  ALME     UA       icar     mene     0.359217  0.31321   0.327573   4203.0
+  28 ¢x    28  IT       UA       icar     mene     0.333714  0.331349  0.334938   4233.0
+  29 ¢x    29  ALME     eroides  icar     mene     0.35422   0.31629   0.32949    4461.0
+  30 ¢x    30  IT       eroides  icar     mene     0.330758  0.331489  0.337752   4493.0
+  31 ¢x    31  UA       eroides  icar     mene     0.366998  0.317692  0.31531    4242.0
+  32 ¢x    32  ALME     eros     icar     mene     0.356741  0.318709  0.32455    4461.0
+  33 ¢x    33  IT       eros     icar     mene     0.34437   0.328088  0.327542   4493.0
+  34 ¢x    34  UA       eros     icar     mene     0.358175  0.323451  0.318374   4242.0
+  35 ¢x    35  eroides  eros     icar     mene     0.349335  0.329212  0.321452   4504.0
+  
+  
+julia> CSV.write("./phylonetworks_run/tableCF.csv", df_sp) # to save the data frame to a file
+"./phylonetworks_run/tableCF.csv"
+
+julia> raxmlCF = readTableCF("./phylonetworks_run/tableCF.csv") # read in the file and produces a "DataCF" object
+between 4203.000000001075 and 5678.999999950667 gene trees per 4-taxon set
+Object DataCF
+number of quartets: 35
+
+julia> astralfile = "Eros_REF_icarus_aftrkr_merg_n54_c85_m35.tre"
+"Eros_REF_icarus_aftrkr_merg_n54_c85_m35.tre"
+
+julia> astraltree = readMultiTopology(astralfile)[1] # read the 1st tree
+HybridNetwork, Rooted Network
+12 edges
+13 nodes: 7 tips, 0 hybrid nodes, 6 internal tree nodes.
+tip labels: ALME, eroides, UA, eros, ...
+(ALME:0.245,((eroides:0.047,UA:0.108)0.86:0.016,(eros:0.049,(mene:0.37,(IT:0.031,icar:1.087)0.22:0.0)0.94:0.02)0.56:0.007):0.0);
+
+julia> rootonedge!(astraltree, 8)
+HybridNetwork, Rooted Network
+12 edges
+13 nodes: 7 tips, 0 hybrid nodes, 6 internal tree nodes.
+tip labels: ALME, eroides, UA, eros, ...
+(icar:0.544,(IT:0.031,((((UA:0.108,eroides:0.047)0.86:0.016,ALME:0.245):0.007,eros:0.049)0.56:0.02,mene:0.37)0.94:0.0)0.22:0.544);
+
+julia> rootatnode!(astraltree, "icar")
+HybridNetwork, Rooted Network
+12 edges
+13 nodes: 7 tips, 0 hybrid nodes, 6 internal tree nodes.
+tip labels: ALME, eroides, UA, eros, ...
+(icar:0.544,(IT:0.031,((((UA:0.108,eroides:0.047)0.86:0.016,ALME:0.245):0.007,eros:0.049)0.56:0.02,mene:0.37)0.94:0.0)0.22:0.544);
+
+julia> net0 = snaq!(astraltree,raxmlCF, hmax=0, filename="net0", seed=4353, runs=50)
+optimization of topology, BL and inheritance probabilities using:
+ hmax = 0,
+ tolerance parameters: ftolRel=1.0e-6, ftolAbs=1.0e-6,
+                       xtolAbs=0.001, xtolRel=0.01.
+ max number of failed proposals = 75, liktolAbs = 1.0e-6.
+rootname for files: net0
+BEGIN: 50 runs on starting tree (UA,eroides,(ALME,(eros,(mene,(IT,icar)0.22:0.0)0.94:0.020010731667030237)0.56:0.0073763797317417):0.015916924959381882)0.86;
+2026-06-05 23:8:43.987
+seed: 4353 for run 1, 2026-06-05 23:8:45.297
+seed: 99955 for run 2, 2026-06-05 23:8:55.128
+seed: 31113 for run 3, 2026-06-05 23:8:57.882
+seed: 90955 for run 4, 2026-06-05 23:9:0.422
+seed: 50555 for run 5, 2026-06-05 23:9:2.843
+seed: 80864 for run 6, 2026-06-05 23:9:6.219
+seed: 76233 for run 7, 2026-06-05 23:9:11.032
+seed: 91974 for run 8, 2026-06-05 23:9:13.497
+seed: 83063 for run 9, 2026-06-05 23:9:16.631
+seed: 81847 for run 10, 2026-06-05 23:9:18.835
+seed: 4859 for run 11, 2026-06-05 23:9:21.665
+seed: 88595 for run 12, 2026-06-05 23:9:24.84
+seed: 30883 for run 13, 2026-06-05 23:9:27.405
+seed: 70954 for run 14, 2026-06-05 23:9:33.347
+seed: 60496 for run 15, 2026-06-05 23:9:36.086
+seed: 42239 for run 16, 2026-06-05 23:9:38.281
+seed: 93929 for run 17, 2026-06-05 23:9:40.621
+seed: 92488 for run 18, 2026-06-05 23:9:45.471
+seed: 20694 for run 19, 2026-06-05 23:9:48.242
+seed: 24377 for run 20, 2026-06-05 23:9:51.448
+seed: 77709 for run 21, 2026-06-05 23:9:54.632
+seed: 90840 for run 22, 2026-06-05 23:9:57.133
+seed: 2479 for run 23, 2026-06-05 23:10:1.53
+seed: 22615 for run 24, 2026-06-05 23:10:4.197
+seed: 57298 for run 25, 2026-06-05 23:10:6.784
+seed: 25633 for run 26, 2026-06-05 23:10:9.092
+seed: 93727 for run 27, 2026-06-05 23:10:11.796
+seed: 36299 for run 28, 2026-06-05 23:10:14.416
+seed: 37465 for run 29, 2026-06-05 23:10:16.877
+seed: 80986 for run 30, 2026-06-05 23:10:19.616
+seed: 22636 for run 31, 2026-06-05 23:10:22.152
+seed: 42365 for run 32, 2026-06-05 23:10:24.614
+seed: 82525 for run 33, 2026-06-05 23:10:27.01
+seed: 38479 for run 34, 2026-06-05 23:10:29.785
+seed: 30452 for run 35, 2026-06-05 23:10:32.332
+seed: 98772 for run 36, 2026-06-05 23:10:34.602
+seed: 96081 for run 37, 2026-06-05 23:10:37.163
+seed: 57100 for run 38, 2026-06-05 23:10:39.648
+seed: 34893 for run 39, 2026-06-05 23:10:42.218
+seed: 19391 for run 40, 2026-06-05 23:10:45.02
+seed: 62730 for run 41, 2026-06-05 23:10:47.59
+seed: 99854 for run 42, 2026-06-05 23:10:50.042
+seed: 86883 for run 43, 2026-06-05 23:10:52.302
+seed: 47234 for run 44, 2026-06-05 23:10:55.718
+seed: 18780 for run 45, 2026-06-05 23:10:58.411
+seed: 78491 for run 46, 2026-06-05 23:11:1.623
+seed: 80553 for run 47, 2026-06-05 23:11:3.984
+seed: 92724 for run 48, 2026-06-05 23:11:7.566
+seed: 67952 for run 49, 2026-06-05 23:11:10.108
+seed: 26838 for run 50, 2026-06-05 23:11:13.752
+
+MaxNet is (UA,eroides,(ALME,(eros,(IT,(mene,icar)0.94:0.0036650216349298588)0.22:0.02648152534830645)0.56:0.008784329267730952):0.01659819944794375)0.86;
+with -loglik 0.4554787391562062
+HybridNetwork, Un-rooted Network
+11 edges
+12 nodes: 7 tips, 0 hybrid nodes, 5 internal tree nodes.
+tip labels: icar, IT, UA, eroides, ...
+(UA,eroides,(ALME,(eros,(IT,(mene,icar)0.94:0.004)0.22:0.026)0.56:0.009):0.017)0.86;
+
+julia> rootonedge!(net1, 1) # rooting the edge for icarus
+ERROR: RootMismatch: the desired root is below a reticulation,
+reverting to old root position.
+Stacktrace:
+ [1] rootonedge!(net::HybridNetwork, edgeNumber::Int64; index::Bool)
+   @ PhyloNetworks ~/.julia/packages/PhyloNetworks/V8OaV/src/manipulateNet.jl:353
+ [2] rootonedge!(net::HybridNetwork, edgeNumber::Int64)
+   @ PhyloNetworks ~/.julia/packages/PhyloNetworks/V8OaV/src/manipulateNet.jl:331
+ [3] top-level scope
+   @ REPL[33]:1
+
+
+julia> net1 = snaq!(astraltree,raxmlCF, hmax=1, filename="net0", seed=4353, runs=50)
+optimization of topology, BL and inheritance probabilities using:
+ hmax = 1,
+ tolerance parameters: ftolRel=1.0e-6, ftolAbs=1.0e-6,
+                       xtolAbs=0.001, xtolRel=0.01.
+ max number of failed proposals = 75, liktolAbs = 1.0e-6.
+rootname for files: net0
+BEGIN: 50 runs on starting tree (eroides,UA,(ALME,(eros,(mene,(IT,icar)0.22:0.0)0.94:0.020010731667030237)0.56:0.0073763797317417):0.015916924959381882)0.86;
+2026-06-06 4:51:1.916
+seed: 4353 for run 1, 2026-06-06 4:51:1.916
+seed: 99955 for run 2, 2026-06-06 4:51:11.501
+seed: 31113 for run 3, 2026-06-06 4:51:16.261
+seed: 90955 for run 4, 2026-06-06 4:51:22.324
+seed: 50555 for run 5, 2026-06-06 4:51:28.785
+seed: 80864 for run 6, 2026-06-06 4:51:35.615
+seed: 76233 for run 7, 2026-06-06 4:51:44.595
+seed: 91974 for run 8, 2026-06-06 4:51:53.789
+seed: 83063 for run 9, 2026-06-06 4:51:59.668
+seed: 81847 for run 10, 2026-06-06 4:52:4.653
+seed: 4859 for run 11, 2026-06-06 4:52:10.006
+seed: 88595 for run 12, 2026-06-06 4:52:15.798
+seed: 30883 for run 13, 2026-06-06 4:52:26.781
+seed: 70954 for run 14, 2026-06-06 4:52:32.048
+seed: 60496 for run 15, 2026-06-06 4:52:39.025
+seed: 42239 for run 16, 2026-06-06 4:52:43.633
+seed: 93929 for run 17, 2026-06-06 4:52:49.118
+seed: 92488 for run 18, 2026-06-06 4:52:56.41
+seed: 20694 for run 19, 2026-06-06 4:53:2.276
+seed: 24377 for run 20, 2026-06-06 4:53:9.081
+seed: 77709 for run 21, 2026-06-06 4:53:15.971
+seed: 90840 for run 22, 2026-06-06 4:53:22.939
+seed: 2479 for run 23, 2026-06-06 4:53:29.892
+seed: 22615 for run 24, 2026-06-06 4:53:37.103
+seed: 57298 for run 25, 2026-06-06 4:53:44.057
+seed: 25633 for run 26, 2026-06-06 4:53:47.721
+seed: 93727 for run 27, 2026-06-06 4:53:51.536
+seed: 36299 for run 28, 2026-06-06 4:53:56.304
+seed: 37465 for run 29, 2026-06-06 4:54:2.894
+seed: 80986 for run 30, 2026-06-06 4:54:15.75
+seed: 22636 for run 31, 2026-06-06 4:54:22.504
+seed: 42365 for run 32, 2026-06-06 4:54:26.912
+seed: 82525 for run 33, 2026-06-06 4:54:34.399
+seed: 38479 for run 34, 2026-06-06 4:54:39.93
+seed: 30452 for run 35, 2026-06-06 4:54:45.101
+seed: 98772 for run 36, 2026-06-06 4:54:50.222
+seed: 96081 for run 37, 2026-06-06 4:54:58.749
+seed: 57100 for run 38, 2026-06-06 4:55:8.179
+seed: 34893 for run 39, 2026-06-06 4:55:12.766
+seed: 19391 for run 40, 2026-06-06 4:55:17.652
+seed: 62730 for run 41, 2026-06-06 4:55:27.504
+seed: 99854 for run 42, 2026-06-06 4:55:35.613
+seed: 86883 for run 43, 2026-06-06 4:55:41.223
+seed: 47234 for run 44, 2026-06-06 4:55:47.896
+seed: 18780 for run 45, 2026-06-06 4:55:53.812
+seed: 78491 for run 46, 2026-06-06 4:55:58.321
+seed: 80553 for run 47, 2026-06-06 4:56:2.763
+seed: 92724 for run 48, 2026-06-06 4:56:8.02
+seed: 67952 for run 49, 2026-06-06 4:56:14.228
+seed: 26838 for run 50, 2026-06-06 4:56:22.047
+best network and networks with different hybrid/gene flow directions printed to .networks file
+
+MaxNet is (UA,(ALME,((IT,((mene,icar)0.22:0.012278680209993977)#H12:::0.7483335096320237)0.56:0.041177594514662005,eros)0.94:0.015730343325746212):0.019950186574871125,(eroides,#H12:::0.2516664903679763):0.03894743983476272)0.86;
+with -loglik 0.20654483965025638
+HybridNetwork, Un-rooted Network
+14 edges
+14 nodes: 7 tips, 1 hybrid nodes, 6 internal tree nodes.
+tip labels: icar, IT, mene, eros, ...
+(UA,(ALME,((IT,((mene,icar)0.22:0.012)#H12:::0.748)0.56:0.041,eros)0.94:0.016):0.02,(eroides,#H12:::0.252):0.039)0.86;
+
+
+caused by: RootMismatch: non-leaf node 12 had 0 children.
+Could be a hybrid whose parents' direction conflicts with the root.
+isChild1 and containRoot were updated for a subset of edges in the network only.
+Stacktrace:
+ [1] traverseDirectEdges!(node::PhyloNetworks.Node, edge::PhyloNetworks.EdgeT{PhyloNetworks.Node}, containroot::Bool)
+   @ PhyloNetworks ~/.julia/packages/PhyloNetworks/V8OaV/src/manipulateNet.jl:708
+ [2] traverseDirectEdges!(node::PhyloNetworks.Node, edge::PhyloNetworks.EdgeT{PhyloNetworks.Node}, containroot::Bool)
+   @ PhyloNetworks ~/.julia/packages/PhyloNetworks/V8OaV/src/manipulateNet.jl:704
+ [3] directEdges!(net::HybridNetwork; checkMajor::Bool)
+   @ PhyloNetworks ~/.julia/packages/PhyloNetworks/V8OaV/src/manipulateNet.jl:676
+ [4] directEdges!
+   @ ~/.julia/packages/PhyloNetworks/V8OaV/src/manipulateNet.jl:653 [inlined]
+ [5] rootonedge!(net::HybridNetwork, edgeNumber::Int64; index::Bool)
+   @ PhyloNetworks ~/.julia/packages/PhyloNetworks/V8OaV/src/manipulateNet.jl:346
+ [6] rootonedge!(net::HybridNetwork, edgeNumber::Int64)
+   @ PhyloNetworks ~/.julia/packages/PhyloNetworks/V8OaV/src/manipulateNet.jl:331
+ [7] top-level scope
+   @ REPL[33]:1
+

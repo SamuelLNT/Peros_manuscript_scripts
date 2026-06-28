@@ -1,0 +1,25 @@
+#example blueprint file
+#input setting
+popid: eros_folded_full # id of the population (no white space)
+nseq: 26 # number of sequences
+L: 42997 # total number of observed nucleic sites, including polymorphic and monomorphic
+whether_folded: true # whethr the SFS is folded (true or false)
+SFS: 962.2321539205349 278.1010809758622 133.7599122086586 68.00768034226199 34.30077771554138 15.17398756301842 7.040144973597881 6.044715049618411 3.713206302623476 3.82403212047261 3.016050627285326 1.533941765031865 0.6632801524347759
+smallest_size_of_SFS_bin_used_for_estimation: 2 # default is 1; to ignore singletons, uncomment this line and change this number to 2
+#largest_size_of_SFS_bin_used_for_estimation: 15 # default is nseq/2 for folded SFS
+pct_training: 0.67 # percentage of sites for training
+nrand: 	6 12 18 24 # number of random break points for each try (separated by white space)
+project_dir: eros_folded # project directory
+stairway_plot_dir: stairway_plot_es # directory to the stairway plot files
+ninput: 200 # number of input files to be created for each estimation
+#random_seed: 6
+#output setting
+mu: 2.9e-9 # assumed mutation rate per site per generation
+year_per_generation: 1 # assumed generation time (in years)
+#plot setting
+plot_title: eros_bcf_folded # title of the plot
+xrange: 0.1,5 # Time (1k year) range; format: xmin,xmax; "0,0" for default
+yrange: 0,0 # Ne (1k individual) range; format: xmin,xmax; "0,0" for default
+xspacing: 2 # X axis spacing
+yspacing: 2 # Y axis spacing
+fontsize: 12 # Font size

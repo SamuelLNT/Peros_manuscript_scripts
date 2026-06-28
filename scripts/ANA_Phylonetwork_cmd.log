@@ -1,0 +1,141 @@
+##############################
+#### Command log
+#### Date: 5 June 2026
+#### Last update: 5 June 2026 21:19
+###############################
+
+###############################
+##### RE RUNNING PHYLONETWORK WITH EDGE ROOTED AT ICARUS
+################################
+
+##########
+## Preparing input files
+##########
+
+cp 002_Uladz_phylonetworks_n54_icarus_outgroup/astral/Eros_REF_icarus_aftrkr_merg_n54_c85_m35.tre ./003_rerun_phylonetwork_n54_icaurs/
+cp 002_Uladz_phylonetworks_n54_icarus_outgroup/loci_phy_conversion_raxml/raxml/besttrees.tre ./003_rerun_phylonetwork_n54_icaurs/
+
+# below is how it looks like before I start
+[lamsamue@r18c03 003_rerun_phylonetwork_n54_icaurs]$ ll
+total 17M
+drwxrws--- 3 lamsamue project_2002599 4.0K Jun  5 21:20 ./
+drwxrws--- 7 lamsamue project_2002599 4.0K Jun  5 21:13 ../
+-rw-rw---- 1 lamsamue project_2002599  17M Jun  5 21:16 besttrees.tre
+-rw-rw---- 1 lamsamue project_2002599    0 Jun  5 21:18 cmd.log
+-rw-rw---- 1 lamsamue project_2002599 2.6K Jun  5 21:14 eros_grouping.txt
+-rw-rw---- 1 lamsamue project_2002599 1.6K Jun  5 21:14 eros_groupping_for_phylo.txt
+-rw-rw---- 1 lamsamue project_2002599 1.2K Jun  5 21:14 eros_MAP_ASTRAL.txt
+-rw-rw---- 1 lamsamue project_2002599 1.5K Jun  5 21:14 eros_MAP_PHYLONET.txt
+-rw-rw---- 1 lamsamue project_2002599  273 Jun  5 21:17 Eros_REF_icarus_aftrkr_merg_n54_c85_m35.tre
+-rw-rw---- 1 lamsamue project_2002599 2.6K Jun  5 21:20 Instructions_Uladz_for_Phylonetworks.txt
+drwxrws--- 2 lamsamue project_2002599 4.0K Jun  5 21:14 phylonetworks_run/
+-rw-rw---- 1 lamsamue project_2002599 7.3K Jun  5 21:20 phylonetworks_script.jl
+
+##########
+## Following the instructions to work
+##########
+
+sinteractive -A project_2002599 -t 3:00:00 -c 8 -m 10G --tmp 16
+
+module load julia
+julia
+
+ENV["R_HOME"] = "*" 
+using Distributed #if doesn't work try add it as package
+addprocs(8) #defines number of cores
+pkg> add RCall
+pkg> build RCall
+
+## installing package for the first time
+import Pkg
+Pkg.add(name="PhyloNetworks", version="0.16.4") #newer version did not have the function writeTableCF
+Pkg.pin(name="PhyloNetworks", version="0.16.4")
+#pkg> free PhyloNetworks #to free the pinned package
+#pkg> update PhyloNetworks
+Pkg.add("PhyloPlots")
+Pkg.pin(name="PhyloPlots", version="1.0.1")
+#pkg> free PhyloPlots #to free the pinned package
+#pkg> update PhyloPlots
+Pkg.add("CSV")
+Pkg.add("RCall")
+Pkg.add("DataFrames")
+Pkg.add("SNaQ")
+Pkg.update()
+ENV["R_HOME"] = "*"  ##it defines where R is, you need to do it only once
+
+#using this before loading the package to check the status
+#using Pkg
+#Pkg.status()
+
+
+# activating packages
+using RCall # already installed
+using PhyloNetworks # already installed
+using PhyloPlots # already installed
+using CSV # already installed
+using DataFrames # already installed
+#using SNaQ
+
+
+#fixing directories
+pwd()
+cd("/scratch/project_2002599/ddRAD_demultiplexed_projects/004_eros_eroides_Jul2025/process_files/Eros_icarus_REF/PhyloNet/003_rerun_phylonetwork_n54_icaurs/")
+
+#mapping for raxml tree
+dt = CSV.read("eros_MAP_PHYLONET.txt",DataFrame)
+taxonmap = Dict(dt[i,:specimen] => dt[i,:species] for i in 1:54) # 48 is the number of individuals
+
+#defining the files
+raxmltrees = "besttrees.tre"
+
+#reading genetrees
+genetrees = readMultiTopology(raxmltrees)
+
+#this works if the package status as follow:
+#julia> Pkg.status()
+#Status `~/.julia/environments/v1.12/Project.toml`
+#  [336ed68f] CSV v0.10.16
+#  [a93c6f00] DataFrames v1.8.2
+#? [33ad39ac] PhyloNetworks v0.16.4 ?
+#? [c0d5b6db] PhyloPlots v1.0.1
+#  [6f49c342] RCall v0.14.13
+df_sp = writeTableCF(countquartetsintrees(genetrees, taxonmap)...) # taxon names should be species names, not allele names here
+ 
+CSV.write("./phylonetworks_run/tableCF.csv", df_sp) # to save the data frame to a file
+raxmlCF = readTableCF("./phylonetworks_run/tableCF.csv") # read in the file and produces a "DataCF" object
+
+
+astralfile = "Eros_REF_icarus_aftrkr_merg_n54_c85_m35.tre"
+astraltree = readMultiTopology(astralfile)[1] # read the 1st tree
+
+rootonedge!(astraltree, 8) # rooting the edge for icarus
+rootatnode!(astraltree, "icar")
+
+#haivng a look at the tree
+R"name = function(x) file.path(x)" # function to create file name in appropriate folder
+R"svg(name('./phylonetworks_run/astral_tree_root.svg'), width=8, height=12)" # starts image file
+R"par"(mar=[0,0,0,0]) # to reduce margins (no margins at all here)
+plot(astraltree, :R, showEdgeLength=true, showEdgeNumber=true); # network is plotted & sent to file
+R"dev.off()"; # wrap up and save image file
+
+
+#runing the first network
+net0 = snaq!(astraltree,raxmlCF, hmax=0, filename="net0", seed=4353, runs=50)
+rootonedge!(net0, 1) # rooting the edge for icarus
+
+R"name = function(x) file.path(x)" # function to create file name in appropriate folder
+R"svg(name('net0.svg'), width=8, height=12)" # starts image file
+R"par"(mar=[0,0,0,0]) # to reduce margins (no margins at all here)
+plot(net0, :R, showEdgeNumber=true); # network is plotted & sent to file
+R"dev.off()"; # wrap up and save image file
+
+#net1
+net1 = snaq!(astraltree,raxmlCF, hmax=1, filename="net1", seed=4353, runs=50)
+rootonedge!(net1, 14) 
+rootonnode!(net1, "icarus")
+
+R"name = function(x) file.path(x)" # function to create file name in appropriate folder
+R"svg(name('net1.svg'), width=8, height=12)" # starts image file
+R"par"(mar=[0,0,0,0]) # to reduce margins (no margins at all here)
+plot(net1, :R, showEdgeNumber=true); # network is plotted & sent to file
+R"dev.off()"; # wrap up and save image file

@@ -1,8 +1,8 @@
-setwd("C:\\Users\\samue\\OneDrive - Oulun yliopisto\\001_Data Analysis\\staircaseplot\\stairwayplot_5_bcftools_allsite_folded_fullvcf_1kwindow\\finalsummary")
-setwd("/Users/samuel_ntl/OneDrive_OuluYlio/OneDrive - Oulun yliopisto/001_Data Analysis/staircaseplot/stairwayplot_9_output10_allsite/final_summary")
+setwd("$PATH")
+setwd("$PATH")
 
 #for v2.2, different theta
-setwd("/Users/samuel_ntl/OneDrive_OuluYlio/OneDrive - Oulun yliopisto/001_Data Analysis/staircaseplot/stairwayplot_v2.2_11_output12_allsite/final_summary_run3_0.3theta/")
+setwd("$PATH")
 
 #prefix for the file names
 prefix = "03theta"

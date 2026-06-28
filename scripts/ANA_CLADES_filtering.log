@@ -1,0 +1,31 @@
+10 June 2024 REF_icaus_n55_m35 dataset
+
+#Loci filtering was done on corresponding .vcf with bcftools:
+
+bcftools view -i 'INFO/NS>50 && INFO/DP>500' REF_icarus_m35.vcf.gz | bcftools query -f '%ID' | sed -e 's/_.*//g' | uniq > variantloci_50_55.list
+
+#get loci files
+python3 convert_forCLADES.py -L ./Eros_REF_icarus_aftrkr_merg_n55_c85_m35.loci
+
+#rename loc to locus
+sed -i 's/loc/locus/g' variantloci_50_55.list
+
+#move all variant locus into a place
+mkdir variantlocus
+for i in `cat variantloci_50_55.list`; do mv ./loci/$i'.phy' ./variantlocus/;done
+mv loci unusedloci
+
+#combine all .phy files
+cat variantlocus/*.phy > tempseq
+tail -n +3 tempseq > REF_n55_m35_659locicombine.txt
+
+#rename by group
+while read a b c d e f; do sed -i "s/$a/$f/g" REF_n55_m35_659locicombine.txt; done < reduce_6treeclus
+sed -i  "s/N/-/g" REF_n55_m35_659locicombine.txt
+cp REF_n55_m35_659locicombine.txt ../REF_n55_m35_50_55cov_seq.txt
+
+rm temp*
+
+grep -v ot REF_n55_m35_50_55cov_seq.txt > REF_n55_m35_50_55cov_ingrp
+
+

@@ -3,13 +3,13 @@
 ###########
 
 
-#setwd("D:\\Oulu OneDrive\\OneDrive - Oulun yliopisto\\001_Data Analysis\\STRUCTURE\\Pyrgus\\Pyrgus_INGR_REF_n44_m30.ustr.str")
-#setwd("C:\\Users\\nlam20\\OneDrive - Oulun yliopisto\\001_Data Analysis\\STRUCTURE\\Pyrgus\\Pyrgus_INGR_REF_n44_m30.ustr.str")
-#setwd("/Users/samuel_ntl/Library/CloudStorage/OneDrive-Oulunyliopisto/001_Data Analysis/STRUCTURE/Agriades_OMEGA/OMEGA_Structure")
-#setwd("C:\\Users\\samue\\OneDrive - Oulun yliopisto\\001_Data Analysis\\STRUCTURE\\Agriades_OMEGA\\OMEGA_STRUCTURE\\")
-#setwd("C:\\Users\\samue\\OneDrive - Oulun yliopisto\\003_GIS\\eros\\kmlfiles_icarusREF")
+#setwd("$PATH")
+#setwd("$PATH")
+#setwd("$PATH")
+#setwd("$PATH")
+#setwd("$PATH")
 
-setwd("/Users/samuel_ntl/Library/CloudStorage/OneDrive-Oulunyliopisto/005_Manuscripts/Pyrgus/PlottingArea/")
+setwd("$PATH")
 
 library(dplyr)
 library(stringr)
