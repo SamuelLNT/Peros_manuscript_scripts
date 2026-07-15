@@ -9,7 +9,7 @@
 #SBATCH --time=00:10:00
 #SBATCH --mem-per-cpu=1G
 #SBATCH --mail-type=END
-#SBATCH --mail-user=samueluob@gmail.com
+#SBATCH --mail-user=username@gmail.com
 
 ################################################
 #This script is to run path sampler seperately if the MCMC for each step is enough

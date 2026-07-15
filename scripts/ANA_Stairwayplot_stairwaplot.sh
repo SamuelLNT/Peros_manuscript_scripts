@@ -9,7 +9,7 @@
 #SBATCH --cpus-per-task=10
 #SBATCH --mem-per-cpu=2G
 #SBATCH --mail-type=END
-#SBATCH --mail-user=samueluob@gmail.com
+#SBATCH --mail-user=username@gmail.com
 #SBATCH --array=0-6%7
 
 module load biojava

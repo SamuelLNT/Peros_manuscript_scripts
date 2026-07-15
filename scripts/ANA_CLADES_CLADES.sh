@@ -9,7 +9,7 @@
 #SBATCH --cpus-per-task=10
 #SBATCH --mem-per-cpu=1G
 #SBATCH --mail-type=END
-#SBATCH --mail-user=samueluob@gmail.com
+#SBATCH --mail-user=username@gmail.com
 
 export PATH="/projappl/project_number/clades-env/bin/:$PATH"
 

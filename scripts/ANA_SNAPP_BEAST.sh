@@ -9,7 +9,7 @@
 #SBATCH --time=72:00:00
 #SBATCH --mem-per-cpu=9500
 #SBATCH --mail-type=END
-#SBATCH --mail-user=samueluob@gmail.com
+#SBATCH --mail-user=username@gmail.com
 
 # commands to manage the batch script
 #   submission command
