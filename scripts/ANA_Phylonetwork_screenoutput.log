@@ -281,12 +281,12 @@ Info Packages marked with ? have new versions available and may be upgradable.
 
 
 julia> pwd()
-"/scratch/project_2002599/ddRAD_demultiplexed_projects/004_eros_eroides_Jul2025/process_files/Eros_icarus_REF/PhyloNet"
+"/scratch/project_number/ddRAD_demultiplexed_projects/004_eros_eroides_Jul2025/process_files/Eros_icarus_REF/PhyloNet"
 
-julia> cd("/scratch/project_2002599/ddRAD_demultiplexed_projects/004_eros_eroides_Jul2025/process_files/Eros_icarus_REF/PhyloNet/003_rerun_phylonetwork_n54_icaurs/")
+julia> cd("/scratch/project_number/ddRAD_demultiplexed_projects/004_eros_eroides_Jul2025/process_files/Eros_icarus_REF/PhyloNet/003_rerun_phylonetwork_n54_icaurs/")
 
 julia> pwd()
-"/scratch/project_2002599/ddRAD_demultiplexed_projects/004_eros_eroides_Jul2025/process_files/Eros_icarus_REF/PhyloNet/003_rerun_phylonetwork_n54_icaurs"
+"/scratch/project_number/ddRAD_demultiplexed_projects/004_eros_eroides_Jul2025/process_files/Eros_icarus_REF/PhyloNet/003_rerun_phylonetwork_n54_icaurs"
 
 julia> dt = CSV.read("eros_MAP_PHYLONET.txt",DataFrame)
 54กั2 DataFrame

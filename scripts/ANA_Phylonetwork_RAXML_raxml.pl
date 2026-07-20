@@ -44,7 +44,7 @@ my $astraldir;
 my $convertphylip = 1;
 my $doastral = 1;
 my $raxml = 'raxmlHPC'; # executable
-my $astral = '/scratch/project_2002599/ddRAD_demultiplexed_projects/Astral/Astral/astral.5.7.8.jar'; # adapt to your system
+my $astral = '/scratch/project_number/ddRAD_demultiplexed_projects/Astral/Astral/astral.5.7.8.jar'; # adapt to your system
 
 # -------------- read arguments from command-line -----------------------
 GetOptions( 'numboot=i' => \$numboot,

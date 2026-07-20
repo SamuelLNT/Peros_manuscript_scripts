@@ -27,13 +27,13 @@ locus1007.phy
 locus1008.phy
 
 # 3
-# I ran the raxml using the same script as before that can be found in "/scratch/project_2002599/ddRAD_demultiplexed_projects/004_eros_eroides/process_files/Eros_icarus_REF/PhyloNet/000_Uladz_phylonetworks/loci_phy_conversion/raxml.pl"
-# the batch script is here "/scratch/project_2002599/ddRAD_demultiplexed_projects/004_eros_eroides/process_files/Eros_icarus_REF/PhyloNet/000_Uladz_phylonetworks/loci_phy_conversion/raxml_batch.sh"
+# I ran the raxml using the same script as before that can be found in "/scratch/project_number/ddRAD_demultiplexed_projects/004_eros_eroides/process_files/Eros_icarus_REF/PhyloNet/000_Uladz_phylonetworks/loci_phy_conversion/raxml.pl"
+# the batch script is here "/scratch/project_number/ddRAD_demultiplexed_projects/004_eros_eroides/process_files/Eros_icarus_REF/PhyloNet/000_Uladz_phylonetworks/loci_phy_conversion/raxml_batch.sh"
 
-# I ran ASTRAL as described in here "/scratch/project_2002599/ddRAD_demultiplexed_projects/004_eros_eroides/process_files/Eros_icarus_REF/PhyloNet/scripts_metadata/Instructions_Uladz_for_Phylonetworks.txt"
+# I ran ASTRAL as described in here "/scratch/project_number/ddRAD_demultiplexed_projects/004_eros_eroides/process_files/Eros_icarus_REF/PhyloNet/scripts_metadata/Instructions_Uladz_for_Phylonetworks.txt"
 
 module load biojava
-java -jar /scratch/project_2002599/Programme/astral_program/Astral/astral.5.7.8.jar -i /scratch/project_2002599/ddRAD_demultiplexed_projects/004_eros_eroides/process_files/Eros_icarus_REF/PhyloNet/002_Uladz_phylonetworks_n54_icarus_outgroup/loci_phy_conversion_raxml/raxml/besttrees.tre -a /scratch/project_2002599/ddRAD_demultiplexed_projects/004_eros_eroides/process_files/Eros_icarus_REF/PhyloNet/002_Uladz_phylonetworks_n54_icarus_outgroup/eros_MAP_ASTRAL.txt -o Eros_REF_icarus_aftrkr_merg_n54_c85_m35.tre > astral.screen.log 2>&1
+java -jar /scratch/project_number/Programme/astral_program/Astral/astral.5.7.8.jar -i /scratch/project_number/ddRAD_demultiplexed_projects/004_eros_eroides/process_files/Eros_icarus_REF/PhyloNet/002_Uladz_phylonetworks_n54_icarus_outgroup/loci_phy_conversion_raxml/raxml/besttrees.tre -a /scratch/project_number/ddRAD_demultiplexed_projects/004_eros_eroides/process_files/Eros_icarus_REF/PhyloNet/002_Uladz_phylonetworks_n54_icarus_outgroup/eros_MAP_ASTRAL.txt -o Eros_REF_icarus_aftrkr_merg_n54_c85_m35.tre > astral.screen.log 2>&1
 
 # 4
 # Phylonetworks
@@ -63,10 +63,10 @@ using DataFrames # already installed
 
 
 
-dt = CSV.read("/scratch/project_2002599/ddRAD_demultiplexed_projects/004_eros_eroides/process_files/Eros_icarus_REF/PhyloNet/002_Uladz_phylonetworks_n54_icarus_outgroup/eros_MAP_PHYLONET.txt",DataFrame)
+dt = CSV.read("/scratch/project_number/ddRAD_demultiplexed_projects/004_eros_eroides/process_files/Eros_icarus_REF/PhyloNet/002_Uladz_phylonetworks_n54_icarus_outgroup/eros_MAP_PHYLONET.txt",DataFrame)
 taxonmap = Dict(dt[i,:specimen] => dt[i,:species] for i in 1:54) # 54 is the number of individuals
 
-raxmltrees = "/scratch/project_2002599/ddRAD_demultiplexed_projects/004_eros_eroides/process_files/Eros_icarus_REF/PhyloNet/002_Uladz_phylonetworks_n54_icarus_outgroup/loci_phy_conversion_raxml/raxml/besttrees.tre"
+raxmltrees = "/scratch/project_number/ddRAD_demultiplexed_projects/004_eros_eroides/process_files/Eros_icarus_REF/PhyloNet/002_Uladz_phylonetworks_n54_icarus_outgroup/loci_phy_conversion_raxml/raxml/besttrees.tre"
 
 genetrees = readMultiTopology(raxmltrees)
 
@@ -75,7 +75,7 @@ df_sp = writeTableCF(countquartetsintrees(genetrees, taxonmap)...) # taxon names
 CSV.write("tableCF.csv", df_sp) # to save the data frame to a file
 raxmlCF = readTableCF("tableCF.csv") # read in the file and produces a "DataCF" object
 
-astralfile = "/scratch/project_2002599/ddRAD_demultiplexed_projects/004_eros_eroides/process_files/Eros_icarus_REF/PhyloNet/002_Uladz_phylonetworks_n54_icarus_outgroup/astral/Eros_REF_icarus_aftrkr_merg_n54_c85_m35.tre" # the generated astrak tree
+astralfile = "/scratch/project_number/ddRAD_demultiplexed_projects/004_eros_eroides/process_files/Eros_icarus_REF/PhyloNet/002_Uladz_phylonetworks_n54_icarus_outgroup/astral/Eros_REF_icarus_aftrkr_merg_n54_c85_m35.tre" # the generated astrak tree
 astraltree = readMultiTopology(astralfile)[1] # read the 1st tree
 
 ###can be done without outgroup. possibly just silence this line and consequtive rootatnode lines.

@@ -1,7 +1,7 @@
 ipyrad PCA python implement
 
 #get ipyrad running
-export PATH='/projappl/project_2002599/ipyrad_0.9.92/bin/:$PATH'
+export PATH='/projappl/project_number/ipyrad_0.9.92/bin/:$PATH'
 
 #activating python to run PCA in ipyrad 
 python
@@ -29,7 +29,7 @@ collections.Sequence = collections.abc.Sequence
 
 #checking and changing working dir
 print(os.getcwd())
-os.chdir('/scratch/project_2002599/ddRAD_demultiplexed_projects/004_eros_eroides_Jul2025/process_files/Eros_icarus_REF/PCAperse')
+os.chdir('/scratch/project_number/ddRAD_demultiplexed_projects/004_eros_eroides_Jul2025/process_files/Eros_icarus_REF/PCAperse')
 print(os.getcwd())
 
 #setting data, it has to use hdf5 format

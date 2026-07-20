@@ -3,11 +3,11 @@
 ######
 
 #setting path for easySFS
-export PATH="/projappl/project_2002599/SFS_kit/easySFS_env/bin/:$PATH"
-export PATH="/projappl/project_2002599/SFS_kit/easySFS/:$PATH"
+export PATH="/projappl/project_number/SFS_kit/easySFS_env/bin/:$PATH"
+export PATH="/projappl/project_number/SFS_kit/easySFS/:$PATH"
 
 #Starting Sinteractive Job
-sinteractive -A project_2002599 -c 5 -j SFS -m 30G -t 5:00:00
+sinteractive -A project_number -c 5 -j SFS -m 30G -t 5:00:00
 
 
 ####

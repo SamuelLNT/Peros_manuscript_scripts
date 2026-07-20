@@ -18,24 +18,24 @@ cp 002_Uladz_phylonetworks_n54_icarus_outgroup/loci_phy_conversion_raxml/raxml/b
 # below is how it looks like before I start
 [lamsamue@r18c03 003_rerun_phylonetwork_n54_icaurs]$ ll
 total 17M
-drwxrws--- 3 lamsamue project_2002599 4.0K Jun  5 21:20 ./
-drwxrws--- 7 lamsamue project_2002599 4.0K Jun  5 21:13 ../
--rw-rw---- 1 lamsamue project_2002599  17M Jun  5 21:16 besttrees.tre
--rw-rw---- 1 lamsamue project_2002599    0 Jun  5 21:18 cmd.log
--rw-rw---- 1 lamsamue project_2002599 2.6K Jun  5 21:14 eros_grouping.txt
--rw-rw---- 1 lamsamue project_2002599 1.6K Jun  5 21:14 eros_groupping_for_phylo.txt
--rw-rw---- 1 lamsamue project_2002599 1.2K Jun  5 21:14 eros_MAP_ASTRAL.txt
--rw-rw---- 1 lamsamue project_2002599 1.5K Jun  5 21:14 eros_MAP_PHYLONET.txt
--rw-rw---- 1 lamsamue project_2002599  273 Jun  5 21:17 Eros_REF_icarus_aftrkr_merg_n54_c85_m35.tre
--rw-rw---- 1 lamsamue project_2002599 2.6K Jun  5 21:20 Instructions_Uladz_for_Phylonetworks.txt
-drwxrws--- 2 lamsamue project_2002599 4.0K Jun  5 21:14 phylonetworks_run/
--rw-rw---- 1 lamsamue project_2002599 7.3K Jun  5 21:20 phylonetworks_script.jl
+drwxrws--- 3 lamsamue project_number 4.0K Jun  5 21:20 ./
+drwxrws--- 7 lamsamue project_number 4.0K Jun  5 21:13 ../
+-rw-rw---- 1 lamsamue project_number  17M Jun  5 21:16 besttrees.tre
+-rw-rw---- 1 lamsamue project_number    0 Jun  5 21:18 cmd.log
+-rw-rw---- 1 lamsamue project_number 2.6K Jun  5 21:14 eros_grouping.txt
+-rw-rw---- 1 lamsamue project_number 1.6K Jun  5 21:14 eros_groupping_for_phylo.txt
+-rw-rw---- 1 lamsamue project_number 1.2K Jun  5 21:14 eros_MAP_ASTRAL.txt
+-rw-rw---- 1 lamsamue project_number 1.5K Jun  5 21:14 eros_MAP_PHYLONET.txt
+-rw-rw---- 1 lamsamue project_number  273 Jun  5 21:17 Eros_REF_icarus_aftrkr_merg_n54_c85_m35.tre
+-rw-rw---- 1 lamsamue project_number 2.6K Jun  5 21:20 Instructions_Uladz_for_Phylonetworks.txt
+drwxrws--- 2 lamsamue project_number 4.0K Jun  5 21:14 phylonetworks_run/
+-rw-rw---- 1 lamsamue project_number 7.3K Jun  5 21:20 phylonetworks_script.jl
 
 ##########
 ## Following the instructions to work
 ##########
 
-sinteractive -A project_2002599 -t 3:00:00 -c 8 -m 10G --tmp 16
+sinteractive -A project_number -t 3:00:00 -c 8 -m 10G --tmp 16
 
 module load julia
 julia
@@ -79,7 +79,7 @@ using DataFrames # already installed
 
 #fixing directories
 pwd()
-cd("/scratch/project_2002599/ddRAD_demultiplexed_projects/004_eros_eroides_Jul2025/process_files/Eros_icarus_REF/PhyloNet/003_rerun_phylonetwork_n54_icaurs/")
+cd("/scratch/project_number/ddRAD_demultiplexed_projects/004_eros_eroides_Jul2025/process_files/Eros_icarus_REF/PhyloNet/003_rerun_phylonetwork_n54_icaurs/")
 
 #mapping for raxml tree
 dt = CSV.read("eros_MAP_PHYLONET.txt",DataFrame)
